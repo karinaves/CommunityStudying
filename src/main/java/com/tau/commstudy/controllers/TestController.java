@@ -1,32 +1,17 @@
 package com.tau.commstudy.controllers;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
-@Path("/test")
+@RestController
+@RequestMapping("/test")
 public class TestController {
 
-
-	@POST
-	@Produces(MediaType.TEXT_PLAIN)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public String getBla() {
-		return "bla";
-	}
-
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getHello(@QueryParam("name") @DefaultValue("NO NAME") String name) {
-	    return "hello " + name+"!";
+    	@RequestMapping(method = RequestMethod.GET, value = "")
+	public String getHello(String name) {
+	    return "hello "+name+"!";
 	}
 
 }

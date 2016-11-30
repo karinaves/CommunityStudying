@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     	@RequestMapping(method = RequestMethod.GET, value = "")
-	public String getHello(String name,String age) {
-	    return "hello "+name+"!"+age;
+	public String getHello(String name,String AGE) {
+	    return "hello "+name+"!"+AGE;
 	}
 
 }

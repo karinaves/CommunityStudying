@@ -1,5 +1,9 @@
 package com.tau.commstudy.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,5 +43,11 @@ public class QuestionController {
     public Question get(long id)
     {
 	return dao.findOne(id);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/all")
+    public Iterable<Question> getAll()
+    {
+	return dao.findAll();
     }
 }

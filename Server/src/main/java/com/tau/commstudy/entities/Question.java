@@ -23,7 +23,16 @@ public class Question {
     @NotNull
     private String content;
     
+    @NotNull
+    private String userId;
     
+    private int answers;
+    
+    private int votes;
+    
+    private String tags;
+
+
 
     public Question() {
     }

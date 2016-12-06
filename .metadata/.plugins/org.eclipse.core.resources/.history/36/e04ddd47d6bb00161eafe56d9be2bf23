@@ -1,0 +1,9 @@
+package com.tau.commstudy.entities;
+
+public class Faculties {
+
+    public Faculties() {
+	// TODO Auto-generated constructor stub
+    }
+
+}

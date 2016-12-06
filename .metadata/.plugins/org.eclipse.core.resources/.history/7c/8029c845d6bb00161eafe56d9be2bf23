@@ -1,0 +1,9 @@
+package com.tau.commstudy.entities;
+
+public class Tags {
+
+    public Tags() {
+	// TODO Auto-generated constructor stub
+    }
+
+}

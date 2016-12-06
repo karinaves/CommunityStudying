@@ -1,0 +1,9 @@
+1481044330850	Rename type 'Faculties'
+1481044655396	Rename type 'Tags'
+1481045353403	Rename type 'Tests'
+1481046524782	Rename type 'Question'
+1481046598096	Rename type 'QuestionController'
+1481046712190	Rename type 'QuestionDao'
+1481046768017	Delete element
+1481047031644	Rename type 'CommentToPost'
+1481047140760	Rename local variable 'q'

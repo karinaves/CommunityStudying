@@ -1,0 +1,9 @@
+package com.tau.commstudy.entities;
+
+public class CommentToPost {
+
+    public CommentToPost() {
+	// TODO Auto-generated constructor stub
+    }
+
+}

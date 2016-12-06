@@ -1,0 +1,9 @@
+package com.tau.commstudy.entities;
+
+public class UsersPosts {
+
+    public UsersPosts() {
+	// TODO Auto-generated constructor stub
+    }
+
+}

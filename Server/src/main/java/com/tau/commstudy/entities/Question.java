@@ -23,7 +23,6 @@ public class Question {
     @NotNull
     private String content;
     
-    @NotNull
     private String userId;
     
     private int answers;
@@ -65,7 +64,7 @@ public class Question {
         return userId;
     }
 
-    public void UserId(String userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
     

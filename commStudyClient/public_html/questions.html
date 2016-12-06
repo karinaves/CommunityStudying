@@ -11,14 +11,14 @@ http://www.tooplate.com/view/2067-education
 -->
 <link href="tooplate_style.css" rel="stylesheet" type="text/css" />
 
- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-  <!-- Angular Material Library -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"
-
+   Angular Material Library 
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 <script type="text/JavaScript" src="js/jquery-1.6.3.js"></script> 
 <script type="text/JavaScript" src="js/tamp/fancyalert.js"></script> 
@@ -115,6 +115,7 @@ ddsmoothmenu.init({
 <div style="clear:both;height:30px;"></div>
 
 <div ng-app="myApp" ng-controller="QuestionsCtr">
+    <div ng-repeat="x in questions">
 	<div class="questionsview_userbox">
 <!--                 <?php echo getUser($question['userid']);?>-->
                        {{x.userId}}
@@ -187,7 +188,7 @@ ddsmoothmenu.init({
    -->
 </div>
 
-
+</div>
 
 
 

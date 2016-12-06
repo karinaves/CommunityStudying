@@ -22,10 +22,11 @@ public class QuestionController {
     private QuestionDao dao;
     
     @RequestMapping(method = RequestMethod.GET, value = "/save")
-    public String saveQuestion(String title,String content)
+    public String saveQuestion(String title,String content,String userId)
     {
 	Question q = new Question();
 	q.setTitle(title);
+	q.setUserId(userId);
 	q.setContent(content);
 	dao.save(q);
 	

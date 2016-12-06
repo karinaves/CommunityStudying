@@ -61,5 +61,37 @@ public class Question {
         this.content = content;
     }
     
+    public String getUserId() {
+        return userId;
+    }
+
+    public void UserId(String userId) {
+        this.userId = userId;
+    }
+    
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+    
+    public int getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(int answers) {
+        this.answers = answers;
+    }
+    
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+    
     
 }

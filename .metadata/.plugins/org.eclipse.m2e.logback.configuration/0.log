@@ -586,3 +586,250 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.google.co
 2016-12-06 20:04:55,219 [Worker-100] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2016-12-06 20:04:55,220 [Worker-100] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2016-12-06 20:04:55,223 [Worker-100] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 20:59:38,860 [Worker-107] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 20:59:38,862 [Worker-107] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 20:59:38,875 [Worker-107] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 20:59:38,879 [Worker-107] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 20:59:38,879 [Worker-107] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:00:43,014 [Worker-108] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:00:43,015 [Worker-108] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:00:43,024 [Worker-108] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:00:43,027 [Worker-108] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:00:43,029 [Worker-108] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:00:58,235 [Worker-110] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:00:58,241 [Worker-110] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:00:58,254 [Worker-110] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:00:58,258 [Worker-110] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:00:58,259 [Worker-110] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:13:44,419 [Worker-103] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2016-12-06 21:13:45,156 [Worker-103] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.tau:commstudy:0.0.1-SNAPSHOT @ C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\pom.xml.
+2016-12-06 21:13:45,830 [Worker-103] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/main/java
+2016-12-06 21:13:45,830 [Worker-103] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:13:45,830 [Worker-103] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:13:45,831 [Worker-103] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/test/java
+2016-12-06 21:13:46,087 [Worker-103] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2016-12-06 21:13:47,094 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:13:47,097 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:13:47,118 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:13:47,122 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:13:47,122 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:14:46,434 [Worker-109] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:14:46,437 [Worker-109] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:14:46,445 [Worker-109] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:14:46,447 [Worker-109] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:14:46,449 [Worker-109] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:20:24,683 [Worker-103] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2016-12-06 21:20:25,266 [Worker-103] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.tau:commstudy:0.0.1-SNAPSHOT @ C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\pom.xml.
+2016-12-06 21:20:25,859 [Worker-103] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/main/java
+2016-12-06 21:20:25,861 [Worker-103] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:20:25,863 [Worker-103] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:20:25,865 [Worker-103] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/test/java
+2016-12-06 21:20:26,064 [Worker-103] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2016-12-06 21:20:26,814 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:20:26,815 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:20:26,840 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:20:26,842 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:20:26,844 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:21:24,134 [Worker-121] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2016-12-06 21:21:24,746 [Worker-121] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.tau:commstudy:0.0.1-SNAPSHOT @ C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\pom.xml.
+2016-12-06 21:21:25,315 [Worker-121] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/main/java
+2016-12-06 21:21:25,317 [Worker-121] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:21:25,320 [Worker-121] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:21:25,322 [Worker-121] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/test/java
+2016-12-06 21:21:25,516 [Worker-121] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2016-12-06 21:21:26,240 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:21:26,240 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:21:26,260 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:21:26,262 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:21:26,264 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:21:28,699 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:21:28,702 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:21:28,710 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:21:28,716 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:21:28,718 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:21:37,329 [Worker-115] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2016-12-06 21:21:37,975 [Worker-115] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.tau:commstudy:0.0.1-SNAPSHOT @ C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\pom.xml.
+2016-12-06 21:21:38,684 [Worker-115] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/main/java
+2016-12-06 21:21:38,687 [Worker-115] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:21:38,689 [Worker-115] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:21:38,689 [Worker-115] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/test/java
+2016-12-06 21:21:38,903 [Worker-115] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2016-12-06 21:21:39,656 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:21:39,657 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:21:39,682 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:21:39,685 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:21:39,687 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:22:56,501 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:22:56,503 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:22:56,516 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:22:56,521 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:22:56,524 [Worker-103] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:23:28,112 [Worker-115] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:23:28,115 [Worker-115] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:23:28,123 [Worker-115] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:23:28,126 [Worker-115] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:23:28,127 [Worker-115] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:24:34,752 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:24:34,752 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:24:34,760 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:24:34,762 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:24:34,764 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:25:01,636 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:25:01,638 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:25:01,647 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:25:01,650 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:25:01,650 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:25:37,630 [Worker-113] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:25:37,630 [Worker-113] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:25:37,640 [Worker-113] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:25:37,644 [Worker-113] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:25:37,646 [Worker-113] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:32:17,353 [Worker-123] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2016-12-06 21:32:17,961 [Worker-123] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.tau:commstudy:0.0.1-SNAPSHOT @ C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\pom.xml.
+2016-12-06 21:32:18,571 [Worker-123] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/main/java
+2016-12-06 21:32:18,573 [Worker-123] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:32:18,576 [Worker-123] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:32:18,578 [Worker-123] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/test/java
+2016-12-06 21:32:18,790 [Worker-123] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2016-12-06 21:32:19,521 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:32:19,522 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:32:19,548 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:32:19,552 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:32:19,554 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:38:46,586 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:38:46,590 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:38:46,601 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:38:46,605 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:38:46,606 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:40:03,418 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:40:03,419 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:40:03,425 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:40:03,427 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:40:03,430 [Worker-121] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:40:28,237 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:40:28,244 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:40:28,253 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:40:28,256 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:40:28,256 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:41:09,540 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:41:09,541 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:41:09,551 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:41:09,554 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:41:09,557 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:45:17,729 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:45:17,732 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:45:17,753 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:45:17,757 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:45:17,757 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:46:19,369 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:46:19,370 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:46:19,384 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:46:19,385 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:46:19,385 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:46:29,514 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:46:29,514 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:46:29,522 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:46:29,527 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:46:29,527 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:47:10,422 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:47:10,422 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:47:10,434 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:47:10,438 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:47:10,440 [Worker-128] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:48:33,014 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:48:33,017 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:48:33,031 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:48:33,035 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:48:33,035 [Worker-129] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:49:50,856 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:49:50,857 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:49:50,863 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:49:50,865 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:49:50,867 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:50:05,604 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:50:05,606 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:50:05,614 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:50:05,617 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:50:05,617 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:51:16,669 [Worker-131] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:51:16,670 [Worker-131] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:51:16,692 [Worker-131] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:51:16,698 [Worker-131] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:51:16,702 [Worker-131] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:54:49,801 [Worker-114] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2016-12-06 21:54:50,429 [Worker-114] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.tau:commstudy:0.0.1-SNAPSHOT @ C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\pom.xml.
+2016-12-06 21:54:51,075 [Worker-114] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/main/java
+2016-12-06 21:54:51,077 [Worker-114] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:54:51,078 [Worker-114] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Server/src/main/resources
+2016-12-06 21:54:51,080 [Worker-114] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Server/src/test/java
+2016-12-06 21:54:51,301 [Worker-114] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2016-12-06 21:54:52,045 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:54:52,045 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:54:52,064 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:54:52,068 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:54:52,070 [Worker-114] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 21:55:23,393 [Worker-135] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:55:23,399 [Worker-135] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 21:55:23,411 [Worker-135] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 21:55:23,414 [Worker-135] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 21:55:23,414 [Worker-135] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:00:01,839 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:00:01,840 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:00:01,850 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:00:01,852 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:00:01,854 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:00:46,784 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:00:46,787 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:00:46,798 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:00:46,801 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:00:46,802 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:01:26,980 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:01:26,981 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:01:26,993 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:01:26,996 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:01:26,999 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:02:18,887 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:02:18,891 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:02:18,901 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:02:18,904 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:02:18,904 [Worker-141] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:04:25,171 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:04:25,172 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:04:25,180 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:04:25,181 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:04:25,182 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:05:08,390 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:05:08,391 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:05:08,400 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:05:08,406 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:05:08,406 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:05:39,281 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:05:39,282 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:05:39,299 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:05:39,302 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:05:39,304 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:05:58,074 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:05:58,077 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:05:58,088 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:05:58,090 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:05:58,091 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:06:15,855 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:06:15,855 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:06:15,862 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:06:15,863 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:06:15,865 [Worker-133] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:06:24,250 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:06:24,285 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:06:24,298 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:06:24,304 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:06:24,304 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:06:54,721 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:06:54,721 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:06:54,730 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:06:54,733 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:06:54,735 [Worker-136] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources
+2016-12-06 22:07:46,411 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:07:46,413 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-12-06 22:07:46,426 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-12-06 22:07:46,430 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-12-06 22:07:46,430 [Worker-132] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Mike\Documents\Studies\CS_Full\3_Year\Symester1\Google_Proj\CommunityStudying\Server\src\test\resources

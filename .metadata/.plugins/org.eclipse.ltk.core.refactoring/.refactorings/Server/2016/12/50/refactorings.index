@@ -7,3 +7,7 @@
 1481046768017	Delete element
 1481047031644	Rename type 'CommentToPost'
 1481047140760	Rename local variable 'q'
+1481053126513	Rename field 'facultyId'
+1481054122914	Rename type 'TestQuestions'
+1481054401328	Rename type 'Courses'
+1481054664716	Rename type 'TagToQuestion'

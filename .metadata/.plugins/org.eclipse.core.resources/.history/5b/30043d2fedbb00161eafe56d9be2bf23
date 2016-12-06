@@ -1,0 +1,9 @@
+package com.tau.commstudy.controllers;
+
+public class FacultyController {
+
+    public FacultyController() {
+	// TODO Auto-generated constructor stub
+    }
+
+}

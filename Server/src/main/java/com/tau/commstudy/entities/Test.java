@@ -1,8 +1,6 @@
 package com.tau.commstudy.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -10,12 +8,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name="test")
 @XmlRootElement
 public class Test {
-    private long id;
+    private long testId;
     private int courseId;
+//    
+//    @ManyToOne
+//    @JoinColumn(name = "FACULTY_ID")
+    private int facultyId1;
     
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private int facultyId;
     private int year;
     private char semester;
     private String teacher;
@@ -29,12 +28,12 @@ public class Test {
 
 
     public long getId() {
-        return id;
+        return testId;
     }
 
 
     public void setId(long id) {
-        this.id = id;
+        this.testId = id;
     }
 
 
@@ -49,12 +48,12 @@ public class Test {
 
 
     public int getFacultyId() {
-        return facultyId;
+        return facultyId1;
     }
 
 
     public void setFacultyId(int facultyId) {
-        this.facultyId = facultyId;
+        this.facultyId1 = facultyId;
     }
 
 

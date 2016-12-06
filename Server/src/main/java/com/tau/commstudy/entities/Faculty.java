@@ -1,9 +1,8 @@
 package com.tau.commstudy.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,8 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Faculty {
     @Id
-    @OneToMany(mappedBy = "facultyId", cascade = CascadeType.ALL)
-    private int id;
+//    @Column(name="FACULTY_ID")
+    private int facultyId;
     
     private String facultyName;
    
@@ -26,13 +25,13 @@ public class Faculty {
 
 
     public int getId() {
-        return id;
+        return facultyId;
     }
 
 
 
     public void setId(int id) {
-        this.id = id;
+        this.facultyId = id;
     }
 
 

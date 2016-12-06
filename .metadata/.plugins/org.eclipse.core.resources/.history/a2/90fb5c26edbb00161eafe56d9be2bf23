@@ -1,0 +1,9 @@
+package com.tau.commstudy.entities;
+
+public class FacultyDao {
+
+    public FacultyDao() {
+	// TODO Auto-generated constructor stub
+    }
+
+}

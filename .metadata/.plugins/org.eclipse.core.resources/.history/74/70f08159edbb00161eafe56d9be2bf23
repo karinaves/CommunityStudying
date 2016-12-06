@@ -1,0 +1,16 @@
+package com.tau.commstudy.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.tau.commstudy.entities.PostDao;
+
+public class FacultyController {
+    
+    @Autowired
+    private FacultyDao dao;
+
+    public FacultyController() {
+	// TODO Auto-generated constructor stub
+    }
+
+}

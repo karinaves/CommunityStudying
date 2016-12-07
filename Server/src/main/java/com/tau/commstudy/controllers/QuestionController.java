@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.entities.Question;
-import com.tau.commstudy.entities.QuestionDao;
+import com.tau.commstudy.entities.daos.QuestionDao;
 
 @RestController
 @RequestMapping("/question")

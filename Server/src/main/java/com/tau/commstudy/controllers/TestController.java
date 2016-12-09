@@ -1,9 +1,6 @@
 package com.tau.commstudy.controllers;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
+import com.tau.commstudy.beans.GoogleValidateInfo;
 import com.tau.commstudy.entities.Comment;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.Tag;
+import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.CommentDao;
 import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.entities.daos.TagDao;
@@ -28,6 +24,8 @@ import com.tau.commstudy.services.UsersService;
 @RequestMapping("/test")
 public class TestController {
 
+    GoogleValidateInfo googleValidateInfo;
+    
     @Autowired
     private TagDao tagDao;
 
@@ -82,10 +80,7 @@ public class TestController {
 	return "hello " + name + "!" + age;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/verifyUserIdToken")
-    public String verifyUserId(String idTokenString, String clientId) throws GeneralSecurityException, IOException{
-	String userDetails = userService.verifyUserIdToken(idTokenString, clientId);
-	return userDetails;
-    }
+    
+
 
 }

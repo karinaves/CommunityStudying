@@ -10,5 +10,7 @@ import com.tau.commstudy.entities.User;
 @Transactional
 public interface UserDao extends CrudRepository<User, Long> {
 
+    public User findByGoogleId(String googleId);
 
+    
 }

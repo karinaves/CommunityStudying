@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -19,7 +19,8 @@ public class Course {
     private long id;
     private long courseUniversityId;
     
-    
+    @ManyToOne
+    private Faculty faculty;
    
     public Course(){
 	
@@ -47,6 +48,18 @@ public class Course {
 
     public void setCourseUniversityId(long courseUniversityId) {
         this.courseUniversityId = courseUniversityId;
+    }
+
+
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
     
     

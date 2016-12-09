@@ -45,7 +45,7 @@ public class TestController {
 	Post findOne = postDao.findOne(1L);
 	
 	Comment comm = new Comment();
-	comm.setPost(findOne);
+//	comm.setPost(findOne);
 	comm.setContent("dfsdfs");
 	
 	commDao.save(comm);
@@ -70,10 +70,10 @@ public class TestController {
 	Post post = new Post();
 	post.setTitle("sdfsd");
 	post.setContent("content");
-	post.setTagsSet(tags);
+	post.setTags(tags);
 	
-	tag.getPostsSet().add(post);
-	tag2.getPostsSet().add(post);
+	tag.getPosts().add(post);
+	tag2.getPosts().add(post);
 
 	tagDao.save(tag);
 	tagDao.save(tag2);

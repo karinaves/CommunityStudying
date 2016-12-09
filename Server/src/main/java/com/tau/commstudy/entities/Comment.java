@@ -1,12 +1,17 @@
 package com.tau.commstudy.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "commentsToPosts")
@@ -21,59 +26,64 @@ public class Comment {
     private String content;
     private int answerRate;
 
-    @ManyToOne
-    private Post post;
+ 
+
 
     public Comment() {
 
     }
 
+
     public long getId() {
-	return id;
+        return id;
     }
+
 
     public void setId(long id) {
-	this.id = id;
+        this.id = id;
     }
+
 
     public long getUserId() {
-	return userId;
+        return userId;
     }
+
 
     public void setUserId(long userId) {
-	this.userId = userId;
+        this.userId = userId;
     }
+
 
     public long getTimeStamp() {
-	return timeStamp;
+        return timeStamp;
     }
+
 
     public void setTimeStamp(long timeStamp) {
-	this.timeStamp = timeStamp;
+        this.timeStamp = timeStamp;
     }
+
 
     public String getContent() {
-	return content;
+        return content;
     }
+
 
     public void setContent(String content) {
-	this.content = content;
+        this.content = content;
     }
+
 
     public int getAnswerRate() {
-	return answerRate;
+        return answerRate;
     }
+
 
     public void setAnswerRate(int answerRate) {
-	this.answerRate = answerRate;
+        this.answerRate = answerRate;
     }
 
-    public Post getPost() {
-	return post;
-    }
 
-    public void setPost(Post post) {
-	this.post = post;
-    }
+
 
 }

@@ -40,64 +40,104 @@ public class Post {
     @JoinTable(name = "posts_to_tags", joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     private Set<Tag> tags;
     
+    
+    
+    
     public Post() {
     }
+
+
 
     public long getId() {
         return id;
     }
 
+
+
     public void setId(long id) {
         this.id = id;
     }
+
+
 
     public String getTitle() {
         return title;
     }
 
+
+
     public void setTitle(String title) {
         this.title = title;
     }
+
+
 
     public String getContent() {
         return content;
     }
 
+
+
     public void setContent(String content) {
         this.content = content;
     }
-    
+
+
+
     public String getUserId() {
         return userId;
     }
 
+
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
-    
+
+
+
     public int getAnswers() {
         return answers;
     }
 
+
+
     public void setAnswers(int answers) {
         this.answers = answers;
     }
-    
+
+
+
     public int getVotes() {
         return votes;
     }
+
+
 
     public void setVotes(int votes) {
         this.votes = votes;
     }
 
-    public Set<Tag> getTagsSet() {
+
+
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTagsSet(Set<Tag> tagsSet) {
-        this.tags = tagsSet;
+
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
+
+
+
+
+
+
+
+
+    
     
     
 }

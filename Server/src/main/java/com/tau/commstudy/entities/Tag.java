@@ -26,43 +26,80 @@ public class Tag {
     
     @ManyToMany(mappedBy="tags")
     @JsonIgnore
-    private Set<Post> postsSet = new HashSet<Post>();
+    private Set<Post> posts = new HashSet<>();
 
+    @ManyToMany(mappedBy="tags")
+    @JsonIgnore
+    private Set<Question> questions = new HashSet<>();
+
+    
     public Tag() {
 
     }
 
+
+
     public long getId() {
-	return id;
+        return id;
     }
+
+
 
     public void setId(long id) {
-	this.id = id;
+        this.id = id;
     }
+
+
 
     public long getCourseId() {
-	return courseId;
+        return courseId;
     }
+
+
 
     public void setCourseId(long courseId) {
-	this.courseId = courseId;
+        this.courseId = courseId;
     }
+
+
 
     public String getName() {
-	return name;
+        return name;
     }
+
+
 
     public void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
-    public Set<Post> getPostsSet() {
-        return postsSet;
+
+
+    public Set<Post> getPosts() {
+        return posts;
     }
 
-    public void setPostsSet(Set<Post> postsSet) {
-        this.postsSet = postsSet;
+
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
+
+
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
+    }
+
+    
+
+    
 
     
 }

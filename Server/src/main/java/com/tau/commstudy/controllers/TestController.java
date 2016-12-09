@@ -1,24 +1,18 @@
 package com.tau.commstudy.controllers;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.tau.commstudy.beans.GoogleValidateInfo;
 import com.tau.commstudy.entities.Comment;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.Tag;
-import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.CommentDao;
 import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.entities.daos.TagDao;
-import com.tau.commstudy.services.UsersService;
 
 @RestController
 @RequestMapping("/test")
@@ -35,10 +29,8 @@ public class TestController {
     @Autowired
     private CommentDao commDao;
     
-    @Autowired
-    private UsersService userService;
-    
     @RequestMapping(method = RequestMethod.GET, value = "/show")
+    
     public Post show() {
 	Post findOne = postDao.findOne(1L);
 	

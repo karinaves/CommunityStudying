@@ -1,32 +1,35 @@
 package com.tau.commstudy.entities;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "commentsToPosts")
+@Table(name = "comments")
 @XmlRootElement
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private long userId;
+   
     private long timeStamp;
     private String content;
     private int answerRate;
 
- 
+    @ManyToOne
+    private Post post;
+
+    @ManyToOne
+    private User user;
+
 
 
     public Comment() {
@@ -43,15 +46,6 @@ public class Comment {
         this.id = id;
     }
 
-
-    public long getUserId() {
-        return userId;
-    }
-
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
 
 
     public long getTimeStamp() {
@@ -84,6 +78,25 @@ public class Comment {
     }
 
 
+    public Post getPost() {
+        return post;
+    }
 
 
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
+    
 }

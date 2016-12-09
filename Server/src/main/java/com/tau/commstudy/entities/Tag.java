@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,7 +21,6 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private long courseId;
 
     private String name;
     
@@ -32,6 +32,9 @@ public class Tag {
     @JsonIgnore
     private Set<Question> questions = new HashSet<>();
 
+    
+    @ManyToOne
+    private Course course;
     
     public Tag() {
 
@@ -47,18 +50,6 @@ public class Tag {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-
-
-    public long getCourseId() {
-        return courseId;
-    }
-
-
-
-    public void setCourseId(long courseId) {
-        this.courseId = courseId;
     }
 
 
@@ -95,6 +86,18 @@ public class Tag {
 
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
+    }
+
+
+
+    public Course getCourse() {
+        return course;
+    }
+
+
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     

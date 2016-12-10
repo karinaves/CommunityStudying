@@ -1,5 +1,6 @@
 package com.tau.commstudy.entities;
 
+import java.util.Calendar;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -24,6 +27,9 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar time;
     
     @NotNull
     private String title;
@@ -65,6 +71,13 @@ public class Post {
         this.id = id;
     }
 
+    public Calendar getTime() {
+        return time;
+    }
+
+    public void setTime(Calendar time) {
+        this.time = time;
+    }
 
 
     public String getTitle() {

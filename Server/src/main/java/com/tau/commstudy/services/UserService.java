@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.Calendar;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.UserDao;
+import com.tau.commstudy.exceptions.UnauthorizesException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,47 +17,38 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    private GoogleValidateInfo verifyUserIdToken(String idTokenString) {
-	try 
-	{
+    private GoogleValidateInfo verifyUserIdToken(String idTokenString) throws UnauthorizesException{
+	try{
 	    URL url = new URL("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + idTokenString);
 	    ObjectMapper mapper = new ObjectMapper();
 
 	    // json from url to Object
-	    GoogleValidateInfo obj = mapper.readValue(url,
-		    GoogleValidateInfo.class);
+	    GoogleValidateInfo obj = mapper.readValue(url, GoogleValidateInfo.class);
 	    return obj;
-	} 
-	catch (Exception ex)
-	{
-	    System.out.println("Invalid ID token.");
-	    ex.printStackTrace();
-	    return null;
+	}
+	catch (Exception ex){
+	    throw new UnauthorizesException();
 	}
     }
 
-    public User getOrCreateUser(String idTokenString){
+    public User getOrCreateUser(String idTokenString) throws UnauthorizesException{
 	GoogleValidateInfo googleValidateInfo = verifyUserIdToken(idTokenString);
-	if (googleValidateInfo == null)
-	{
-	    return null;
-	}	
 	User user = userDao.findByGoogleId(googleValidateInfo.getSub());
-	if (user ==null)
-	{
-	    User newUser= new User();
-	    newUser.setEmail(googleValidateInfo.getEmail());
-	    newUser.setFirstName(googleValidateInfo.getGiven_name());
-	    newUser.setLastName(googleValidateInfo.getFamily_name());
-	    newUser.setGoogleId(googleValidateInfo.getSub());
+	//creating new User
+	if (user ==null){
+	    user = new User();
 	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(Calendar.getInstance().getTime());
-	    newUser.setCreated(cal);
-	    userDao.save(newUser);
-	    System.out.println(newUser);
-	    return newUser;
+	    
+	    user.setEmail(googleValidateInfo.getEmail());
+	    user.setFirstName(googleValidateInfo.getGiven_name());
+	    user.setLastName(googleValidateInfo.getFamily_name());
+	    user.setGoogleId(googleValidateInfo.getSub());
+	    user.setCreated(cal);
+	    userDao.save(user);
+	    System.out.println(user);
+	    
 	}
-
-	return user;	
+	return user;
     }
 }

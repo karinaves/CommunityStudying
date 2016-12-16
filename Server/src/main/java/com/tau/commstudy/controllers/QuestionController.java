@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.tau.commstudy.entities.TestQuestion;
-import com.tau.commstudy.entities.daos.QuestionDao;
+import com.tau.commstudy.entities.daos.TestQuestionDao;
 
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
    
     @Autowired
-    private QuestionDao dao;
+    private TestQuestionDao dao;
     
     @RequestMapping(method = RequestMethod.GET, value = "/save")
     public String saveQuestion(String title,String content,String userId)

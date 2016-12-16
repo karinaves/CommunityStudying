@@ -1,6 +1,8 @@
 package com.tau.commstudy.entities;
 
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +10,8 @@ import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -20,7 +24,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
    
-    private long timeStamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar timeStamp;
+    
     private String content;
     private int answerRate;
 
@@ -48,12 +54,12 @@ public class Comment {
 
 
 
-    public long getTimeStamp() {
+    public Calendar getTimeStamp() {
         return timeStamp;
     }
 
 
-    public void setTimeStamp(long timeStamp) {
+    public void setTimeStamp(Calendar timeStamp) {
         this.timeStamp = timeStamp;
     }
 

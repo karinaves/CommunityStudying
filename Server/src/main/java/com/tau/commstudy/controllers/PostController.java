@@ -45,6 +45,10 @@ public class PostController {
       return "Post succesfully deleted!";
     }
     
+    /**
+     * if the parameter was not provided, 
+     * returns corresponding message
+     */
     @RequestMapping(value="/delete", params = {})
     public String delete() {
       return "long parameter 'id' needs to be provided";
@@ -55,6 +59,24 @@ public class PostController {
     {
 	return dao.findOne(id);
     }
+    
+    
+    /**
+     * increases the number of votes by 1
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/like")
+    public String like(long id)
+    {
+	try {
+    	  Post post = dao.findOne(id);
+          post.setVotes(post.getVotes() + 1);
+          dao.save(post);
+	}
+	catch (Exception ex) {
+	  return "Error updating votes for post: " + ex.toString();
+	}
+	return "Post succesfully updated!";
+    }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/all")
@@ -62,7 +84,10 @@ public class PostController {
     {
 	return dao.findAll();
     }
-    
+  
+    /**This updates only the content, title of the post.
+    All the other fields (including id and time) stay the same
+    */
     @RequestMapping(method = RequestMethod.POST, value = "/update")
     public String updatePost(@RequestBody Post givenPost) {
       try {

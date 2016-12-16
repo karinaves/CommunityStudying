@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.entities.Post;
-import com.tau.commstudy.entities.TestQuestion;
+<<<<<<< HEAD
+import com.tau.commstudy.entities.Test;
+=======
+import com.tau.commstudy.entities.Question;
+>>>>>>> parent of b783b8b... added CommentController.java,
 import com.tau.commstudy.entities.daos.PostDao;
 
 @RestController
@@ -55,6 +59,32 @@ public class PostController {
     {
 	return dao.findOne(id);
     }
+<<<<<<< HEAD
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/getByQuestion")
+    public Iterable<Post> getByQuestion(Test test, long questionId)
+    {
+	return dao.findByTestAndQuestionId(test, questionId);
+    }
+    
+    /**
+     * increases the number of votes by 1
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/like")
+    public String like(long id)
+    {
+	try {
+    	  Post post = dao.findOne(id);
+          post.setVotes(post.getVotes() + 1);
+          dao.save(post);
+	}
+	catch (Exception ex) {
+	  return "Error updating votes for post: " + ex.toString();
+	}
+	return "Post succesfully updated!";
+    }
+=======
+>>>>>>> parent of b783b8b... added CommentController.java,
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/all")

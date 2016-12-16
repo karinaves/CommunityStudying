@@ -4,9 +4,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.tau.commstudy.entities.Question;
+import com.tau.commstudy.entities.TestQuestion;
 
 @Transactional
-public interface QuestionDao extends CrudRepository<Question, Long>{
+public interface QuestionDao extends CrudRepository<TestQuestion, Long>{
 
 }

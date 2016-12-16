@@ -30,7 +30,7 @@ public class Tag {
 
     @ManyToMany(mappedBy="tags")
     @JsonIgnore
-    private Set<Question> questions = new HashSet<>();
+    private Set<TestQuestion> questions = new HashSet<>();
 
     
     @ManyToOne
@@ -78,13 +78,13 @@ public class Tag {
 
 
 
-    public Set<Question> getQuestions() {
+    public Set<TestQuestion> getQuestions() {
         return questions;
     }
 
 
 
-    public void setQuestions(Set<Question> questions) {
+    public void setQuestions(Set<TestQuestion> questions) {
         this.questions = questions;
     }
 

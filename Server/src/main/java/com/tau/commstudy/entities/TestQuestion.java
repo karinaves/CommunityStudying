@@ -17,9 +17,9 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name="questinos")
+@Table(name="test_questions")
 @XmlRootElement
-public class Question {
+public class TestQuestion {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,7 +44,7 @@ public class Question {
     @ManyToOne
     private Test test;
 
-    public Question() {
+    public TestQuestion() {
     }
 
     public long getId() {

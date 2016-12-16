@@ -51,9 +51,8 @@ public class Post {
     private User user;
 
     @ManyToOne
-    private Test test;
+    private TestQuestion testQuestions;
 
-     
     
     
     public Post() {
@@ -164,15 +163,17 @@ public class Post {
 
 
 
-    public Test getTest() {
-        return test;
+    public TestQuestion getTestQuestions() {
+        return testQuestions;
     }
 
 
 
-    public void setTest(Test test) {
-        this.test = test;
+    public void setTestQuestions(TestQuestion testQuestions) {
+        this.testQuestions = testQuestions;
     }
+
+
 
 
 

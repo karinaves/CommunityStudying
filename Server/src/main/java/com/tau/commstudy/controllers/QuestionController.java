@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.tau.commstudy.entities.Question;
+import com.tau.commstudy.entities.TestQuestion;
 import com.tau.commstudy.entities.daos.QuestionDao;
 
 @RestController
@@ -25,7 +25,7 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.GET, value = "/save")
     public String saveQuestion(String title,String content,String userId)
     {
-	Question q = new Question();
+	TestQuestion q = new TestQuestion();
 	q.setTitle(title);
 	q.setUserId(userId);
 	q.setContent(content);
@@ -35,7 +35,7 @@ public class QuestionController {
     }
     
     @RequestMapping(method = RequestMethod.POST, value = "/save")
-    public String saveByPost(@RequestBody Question q)
+    public String saveByPost(@RequestBody TestQuestion q)
     {
 	dao.save(q);
 	
@@ -43,14 +43,14 @@ public class QuestionController {
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "/getById")
-    public Question get(long id)
+    public TestQuestion get(long id)
     {
 	return dao.findOne(id);
     }
     
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/all")
-    public Iterable<Question> getAll()
+    public Iterable<TestQuestion> getAll()
     {
 	return dao.findAll();
     }

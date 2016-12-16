@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tau.commstudy.beans.GoogleValidateInfo;
 
 @Service
-public class UsersService {
+public class UserService {
 
     @Autowired
     private UserDao userDao;

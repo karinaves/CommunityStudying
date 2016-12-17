@@ -45,7 +45,7 @@ public class CourseService {
     * @return the entity with the given id or {@literal null} if none found
     * @throws TableArgumentException if {@code id} is {@literal null}
     */
-    public Course getById(Long id) throws TableArgumentException{
+    public Course get(Long id) throws TableArgumentException{
 	try{
 	    return courseDao.findOne(id);
 	}

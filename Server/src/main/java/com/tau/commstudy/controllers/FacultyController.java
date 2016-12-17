@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.University;
-import com.tau.commstudy.entities.User;
-import com.tau.commstudy.entities.daos.FacultyDao;
+import com.tau.commstudy.exceptions.TableArgumentException;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 import com.tau.commstudy.services.FacultyService;
-import com.tau.commstudy.services.UserService;
+
 
 
 @RestController
@@ -39,7 +38,7 @@ public class FacultyController {
     }  
     
     @RequestMapping(method = RequestMethod.GET, value = "/delete")
-    public void add(Long id) throws Exception {
+    public void delete(Long id) throws Exception {
 	facultyService.delete(id);
     }  
     
@@ -61,6 +60,12 @@ public class FacultyController {
     @ExceptionHandler(UnauthorizesException.class)
     @ResponseStatus(code=HttpStatus.UNAUTHORIZED)
     public String handleException(UnauthorizesException e) {
+	return e.getMessage();
+    }
+    
+    @ExceptionHandler(UnauthorizesException.class)
+    @ResponseStatus(code=HttpStatus.UNPROCESSABLE_ENTITY)
+    public String handleException(TableArgumentException e) {
 	return e.getMessage();
     }
 

@@ -12,8 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-
 
     
 @Entity
@@ -23,43 +23,60 @@ public class University {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        private long id;
-        private long universityNum;
-        private String address;
-       
-
+        private Long id;
+        
+        @NotNull
         @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
         @JoinTable(name = "universities_to_faculties", joinColumns = @JoinColumn(name = "university_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "faculty_id", referencedColumnName = "id"))
         private Set<Faculty> faculties;
+
+        @NotNull
+        private String name;
         
+        private Long universityNum;
+        
+        private String address;
+       
 
-
+      
         public University() {
 
         }
 
 
 
-	public long getId() {
+	public Long getId() {
 	    return id;
 	}
 
 
 
-	public void setId(long id) {
+	public void setId(Long id) {
 	    this.id = id;
 	}
 
 
 
-	public long getUniversityNum() {
+	public Long getUniversityNum() {
 	    return universityNum;
 	}
 
 
 
-	public void setUniversityNum(long universityNum) {
+	public void setUniversityNum(Long universityNum) {
 	    this.universityNum = universityNum;
+	}
+
+
+
+	public String getName() {
+	    return name;
+	}
+
+
+
+	public void setName(String name) {
+	    this.name = name;
 	}
 
 
@@ -85,7 +102,8 @@ public class University {
 	public void setFaculties(Set<Faculty> faculties) {
 	    this.faculties = faculties;
 	}
-        
+
+
         
     
     

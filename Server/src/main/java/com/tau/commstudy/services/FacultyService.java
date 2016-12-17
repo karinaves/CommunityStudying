@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.tau.commstudy.entities.User;
 import com.google.common.collect.Lists;
-import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.University;
 import com.tau.commstudy.entities.daos.FacultyDao;
@@ -30,11 +29,11 @@ public class FacultyService {
     /**
      * Creates and Saves to DB a Faculty entity. 
      * 
-     * @param  String name- not null, Set<University> universities - not null, Integer facultyUniversityId
-     * @return the saved Course entity
+     * @param  String name- not null, Set<University> universities - not null, Long facultyUniversityId
+     * @return the saved Faculty entity
      * @throws ArgumentException if name or universities is null
      */
-    public Faculty add( String name, Set<University> universities, Integer facultyUniversityId) throws TableArgumentException {
+    public Faculty add( String name, Set<University> universities, Long facultyUniversityId) throws TableArgumentException {
 	try{
 	    Faculty faculty = new Faculty();
 	    faculty.setName(name);
@@ -44,9 +43,9 @@ public class FacultyService {
 	}
 	catch( ValidationException e){
 	    if (name == null)
-		throw new TableArgumentException(Course.class,"name","null");
+		throw new TableArgumentException(Faculty.class,"name","null");
 	    else
-		throw new TableArgumentException(Course.class,"universities","null");
+		throw new TableArgumentException(Faculty.class,"universities","null");
 	    
 	}
     }
@@ -54,7 +53,7 @@ public class FacultyService {
     /**
      * Adds to Faculty Entity A University entity that he belongs to. 
      * 
-     * @param  Long id, University universities , Integer facultyUniversityId
+     * @param  Long id, University university
      * @return the saved Faculty entity
      * @throws TableArgumentException if id or university is null   
      */

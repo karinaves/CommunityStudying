@@ -31,7 +31,7 @@ public class Faculty implements Comparable<Faculty> {
     @NotNull
     private String name;
     
-    private Integer facultyUniversityId; //number of faculty in University
+    private Long facultyUniversityId; //number of faculty in University
     
     
     
@@ -60,14 +60,14 @@ public class Faculty implements Comparable<Faculty> {
 
 
 
-    public Integer getFacultyUniversityId() {
+    public Long getFacultyUniversityId() {
         return facultyUniversityId;
     }
 
 
 
 
-    public void setFacultyUniversityId(Integer facultyUniversityId) {
+    public void setFacultyUniversityId(Long facultyUniversityId) {
         this.facultyUniversityId = facultyUniversityId;
     }
 

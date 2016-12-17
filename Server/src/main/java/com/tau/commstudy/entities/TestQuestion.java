@@ -13,7 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -25,13 +24,8 @@ public class TestQuestion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
-    private String title;
-
-    @NotNull
-    private String content;
-
-    private String userId;
+    // @NotNull
+    // private String title;
 
     private int answers;
 
@@ -53,30 +47,6 @@ public class TestQuestion {
 
     public void setId(long id) {
 	this.id = id;
-    }
-
-    public String getTitle() {
-	return title;
-    }
-
-    public void setTitle(String title) {
-	this.title = title;
-    }
-
-    public String getContent() {
-	return content;
-    }
-
-    public void setContent(String content) {
-	this.content = content;
-    }
-
-    public String getUserId() {
-	return userId;
-    }
-
-    public void setUserId(String userId) {
-	this.userId = userId;
     }
 
     public int getAnswers() {

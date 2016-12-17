@@ -17,16 +17,13 @@ public class TestQuestionController {
     @Autowired
     private TestQuestionDao dao;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/save")
-    public String saveQuestion(String title, String content, String userId) {
-	TestQuestion q = new TestQuestion();
-	q.setTitle(title);
-	q.setUserId(userId);
-	q.setContent(content);
-	dao.save(q);
-
-	return "";
-    }
+    // @RequestMapping(method = RequestMethod.GET, value = "/save")
+    // public String saveQuestion(String title, String content, String userId) {
+    // TestQuestion q = new TestQuestion();
+    // dao.save(q);
+    //
+    // return "";
+    // }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save")
     public String saveByPost(@RequestBody TestQuestion q) {

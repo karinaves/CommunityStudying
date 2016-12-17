@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.tau.commstudy.entities.Comment;
 
 @Transactional
-public interface CommentDao extends CrudRepository<Comment, Long>{
+public interface CommentDao extends CrudRepository<Comment, Long> {
 
 }

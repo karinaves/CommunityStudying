@@ -15,102 +15,62 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="faculties")
+@Table(name = "faculties")
 @XmlRootElement
 public class Faculty implements Comparable<Faculty> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    
-    @ManyToMany(mappedBy="faculties")
+
+    @ManyToMany(mappedBy = "faculties")
     @JsonIgnore
     @NotNull
     private Set<University> universities = new HashSet<>();
-    
+
     @NotNull
     private String name;
-    
-    private Long facultyUniversityId; //number of faculty in University
-    
-    
-    
 
- 
-   
-    
+    private Long facultyUniversityId; // number of faculty in University
+
     public Faculty() {
-	
+
     }
-
-
-
 
     public Long getId() {
-        return id;
+	return id;
     }
-
-
-
 
     public void setId(Long id) {
-        this.id = id;
+	this.id = id;
     }
-
-
-
 
     public Long getFacultyUniversityId() {
-        return facultyUniversityId;
+	return facultyUniversityId;
     }
-
-
-
 
     public void setFacultyUniversityId(Long facultyUniversityId) {
-        this.facultyUniversityId = facultyUniversityId;
+	this.facultyUniversityId = facultyUniversityId;
     }
-
-
-
 
     public String getName() {
-        return name;
+	return name;
     }
-
-
-
 
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
-
-
-
 
     public Set<University> getUniversities() {
-        return universities;
+	return universities;
     }
-
-
-
 
     public void setUniversities(Set<University> universities) {
-        this.universities = universities;
+	this.universities = universities;
     }
-
 
     @Override
     public int compareTo(Faculty o) {
 	return this.name.compareTo(o.getName());
     }
 
-
-
-
-
-    
-    
-    
-    
 }

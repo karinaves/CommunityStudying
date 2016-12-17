@@ -13,45 +13,39 @@ import com.tau.commstudy.exceptions.TableArgumentException;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 import com.tau.commstudy.services.CourseService;
 
-
-
 @RestController
 @RequestMapping("/course")
 public class CourseController {
 
     @Autowired
     private CourseService courseService;
-    
+
     @RequestMapping(method = RequestMethod.GET, value = "/add")
-    public Course add(Faculty faculty, String name, Long courseUniversityId) throws Exception {
+    public Course add(Faculty faculty, String name, Long courseUniversityId)
+	    throws Exception {
 	return courseService.add(faculty, name, courseUniversityId);
     }
-     
-    
+
     @RequestMapping(method = RequestMethod.GET, value = "/delete")
     public void delete(Long id) throws Exception {
 	courseService.delete(id);
-    }  
-    
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/get")
     public void get(Long id) throws Exception {
 	courseService.get(id);
-    }  
-    
-    
-    
+    }
+
     @ExceptionHandler(UnauthorizesException.class)
-    @ResponseStatus(code=HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public String handleException(UnauthorizesException e) {
 	return e.getMessage();
     }
-    
+
     @ExceptionHandler(UnauthorizesException.class)
-    @ResponseStatus(code=HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
     public String handleException(TableArgumentException e) {
 	return e.getMessage();
     }
-    
-    
 
 }

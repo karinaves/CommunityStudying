@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.tau.commstudy.entities.Tag;
 
 @Transactional
-public interface TagDao extends CrudRepository<Tag, Long>{
+public interface TagDao extends CrudRepository<Tag, Long> {
 
 }

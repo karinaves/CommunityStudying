@@ -19,30 +19,29 @@ import com.tau.commstudy.entities.daos.TagDao;
 public class TestController {
 
     GoogleValidateInfo googleValidateInfo;
-    
+
     @Autowired
     private TagDao tagDao;
 
     @Autowired
     private PostDao postDao;
-    
+
     @Autowired
     private CommentDao commDao;
-    
+
     @RequestMapping(method = RequestMethod.GET, value = "/show")
-    
     public Post show() {
 	Post findOne = postDao.findOne(1L);
-	
+
 	Comment comm = new Comment();
-//	comm.setPost(findOne);
+	// comm.setPost(findOne);
 	comm.setContent("dfsdfs");
-	
+
 	commDao.save(comm);
 
 	return findOne;
     }
-    
+
     @RequestMapping(method = RequestMethod.GET, value = "/showComm")
     public Comment showCom() {
 	return commDao.findOne(1L);
@@ -61,7 +60,7 @@ public class TestController {
 	post.setTitle("sdfsd");
 	post.setContent("content");
 	post.setTags(tags);
-	
+
 	tag.getPosts().add(post);
 	tag2.getPosts().add(post);
 
@@ -71,8 +70,5 @@ public class TestController {
 
 	return "hello " + name + "!" + age;
     }
-
-    
-
 
 }

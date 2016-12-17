@@ -20,81 +20,72 @@ public class CommentController {
     private CommentDao dao;
 
     @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public String createComment(@RequestBody Comment newComment)
-    {
+    public String createComment(@RequestBody Comment newComment) {
 	try {
-	newComment.setTimeStamp(Calendar.getInstance());
-	dao.save(newComment);
-	}
-	catch (Exception ex) {
-	  return "Error creating the comment:" + ex.toString();
+	    newComment.setTimeStamp(Calendar.getInstance());
+	    dao.save(newComment);
+	} catch (Exception ex) {
+	    return "Error creating the comment:" + ex.toString();
 	}
 
 	return "Comment succesfully saved!";
     }
 
-    @RequestMapping(value="/delete", params = {"id"})
+    @RequestMapping(value = "/delete", params = { "id" })
     public String delete(long id) {
-      try {
-        dao.delete(id);
-      }
-      catch (Exception ex) {
-        return "Error deleting the comment:" + ex.toString();
-      }
-      return "Comment succesfully deleted!";
+	try {
+	    dao.delete(id);
+	} catch (Exception ex) {
+	    return "Error deleting the comment:" + ex.toString();
+	}
+	return "Comment succesfully deleted!";
     }
 
-    @RequestMapping(value="/delete", params = {})
+    @RequestMapping(value = "/delete", params = {})
     public String delete() {
-      return "long parameter 'id' needs to be provided";
+	return "long parameter 'id' needs to be provided";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getById")
-    public Comment getById(long id)
-    {
+    public Comment getById(long id) {
 	return dao.findOne(id);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/all")
-    public Iterable<Comment> getAll()
-    {
+    public Iterable<Comment> getAll() {
 	return dao.findAll();
     }
 
-    /**This updates only the content of the comment.
-    All the other fields (including id and time) stay the same
-    */
+    /**
+     * This updates only the content of the comment. All the other fields
+     * (including id and time) stay the same
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/update")
     public String updatePost(@RequestBody Comment givenComment) {
-      try {
-	Comment comment = dao.findOne(givenComment.getId());
-	comment.setContent(givenComment.getContent());
-        dao.save(comment);
-      }
-      catch (Exception ex) {
-        return "Error updating the comment: " + ex.toString();
-      }
-      return "Comment succesfully updated!";
+	try {
+	    Comment comment = dao.findOne(givenComment.getId());
+	    comment.setContent(givenComment.getContent());
+	    dao.save(comment);
+	} catch (Exception ex) {
+	    return "Error updating the comment: " + ex.toString();
+	}
+	return "Comment succesfully updated!";
     }
 
     /**
      * increases this answer's rating by 1
      */
     @RequestMapping(method = RequestMethod.POST, value = "/like")
-    public String like(long id)
-    {
+    public String like(long id) {
 	try {
-	Comment comment = dao.findOne(id);
-    	comment.setAnswerRate(comment.getAnswerRate() + 1);
-          dao.save(comment);
-	}
-	catch (Exception ex) {
-	  return "Error updating rating for comment: " + ex.toString();
+	    Comment comment = dao.findOne(id);
+	    comment.setAnswerRate(comment.getAnswerRate() + 1);
+	    dao.save(comment);
+	} catch (Exception ex) {
+	    return "Error updating rating for comment: " + ex.toString();
 	}
 	return "Comment succesfully updated!";
     }
 
 }
-
-

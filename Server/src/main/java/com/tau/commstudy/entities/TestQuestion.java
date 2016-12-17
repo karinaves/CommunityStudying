@@ -17,27 +17,27 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name="test_questions")
+@Table(name = "test_questions")
 @XmlRootElement
 public class TestQuestion {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
+
     @NotNull
     private String title;
-    
+
     @NotNull
     private String content;
-    
+
     private String userId;
-    
+
     private int answers;
-    
+
     private int votes;
-    
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "test_questions_to_tags", joinColumns = @JoinColumn(name = "test_question_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     private Set<Tag> tags;
 
@@ -48,69 +48,67 @@ public class TestQuestion {
     }
 
     public long getId() {
-        return id;
+	return id;
     }
 
     public void setId(long id) {
-        this.id = id;
+	this.id = id;
     }
 
     public String getTitle() {
-        return title;
+	return title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+	this.title = title;
     }
 
     public String getContent() {
-        return content;
+	return content;
     }
 
     public void setContent(String content) {
-        this.content = content;
+	this.content = content;
     }
-    
+
     public String getUserId() {
-        return userId;
+	return userId;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+	this.userId = userId;
     }
-    
-    
+
     public int getAnswers() {
-        return answers;
+	return answers;
     }
 
     public void setAnswers(int answers) {
-        this.answers = answers;
+	this.answers = answers;
     }
-    
+
     public int getVotes() {
-        return votes;
+	return votes;
     }
 
     public void setVotes(int votes) {
-        this.votes = votes;
+	this.votes = votes;
     }
 
     public Set<Tag> getTags() {
-        return tags;
+	return tags;
     }
 
     public void setTags(Set<Tag> tags) {
-        this.tags = tags;
+	this.tags = tags;
     }
 
     public Test getTest() {
-        return test;
+	return test;
     }
 
     public void setTest(Test test) {
-        this.test = test;
+	this.test = test;
     }
-    
-    
+
 }

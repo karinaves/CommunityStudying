@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @Table(name = "tags")
 public class Tag {
@@ -21,88 +20,61 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-
     private String name;
-    
-    @ManyToMany(mappedBy="tags")
+
+    @ManyToMany(mappedBy = "tags")
     @JsonIgnore
     private Set<Post> posts = new HashSet<>();
 
-    @ManyToMany(mappedBy="tags")
+    @ManyToMany(mappedBy = "tags")
     @JsonIgnore
     private Set<TestQuestion> questions = new HashSet<>();
 
-    
     @ManyToOne
     private Course course;
-    
+
     public Tag() {
 
     }
 
-
-
     public long getId() {
-        return id;
+	return id;
     }
-
-
 
     public void setId(long id) {
-        this.id = id;
+	this.id = id;
     }
-
-
 
     public String getName() {
-        return name;
+	return name;
     }
-
-
 
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
-
-
 
     public Set<Post> getPosts() {
-        return posts;
+	return posts;
     }
-
-
 
     public void setPosts(Set<Post> posts) {
-        this.posts = posts;
+	this.posts = posts;
     }
-
-
 
     public Set<TestQuestion> getQuestions() {
-        return questions;
+	return questions;
     }
-
-
 
     public void setQuestions(Set<TestQuestion> questions) {
-        this.questions = questions;
+	this.questions = questions;
     }
-
-
 
     public Course getCourse() {
-        return course;
+	return course;
     }
-
-
 
     public void setCourse(Course course) {
-        this.course = course;
+	this.course = course;
     }
 
-    
-
-    
-
-    
 }

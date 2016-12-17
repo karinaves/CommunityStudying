@@ -1,6 +1,5 @@
 package com.tau.commstudy.entities;
 
-
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -14,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 @Entity
 @Table(name = "comments")
 @XmlRootElement
@@ -23,10 +21,10 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-   
+
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar timeStamp;
-    
+
     private String content;
     private int answerRate;
 
@@ -36,73 +34,56 @@ public class Comment {
     @ManyToOne
     private User user;
 
-
-
     public Comment() {
 
     }
 
-
     public long getId() {
-        return id;
+	return id;
     }
-
 
     public void setId(long id) {
-        this.id = id;
+	this.id = id;
     }
-
-
 
     public Calendar getTimeStamp() {
-        return timeStamp;
+	return timeStamp;
     }
-
 
     public void setTimeStamp(Calendar timeStamp) {
-        this.timeStamp = timeStamp;
+	this.timeStamp = timeStamp;
     }
-
 
     public String getContent() {
-        return content;
+	return content;
     }
-
 
     public void setContent(String content) {
-        this.content = content;
+	this.content = content;
     }
-
 
     public int getAnswerRate() {
-        return answerRate;
+	return answerRate;
     }
-
 
     public void setAnswerRate(int answerRate) {
-        this.answerRate = answerRate;
+	this.answerRate = answerRate;
     }
-
 
     public Post getPost() {
-        return post;
+	return post;
     }
-
 
     public void setPost(Post post) {
-        this.post = post;
+	this.post = post;
     }
-
 
     public User getUser() {
-        return user;
+	return user;
     }
-
 
     public void setUser(User user) {
-        this.user = user;
+	this.user = user;
     }
 
-    
-    
 }

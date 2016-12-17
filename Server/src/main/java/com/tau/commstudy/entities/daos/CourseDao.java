@@ -6,5 +6,5 @@ import com.tau.commstudy.entities.Course;
 
 @Transactional
 public interface CourseDao extends CrudRepository<Course, Long> {
-    
+
 }

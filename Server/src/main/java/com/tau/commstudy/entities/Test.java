@@ -1,6 +1,5 @@
 package com.tau.commstudy.entities;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,107 +9,89 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name="test")
+@Table(name = "test")
 @XmlRootElement
 public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private int courseId;
-    
+
     private int year;
     private char semester;
     private String teacher;
     private char numOfquestions;
     private char difficulty;
-    
+
     @ManyToOne
     private Course course;
-    
-    public Test() {
-	
-    }
 
+    public Test() {
+
+    }
 
     public long getId() {
-        return id;
+	return id;
     }
-
 
     public void setId(long id) {
-        this.id = id;
+	this.id = id;
     }
-
 
     public int getCourseId() {
-        return courseId;
+	return courseId;
     }
-
 
     public void setCourseId(int courseId) {
-        this.courseId = courseId;
+	this.courseId = courseId;
     }
-
 
     public int getYear() {
-        return year;
+	return year;
     }
-
 
     public void setYear(int year) {
-        this.year = year;
+	this.year = year;
     }
-
 
     public char getSemester() {
-        return semester;
+	return semester;
     }
-
 
     public void setSemester(char semester) {
-        this.semester = semester;
+	this.semester = semester;
     }
-
 
     public String getTeacher() {
-        return teacher;
+	return teacher;
     }
-
 
     public void setTeacher(String teacher) {
-        this.teacher = teacher;
+	this.teacher = teacher;
     }
-
 
     public char getNumOfquestions() {
-        return numOfquestions;
+	return numOfquestions;
     }
-
 
     public void setNumOfquestions(char numOfquestions) {
-        this.numOfquestions = numOfquestions;
+	this.numOfquestions = numOfquestions;
     }
-
 
     public char getDifficulty() {
-        return difficulty;
+	return difficulty;
     }
-
 
     public void setDifficulty(char difficulty) {
-        this.difficulty = difficulty;
+	this.difficulty = difficulty;
     }
-
 
     public Course getCourse() {
-        return course;
+	return course;
     }
-
 
     public void setCourse(Course course) {
-        this.course = course;
+	this.course = course;
     }
-
-
 
 }

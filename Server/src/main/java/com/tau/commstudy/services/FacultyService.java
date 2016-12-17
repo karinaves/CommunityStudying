@@ -24,97 +24,100 @@ public class FacultyService {
     private FacultyDao facultyDao;
     @Autowired
     private UserService userService;
-   
 
     /**
-     * Creates and Saves to DB a Faculty entity. 
+     * Creates and Saves to DB a Faculty entity.
      * 
-     * @param  String name- not null, Set<University> universities - not null, Long facultyUniversityId
+     * @param String
+     *            name- not null, Set<University> universities - not null, Long
+     *            facultyUniversityId
      * @return the saved Faculty entity
-     * @throws ArgumentException if name or universities is null
+     * @throws ArgumentException
+     *             if name or universities is null
      */
-    public Faculty add( String name, Set<University> universities, Long facultyUniversityId) throws TableArgumentException {
-	try{
+    public Faculty add(String name, Set<University> universities,
+	    Long facultyUniversityId) throws TableArgumentException {
+	try {
 	    Faculty faculty = new Faculty();
 	    faculty.setName(name);
 	    faculty.setUniversities(universities);
 	    faculty.setFacultyUniversityId(facultyUniversityId);
 	    return facultyDao.save(faculty);
-	}
-	catch( ValidationException e){
+	} catch (ValidationException e) {
 	    if (name == null)
-		throw new TableArgumentException(Faculty.class,"name","null");
+		throw new TableArgumentException(Faculty.class, "name", "null");
 	    else
-		throw new TableArgumentException(Faculty.class,"universities","null");
-	    
+		throw new TableArgumentException(Faculty.class, "universities",
+			"null");
+
 	}
     }
-    
+
     /**
-     * Adds to Faculty Entity A University entity that he belongs to. 
+     * Adds to Faculty Entity A University entity that he belongs to.
      * 
-     * @param  Long id, University university
+     * @param Long
+     *            id, University university
      * @return the saved Faculty entity
-     * @throws TableArgumentException if id or university is null   
+     * @throws TableArgumentException
+     *             if id or university is null
      */
-    public Faculty addUniversity(Long id, University university) throws TableArgumentException{
-	if (university == null){
-	    throw new TableArgumentException(Faculty.class,"University", "null");
+    public Faculty addUniversity(Long id, University university)
+	    throws TableArgumentException {
+	if (university == null) {
+	    throw new TableArgumentException(Faculty.class, "University",
+		    "null");
 	}
 	Faculty faculty = get(id);
 	faculty.getUniversities().add(university);
 	return faculty;
     }
-    
-  
+
     /**
-    * Retrieves an entity by its id.
-    * 
-    * @param id must not be {@literal null}.
-    * @return the entity with the given id or {@literal null} if none found
-    * @throws TableArgumentException if {@code id} is {@literal null}
-    */
-    public Faculty get(Long id) throws TableArgumentException{
-	try{
+     * Retrieves an entity by its id.
+     * 
+     * @param id
+     *            must not be {@literal null}.
+     * @return the entity with the given id or {@literal null} if none found
+     * @throws TableArgumentException
+     *             if {@code id} is {@literal null}
+     */
+    public Faculty get(Long id) throws TableArgumentException {
+	try {
 	    return facultyDao.findOne(id);
-	}
-	catch (IllegalArgumentException e){
-		throw new TableArgumentException(Faculty.class,"id", "null");
+	} catch (IllegalArgumentException e) {
+	    throw new TableArgumentException(Faculty.class, "id", "null");
 	}
     }
-    
+
     /**
      * Deletes an entity by its id.
      * 
-     * @param id must not be {@literal null}.
+     * @param id
+     *            must not be {@literal null}.
      * @return void if deleted or not in DB
-     * @throws TableArgumentException if {@code id} is {@literal null}
-     */  
+     * @throws TableArgumentException
+     *             if {@code id} is {@literal null}
+     */
     public void delete(Long id) throws TableArgumentException {
 	try {
 	    facultyDao.delete(id);
-	}
-	catch (IllegalArgumentException e) {
-	    throw new TableArgumentException(Faculty.class,"id", "null");
-		    
+	} catch (IllegalArgumentException e) {
+	    throw new TableArgumentException(Faculty.class, "id", "null");
+
 	}
     }
 
-    
-       
-    
-    public List<Faculty> getAllFaculties(String idTokenString) throws UnauthorizesException{
+    public List<Faculty> getAllFaculties(String idTokenString)
+	    throws UnauthorizesException {
 	List<Faculty> faculties = null;
-	User user = userService.getOrCreateUser(idTokenString); //can throw UnauthorizesException
+	User user = userService.getOrCreateUser(idTokenString); // can throw
+								// UnauthorizesException
 	faculties = Lists.newArrayList(facultyDao.findAll());
-	//no faculties Error to handle
-	Collections.sort(faculties); //sort by faculty name
+	// no faculties Error to handle
+	Collections.sort(faculties); // sort by faculty name
 	return faculties;
-	
-	
-	
-    }
-    
 
-    
+    }
+
 }

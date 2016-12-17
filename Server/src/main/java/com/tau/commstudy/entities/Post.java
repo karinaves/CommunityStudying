@@ -20,169 +20,120 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name="posts")
+@Table(name = "posts")
 @XmlRootElement
 public class Post {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar time;
-    
+
     @NotNull
     private String title;
-    
+
     @NotNull
     private String content;
-    
+
     private String userId;
-    
+
     private int answers;
-    
+
     private int votes;
-    
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "posts_to_tags", joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     private Set<Tag> tags;
-    
+
     @ManyToOne
     private User user;
 
     @ManyToOne
     private TestQuestion testQuestions;
 
-    
-    
     public Post() {
     }
 
-
-
     public long getId() {
-        return id;
+	return id;
     }
 
-
-
     public void setId(long id) {
-        this.id = id;
+	this.id = id;
     }
 
     public Calendar getTime() {
-        return time;
+	return time;
     }
 
     public void setTime(Calendar time) {
-        this.time = time;
+	this.time = time;
     }
-
 
     public String getTitle() {
-        return title;
+	return title;
     }
-
-
 
     public void setTitle(String title) {
-        this.title = title;
+	this.title = title;
     }
-
-
 
     public String getContent() {
-        return content;
+	return content;
     }
-
-
 
     public void setContent(String content) {
-        this.content = content;
+	this.content = content;
     }
-
-
 
     public String getUserId() {
-        return userId;
+	return userId;
     }
-
-
 
     public void setUserId(String userId) {
-        this.userId = userId;
+	this.userId = userId;
     }
-
-
 
     public int getAnswers() {
-        return answers;
+	return answers;
     }
-
-
 
     public void setAnswers(int answers) {
-        this.answers = answers;
+	this.answers = answers;
     }
-
-
 
     public int getVotes() {
-        return votes;
+	return votes;
     }
-
-
 
     public void setVotes(int votes) {
-        this.votes = votes;
+	this.votes = votes;
     }
-
-
 
     public Set<Tag> getTags() {
-        return tags;
+	return tags;
     }
-
-
 
     public void setTags(Set<Tag> tags) {
-        this.tags = tags;
+	this.tags = tags;
     }
-
-
 
     public User getUser() {
-        return user;
+	return user;
     }
-
-
 
     public void setUser(User user) {
-        this.user = user;
+	this.user = user;
     }
-
-
 
     public TestQuestion getTestQuestions() {
-        return testQuestions;
+	return testQuestions;
     }
-
-
 
     public void setTestQuestions(TestQuestion testQuestions) {
-        this.testQuestions = testQuestions;
+	this.testQuestions = testQuestions;
     }
 
-
-
-
-
-
-
-
-
-
-    
-    
-    
 }

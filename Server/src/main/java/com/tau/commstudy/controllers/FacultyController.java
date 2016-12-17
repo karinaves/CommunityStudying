@@ -1,7 +1,6 @@
 package com.tau.commstudy.controllers;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.entities.Faculty;
-import com.tau.commstudy.entities.University;
 import com.tau.commstudy.exceptions.TableArgumentException;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 import com.tau.commstudy.services.FacultyService;
@@ -25,15 +23,13 @@ public class FacultyController {
     private FacultyService facultyService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/add")
-    public Faculty add(String name, Set<University> universities,
-	    Long facultyUniversityId) throws Exception {
-	return facultyService.add(name, universities, facultyUniversityId);
+    public Faculty add(String name, Long facultyUniversityId) throws Exception {
+	return facultyService.add(name, facultyUniversityId);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/addUniversity")
-    public Faculty addUniversity(Long id, University university)
-	    throws Exception {
-	return facultyService.addUniversity(id, university);
+    public Faculty addUniversity(Long id, Long universityId) throws Exception {
+	return facultyService.addUniversity(id, universityId);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/delete")

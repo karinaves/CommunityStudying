@@ -2,17 +2,16 @@ package com.tau.commstudy.services;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tau.commstudy.entities.User;
 import com.google.common.collect.Lists;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.University;
+import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.FacultyDao;
 import com.tau.commstudy.exceptions.TableArgumentException;
 import com.tau.commstudy.exceptions.UnauthorizesException;
@@ -24,31 +23,26 @@ public class FacultyService {
     private FacultyDao facultyDao;
     @Autowired
     private UserService userService;
+    @Autowired
+    private UniversityService universityService;
 
     /**
      * Creates and Saves to DB a Faculty entity.
      * 
      * @param String
-     *            name- not null, Set<University> universities - not null, Long
-     *            facultyUniversityId
+     *            name- not null, Long facultyUniversityId
      * @return the saved Faculty entity
      * @throws ArgumentException
-     *             if name or universities is null
+     *             if name is null
      */
-    public Faculty add(String name, Set<University> universities,
-	    Long facultyUniversityId) throws TableArgumentException {
+    public Faculty add(String name, Long facultyUniversityId) throws TableArgumentException {
 	try {
 	    Faculty faculty = new Faculty();
 	    faculty.setName(name);
-	    faculty.setUniversities(universities);
 	    faculty.setFacultyUniversityId(facultyUniversityId);
 	    return facultyDao.save(faculty);
 	} catch (ValidationException e) {
-	    if (name == null)
-		throw new TableArgumentException(Faculty.class, "name", "null");
-	    else
-		throw new TableArgumentException(Faculty.class, "universities",
-			"null");
+	    throw new TableArgumentException(Faculty.class, "name", "null");
 
 	}
     }
@@ -60,15 +54,11 @@ public class FacultyService {
      *            id, University university
      * @return the saved Faculty entity
      * @throws TableArgumentException
-     *             if id or university is null
+     *             if id or universityId is null
      */
-    public Faculty addUniversity(Long id, University university)
-	    throws TableArgumentException {
-	if (university == null) {
-	    throw new TableArgumentException(Faculty.class, "University",
-		    "null");
-	}
+    public Faculty addUniversity(Long id, Long universityId) throws TableArgumentException {
 	Faculty faculty = get(id);
+	University university = universityService.get(universityId);
 	faculty.getUniversities().add(university);
 	return faculty;
     }
@@ -108,8 +98,7 @@ public class FacultyService {
 	}
     }
 
-    public List<Faculty> getAllFaculties(String idTokenString)
-	    throws UnauthorizesException {
+    public List<Faculty> getAllFaculties(String idTokenString) throws UnauthorizesException {
 	List<Faculty> faculties = null;
 	User user = userService.getOrCreateUser(idTokenString); // can throw
 								// UnauthorizesException

@@ -1,7 +1,5 @@
 package com.tau.commstudy.services;
 
-import java.util.Set;
-
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,33 +15,27 @@ public class UniversityService {
 
     @Autowired
     private UniversityDao universityDao;
+    @Autowired
+    private FacultyService facultyService;
 
     /**
      * Creates and Saves to DB a University entity.
      * 
      * @param String
-     *            name- not null, Set<Faculty> faculties - not null, Long
-     *            universityNum, String address
+     *            name- not null, Long universityNum, String address
      * @return the saved Course entity
      * @throws ArgumentException
-     *             if name or universities is null
+     *             if name is null
      */
-    public University add(String name, Set<Faculty> faculties,
-	    Long universityNum, String address) throws TableArgumentException {
+    public University add(String name, Long universityNum, String address) throws TableArgumentException {
 	try {
 	    University university = new University();
 	    university.setName(name);
-	    university.setFaculties(faculties);
 	    university.setUniversityNum(universityNum);
 	    university.setAddress(address);
 	    return universityDao.save(university);
 	} catch (ValidationException e) {
-	    if (name == null)
-		throw new TableArgumentException(University.class, "name",
-			"null");
-	    else
-		throw new TableArgumentException(University.class,
-			"universities", "null");
+	    throw new TableArgumentException(University.class, "name", "null");
 
 	}
     }
@@ -52,18 +44,14 @@ public class UniversityService {
      * Adds to University Entity A Faculty entity .
      * 
      * @param Long
-     *            id, Faculty faculty
+     *            id, Long facultyId
      * @return the saved University entity
      * @throws TableArgumentException
-     *             if id or university is null
+     *             if id or universityId is null
      */
-    public University addFaculty(Long id, Faculty faculty)
-	    throws TableArgumentException {
-	if (faculty == null) {
-	    throw new TableArgumentException(University.class, "Faculty",
-		    "null");
-	}
+    public University addFaculty(Long id, Long facultyId) throws TableArgumentException {
 	University university = get(id);
+	Faculty faculty = facultyService.get(facultyId);
 	university.getFaculties().add(faculty);
 	return university;
     }

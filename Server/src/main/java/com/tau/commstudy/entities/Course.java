@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -16,11 +17,15 @@ public class Course {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private long courseUniversityId;
-    
+    private Long id;
+    @NotNull
     @ManyToOne
     private Faculty faculty;
+    @NotNull
+    private String name;
+    private Long courseUniversityId;
+  
+    
    
     public Course(){
 	
@@ -28,19 +33,19 @@ public class Course {
 
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
 
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
 
 
-    public long getCourseUniversityId() {
+    public Long getCourseUniversityId() {
         return courseUniversityId;
     }
 
@@ -60,6 +65,18 @@ public class Course {
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
+    }
+
+
+
+    public String getName() {
+        return name;
+    }
+
+
+
+    public void setName(String name) {
+        this.name = name;
     }
     
     

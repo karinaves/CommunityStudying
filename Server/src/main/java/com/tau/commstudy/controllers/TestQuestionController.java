@@ -16,8 +16,8 @@ import com.tau.commstudy.entities.TestQuestion;
 import com.tau.commstudy.entities.daos.TestQuestionDao;
 
 @RestController
-@RequestMapping("/question")
-public class QuestionController {
+@RequestMapping("/testQuestion")
+public class TestQuestionController {
    
     @Autowired
     private TestQuestionDao dao;

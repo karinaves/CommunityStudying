@@ -17,20 +17,6 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    private GoogleValidateInfo verifyUserIdToken(String idTokenString) throws UnauthorizesException{
-	try{
-	    URL url = new URL("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + idTokenString);
-	    ObjectMapper mapper = new ObjectMapper();
-
-	    // json from url to Object
-	    GoogleValidateInfo obj = mapper.readValue(url, GoogleValidateInfo.class);
-	    return obj;
-	}
-	catch (Exception ex){
-	    throw new UnauthorizesException();
-	}
-    }
-
     public User getOrCreateUser(String idTokenString) throws UnauthorizesException{
 	GoogleValidateInfo googleValidateInfo = verifyUserIdToken(idTokenString);
 	User user = userDao.findByGoogleId(googleValidateInfo.getSub());
@@ -51,4 +37,22 @@ public class UserService {
 	}
 	return user;
     }
+
+    // -----------------Auxiliary functions-----------------------
+    
+    private GoogleValidateInfo verifyUserIdToken(String idTokenString) throws UnauthorizesException{
+	try{
+	    URL url = new URL("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + idTokenString);
+	    ObjectMapper mapper = new ObjectMapper();
+
+	    // Json format from the URL to GoogleValidateInfo instance
+	    GoogleValidateInfo validateInfo = mapper.readValue(url, GoogleValidateInfo.class);
+	    return validateInfo;
+	}
+	catch (Exception ex){
+	    throw new UnauthorizesException();
+	}
+    }
+
+
 }

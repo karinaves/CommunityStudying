@@ -17,6 +17,13 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
+    /**
+     * Verify the user's id token. In case the validation successes, checks if the user exists. 
+     * Create a new user in case there is no user with its google id.
+     * @param String idTokenString - the google id token of the user.
+     * @return user or a new user with the relevant google id. if In case validation failed, return null.
+     *
+     */
     public User getOrCreateUser(String idTokenString) throws UnauthorizesException{
 	GoogleValidateInfo googleValidateInfo = verifyUserIdToken(idTokenString);
 	User user = userDao.findByGoogleId(googleValidateInfo.getSub());
@@ -39,6 +46,13 @@ public class UserService {
     }
 
     // -----------------Auxiliary functions-----------------------
+    
+    /**
+     * Authenticate user login. verify the user's id token. 
+     * @param String idTokenString - the google id token of the user.
+     * @return A new GoogleValidateInfo of the user in case validation succeed, otherwise returns null.
+     *
+     */
     
     private GoogleValidateInfo verifyUserIdToken(String idTokenString) throws UnauthorizesException{
 	try{

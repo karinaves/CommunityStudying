@@ -5,12 +5,14 @@ import java.util.Set;
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.University;
 import com.tau.commstudy.entities.daos.UniversityDao;
 import com.tau.commstudy.exceptions.TableArgumentException;
 
+@Service
 public class UniversityService {
 
     @Autowired

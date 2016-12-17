@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
+import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.PostDao;
 
 @RestController
@@ -49,11 +51,6 @@ public class PostController {
 	return "long parameter 'id' needs to be provided";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getById")
-    public Post getById(long id) {
-	return dao.findOne(id);
-    }
-
     /**
      * increases the number of votes by 1
      */
@@ -90,6 +87,21 @@ public class PostController {
 	    return "Error updating the post: " + ex.toString();
 	}
 	return "Post succesfully updated!";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getById")
+    public Post getById(long id) {
+	return dao.findOne(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getByUser")
+    public Iterable<Post> getByUser(User user) {
+	return dao.findByUser(user);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getByCourse")
+    public Iterable<Post> getByCourse(Course course) {
+	return dao.findByTestQuestion_Test_CourseOrderByTimeDesc(course);
     }
 
 }

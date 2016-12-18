@@ -2,23 +2,31 @@ package com.tau.commstudy.controllers;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.tau.commstudy.beans.GoogleValidateInfo;
 import com.tau.commstudy.entities.Comment;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.Tag;
+import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.daos.CommentDao;
 import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.entities.daos.TagDao;
+import com.tau.commstudy.entities.daos.TestDao;
 
 @RestController
 @RequestMapping("/test")
 public class TestController {
 
     GoogleValidateInfo googleValidateInfo;
+
+    @Autowired
+    private TestDao dao;
 
     @Autowired
     private TagDao tagDao;
@@ -28,6 +36,11 @@ public class TestController {
 
     @Autowired
     private CommentDao commDao;
+
+    @RequestMapping(method = RequestMethod.POST, value = "/create")
+    public Test createTest(@RequestBody Test newTest) {
+	return dao.save(newTest);
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/show")
     public Post show() {

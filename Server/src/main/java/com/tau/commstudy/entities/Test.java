@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -14,15 +15,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private int courseId;
 
-    private int year;
-    private char semester;
+    private Integer year;
+    private Character semester;
+    private Character moed;
     private String teacher;
     private char numOfquestions;
     private char difficulty;
 
+    @NotNull
     @ManyToOne
     private Course course;
 
@@ -30,11 +33,11 @@ public class Test {
 
     }
 
-    public long getId() {
+    public Long getId() {
 	return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
 	this.id = id;
     }
 
@@ -46,7 +49,7 @@ public class Test {
 	this.courseId = courseId;
     }
 
-    public int getYear() {
+    public Integer getYear() {
 	return year;
     }
 
@@ -54,12 +57,20 @@ public class Test {
 	this.year = year;
     }
 
-    public char getSemester() {
+    public Character getSemester() {
 	return semester;
     }
 
     public void setSemester(char semester) {
 	this.semester = semester;
+    }
+
+    public Character getMoed() {
+	return moed;
+    }
+
+    public void setMoed(char moed) {
+	this.moed = moed;
     }
 
     public String getTeacher() {

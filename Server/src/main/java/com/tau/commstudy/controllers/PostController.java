@@ -22,15 +22,15 @@ public class PostController {
     private PostDao dao;
 
     @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public String createPost(@RequestBody Post newPost) {
+    public Post createPost(@RequestBody Post newPost) {
 	try {
 	    newPost.setTime(Calendar.getInstance());
-	    dao.save(newPost);
+	    return dao.save(newPost);
 	} catch (Exception ex) {
-	    return "Error creating the post:" + ex.toString();
+	    return null; // "Error creating the post:" + ex.toString();
 	}
 
-	return "Post succesfully saved!";
+	// return "Post succesfully saved!";
     }
 
     @RequestMapping(value = "/delete", params = { "id" })
@@ -102,6 +102,12 @@ public class PostController {
     @RequestMapping(method = RequestMethod.GET, value = "/getByCourse")
     public Iterable<Post> getByCourse(Course course) {
 	return dao.findByTestQuestion_Test_CourseOrderByTimeDesc(course);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getByMoed")
+    public Iterable<Post> getByMoed(Integer year, Character semester, Character moed) {
+	return dao.findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedOrderByTimeDesc(
+		year, semester, moed);
     }
 
 }

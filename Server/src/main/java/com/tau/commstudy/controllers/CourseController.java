@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Faculty;
+import com.tau.commstudy.entities.daos.CourseDao;
 import com.tau.commstudy.exceptions.TableArgumentException;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 import com.tau.commstudy.services.CourseService;
@@ -20,10 +22,19 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private CourseDao dao;
+
     @RequestMapping(method = RequestMethod.GET, value = "/add")
-    public Course add(Faculty faculty, String name, Long courseUniversityId)
-	    throws Exception {
+    public Course add(Faculty faculty, String name, Long courseUniversityId) throws Exception {
 	return courseService.add(faculty, name, courseUniversityId);
+    }
+
+    //temporarily without requestBody for testing
+    @RequestMapping(method = RequestMethod.POST, value = "/add")
+    public Course add(Course course) throws Exception {
+	return dao.save(course);
+
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/delete")
@@ -32,8 +43,8 @@ public class CourseController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get")
-    public void get(Long id) throws Exception {
-	courseService.get(id);
+    public Course get(Long id) throws Exception {
+	return courseService.get(id);
     }
 
     @ExceptionHandler(UnauthorizesException.class)

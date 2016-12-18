@@ -22,10 +22,9 @@ public class TestQuestion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
-    // @NotNull
-    // private String title;
+    private int numberInTest;
 
     private int answers;
 
@@ -41,7 +40,7 @@ public class TestQuestion {
     public TestQuestion() {
     }
 
-    public long getId() {
+    public Long getId() {
 	return id;
     }
 
@@ -79,6 +78,14 @@ public class TestQuestion {
 
     public void setTest(Test test) {
 	this.test = test;
+    }
+
+    public int getNumberInTest() {
+	return numberInTest;
+    }
+
+    public void setNumberInTest(int numberInTest) {
+	this.numberInTest = numberInTest;
     }
 
 }

@@ -19,11 +19,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getOrCreateUser")
+    @RequestMapping(method = RequestMethod.GET, value = "/getOrCreate")
     public User getOrCreateUser(String idTokenString) throws Exception {
 	// if an exception is thrown that it is caught in runtime by
 	// @ExceptionHandler
-	User user = userService.getOrCreateUser(idTokenString);
+	User user = userService.getOrCreate(idTokenString);
 	return user;
 
     }

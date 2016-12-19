@@ -100,8 +100,8 @@ public class FacultyService {
 
     public List<Faculty> getAllFaculties(String idTokenString) throws UnauthorizesException {
 	List<Faculty> faculties = null;
-	User user = userService.getOrCreateUser(idTokenString); // can throw
-								// UnauthorizesException
+	User user = userService.getOrCreate(idTokenString); // can throw
+							    // UnauthorizesException
 	faculties = Lists.newArrayList(facultyDao.findAll());
 	// no faculties Error to handle
 	Collections.sort(faculties); // sort by faculty name

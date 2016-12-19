@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.University;
 import com.tau.commstudy.entities.daos.UniversityDao;
-import com.tau.commstudy.exceptions.TableArgumentException;
 
 @Service
 public class UniversityService {
@@ -63,16 +62,16 @@ public class UniversityService {
      * 
      * @param Long
      *            id, Long facultyId
-     * @return the saved University entity
-     * @throws TableArgumentException
-     *             if id or universityId is null
+     * @return true if added
+     * @throws ValidationException
+     *             if id or facultyId is null
      */
-    public University addFaculty(Long id, Long facultyId) throws ValidationException {
+    public boolean addFaculty(Long id, Long facultyId) throws ValidationException {
 	University university = get(id);
 	Faculty faculty = facultyService.get(facultyId);
 	university.getFaculties().add(faculty);
 	universityDao.save(university);
-	return university;
+	return true;
     }
 
 }

@@ -33,7 +33,7 @@ public class UniversityController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/addFaculty")
-    public University addFaculty(Long id, Long facultyId) throws Exception {
+    public boolean addFaculty(Long id, Long facultyId) throws Exception {
 	return universityService.addFaculty(id, facultyId);
     }
 

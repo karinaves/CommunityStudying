@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.tau.commstudy.beans.UserAllData;
 import com.tau.commstudy.entities.Faculty;
-import com.tau.commstudy.entities.University;
-import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.FacultyDao;
 import com.tau.commstudy.exceptions.TableArgumentException;
 import com.tau.commstudy.exceptions.UnauthorizesException;
@@ -73,24 +72,29 @@ public class FacultyService {
      * @param Long
      *            id, University university
      * @return the saved Faculty entity
-     * @throws TableArgumentException
+     * @throws ValidationException
      *             if id or universityId is null
      */
-    public Faculty addUniversity(Long id, Long universityId) throws TableArgumentException {
-	Faculty faculty = get(id);
-	University university = universityService.get(universityId);
-	faculty.getUniversities().add(university);
-	return faculty;
+    public boolean addUniversity(Long id, Long universityId) throws ValidationException {
+	return universityService.addFaculty(universityId, id);
+
     }
 
-    public List<Faculty> getAllFaculties(String idTokenString) throws UnauthorizesException {
+    private List<Faculty> getAllSorted() {
 	List<Faculty> faculties = null;
-	User user = userService.getOrCreateUser(idTokenString); // can throw
-								// UnauthorizesException
+	// UnauthorizesException
 	faculties = Lists.newArrayList(facultyDao.findAll());
 	// no faculties Error to handle
 	Collections.sort(faculties); // sort by faculty name
 	return faculties;
+    }
+
+    public UserAllData<Faculty> getUserAllData(String idTokenString) throws UnauthorizesException {
+	UserAllData<Faculty> data = new UserAllData<>();
+	data.setAllData(getAllSorted());
+	// User user = userService.get(idTokenString); // can throw
+	// data.setUserData(userService.getAllFaculties());
+	return data;
 
     }
 

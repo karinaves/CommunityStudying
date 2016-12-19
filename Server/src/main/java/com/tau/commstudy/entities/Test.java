@@ -6,17 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "test")
+@Table(name = "test", uniqueConstraints = @UniqueConstraint(columnNames = { "course", "year", "semester", "moed" }))
 @XmlRootElement
 public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int courseId;
 
     private Integer year;
     private Character semester;
@@ -39,14 +39,6 @@ public class Test {
 
     public void setId(Long id) {
 	this.id = id;
-    }
-
-    public int getCourseId() {
-	return courseId;
-    }
-
-    public void setCourseId(int courseId) {
-	this.courseId = courseId;
     }
 
     public Integer getYear() {

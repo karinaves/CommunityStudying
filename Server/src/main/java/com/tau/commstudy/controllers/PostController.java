@@ -1,6 +1,7 @@
 package com.tau.commstudy.controllers;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -105,9 +106,20 @@ public class PostController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getByMoed")
-    public Iterable<Post> getByMoed(Integer year, Character semester, Character moed) {
-	return dao.findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedOrderByTimeDesc(
-		year, semester, moed);
+    public Iterable<Post> getByMoed(Integer year, Character semester, Character moed, Course course) {
+	return dao
+		.findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedAndTestQuestion_Test_CourseOrderByTimeDesc(
+			year, semester, moed, course);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/checkByMoed")
+    public boolean checkByMoed(Integer year, Character semester, Character moed, Course course) {
+	List<Post> posts = dao
+		.findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedAndTestQuestion_Test_CourseOrderByTimeDesc(
+			year, semester, moed, course);
+	if (posts.size() == 0)
+	    return false;
+	return true;
     }
 
 }

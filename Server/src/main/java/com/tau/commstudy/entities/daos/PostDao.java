@@ -1,5 +1,7 @@
 package com.tau.commstudy.entities.daos;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.tau.commstudy.entities.Course;
@@ -12,6 +14,6 @@ public interface PostDao extends CrudRepository<Post, Long> {
 
     Iterable<Post> findByTestQuestion_Test_CourseOrderByTimeDesc(Course course);
 
-    Iterable<Post> findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedOrderByTimeDesc(
-	    Integer year, Character semester, Character moed);
+    List<Post> findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedAndTestQuestion_Test_CourseOrderByTimeDesc(
+	    Integer year, Character semester, Character moed, Course course);
 }

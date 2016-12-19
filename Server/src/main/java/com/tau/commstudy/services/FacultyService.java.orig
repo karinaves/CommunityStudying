@@ -82,8 +82,12 @@ public class FacultyService {
 
     private List<Faculty> getAllSorted() {
 	List<Faculty> faculties = null;
+<<<<<<< HEAD
 	User user = userService.getOrCreate(idTokenString); // can throw
 							    // UnauthorizesException
+=======
+	// UnauthorizesException
+>>>>>>> b1d0813f3d454182a1e0d9408afe1bc0715ed211
 	faculties = Lists.newArrayList(facultyDao.findAll());
 	// no faculties Error to handle
 	Collections.sort(faculties); // sort by faculty name

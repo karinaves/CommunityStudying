@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "courses")
 @XmlRootElement
-public class Course {
+public class Course implements Comparable<Course> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,6 +58,11 @@ public class Course {
 
     public void setName(String name) {
 	this.name = name;
+    }
+
+    @Override
+    public int compareTo(Course o) {
+	return this.name.compareTo(o.getName());
     }
 
 }

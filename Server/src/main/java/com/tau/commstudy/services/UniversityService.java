@@ -22,40 +22,13 @@ public class UniversityService {
      * Creates and Saves to DB a University entity.
      * 
      * @param String
-     *            name- not null, Long universityNum, String address
+     *            University university object
      * @return the saved Course entity
-     * @throws ArgumentException
-     *             if name is null
+     * @throws ValidationException
+     *             if not saved
      */
-    public University add(String name, Long universityNum, String address) throws TableArgumentException {
-	try {
-	    University university = new University();
-	    university.setName(name);
-	    university.setUniversityNum(universityNum);
-	    university.setAddress(address);
-	    return universityDao.save(university);
-	} catch (ValidationException e) {
-	    e.printStackTrace();
-	    throw new TableArgumentException(University.class, "name", "null");
-
-	}
-    }
-
-    /**
-     * Adds to University Entity A Faculty entity .
-     * 
-     * @param Long
-     *            id, Long facultyId
-     * @return the saved University entity
-     * @throws TableArgumentException
-     *             if id or universityId is null
-     */
-    public University addFaculty(Long id, Long facultyId) throws TableArgumentException {
-	University university = get(id);
-	Faculty faculty = facultyService.get(facultyId);
-	university.getFaculties().add(faculty);
-	universityDao.save(university);
-	return university;
+    public University add(University university) throws ValidationException {
+	return universityDao.save(university);
     }
 
     /**
@@ -80,17 +53,30 @@ public class UniversityService {
      * 
      * @param id
      *            must not be {@literal null}.
-     * @return void if deleted or not in DB
-     * @throws TableArgumentException
+     * @return true if deleted or not in DB
+     * @throws IllegalArgumentException
      *             if {@code id} is {@literal null}
      */
-    public void delete(Long id) throws TableArgumentException {
-	try {
-	    universityDao.delete(id);
-	} catch (IllegalArgumentException e) {
-	    throw new TableArgumentException(University.class, "id", "null");
+    public boolean delete(Long id) throws IllegalArgumentException {
+	universityDao.delete(id);
+	return true;
+    }
 
-	}
+    /**
+     * Adds to University Entity A Faculty entity .
+     * 
+     * @param Long
+     *            id, Long facultyId
+     * @return the saved University entity
+     * @throws TableArgumentException
+     *             if id or universityId is null
+     */
+    public University addFaculty(Long id, Long facultyId) throws ValidationException {
+	University university = get(id);
+	Faculty faculty = facultyService.get(facultyId);
+	university.getFaculties().add(faculty);
+	universityDao.save(university);
+	return university;
     }
 
 }

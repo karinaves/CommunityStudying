@@ -35,8 +35,8 @@ public class UniversityController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void delete(@PathVariable Long id) throws Exception {
-	universityService.delete(id);
+    public boolean delete(@PathVariable Long id) throws Exception {
+	return universityService.delete(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/addFaculty")

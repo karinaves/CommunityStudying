@@ -38,8 +38,8 @@ public class FacultyController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get")
-    public void get(Long id) throws Exception {
-	facultyService.get(id);
+    public Faculty get(Long id) throws Exception {
+	return facultyService.get(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAllFaculties")

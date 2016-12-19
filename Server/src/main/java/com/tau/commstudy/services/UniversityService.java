@@ -35,6 +35,7 @@ public class UniversityService {
 	    university.setAddress(address);
 	    return universityDao.save(university);
 	} catch (ValidationException e) {
+	    e.printStackTrace();
 	    throw new TableArgumentException(University.class, "name", "null");
 
 	}
@@ -53,6 +54,7 @@ public class UniversityService {
 	University university = get(id);
 	Faculty faculty = facultyService.get(facultyId);
 	university.getFaculties().add(faculty);
+	universityDao.save(university);
 	return university;
     }
 

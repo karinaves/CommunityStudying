@@ -36,8 +36,8 @@ public class UniversityController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get")
-    public void get(Long id) throws Exception {
-	universityService.get(id);
+    public University get(Long id) throws Exception {
+	return universityService.get(id);
     }
 
     @ExceptionHandler(UnauthorizesException.class)

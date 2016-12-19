@@ -2,20 +2,29 @@ package com.tau.commstudy.services;
 
 import java.net.URL;
 import java.util.Calendar;
-import com.tau.commstudy.entities.User;
-import com.tau.commstudy.entities.daos.UserDao;
-import com.tau.commstudy.exceptions.UnauthorizesException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tau.commstudy.beans.GoogleValidateInfo;
+import com.tau.commstudy.entities.Faculty;
+import com.tau.commstudy.entities.User;
+import com.tau.commstudy.entities.daos.UserDao;
+import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserDao userDao;
+
+    public User get(String idTokenString) throws UnauthorizesException {
+	GoogleValidateInfo google = verifyUserIdToken(idTokenString);
+	User user = userDao.findByGoogleId(google.getSub());
+	return user;
+    }
 
     /**
      * Verify the user's id token. In case the validation successes, checks if
@@ -28,26 +37,20 @@ public class UserService {
      *         validation failed, return null.
      *
      */
-    public User getOrCreateUser(String idTokenString)
-	    throws UnauthorizesException {
-	GoogleValidateInfo googleValidateInfo = verifyUserIdToken(idTokenString);
-	User user = userDao.findByGoogleId(googleValidateInfo.getSub());
+    public User getOrCreate(String idTokenString) throws UnauthorizesException {
+	User user = get(idTokenString);
 	// creating new User
 	if (user == null) {
-	    user = new User();
-	    Calendar cal = Calendar.getInstance();
-	    cal.setTime(Calendar.getInstance().getTime());
-
-	    user.setEmail(googleValidateInfo.getEmail());
-	    user.setFirstName(googleValidateInfo.getGiven_name());
-	    user.setLastName(googleValidateInfo.getFamily_name());
-	    user.setGoogleId(googleValidateInfo.getSub());
-	    user.setCreated(cal);
-	    userDao.save(user);
-	    System.out.println(user);
-
+	    user = createUser(idTokenString);
 	}
 	return user;
+    }
+
+    public List<Faculty> getFaculties(String idTokenString) throws UnauthorizesException {
+	List<Faculty> faculties = null;
+	User user = get(idTokenString);
+
+	return faculties;
     }
 
     // -----------------Auxiliary functions-----------------------
@@ -62,21 +65,34 @@ public class UserService {
      *
      */
 
-    private GoogleValidateInfo verifyUserIdToken(String idTokenString)
-	    throws UnauthorizesException {
+    private GoogleValidateInfo verifyUserIdToken(String idTokenString) throws UnauthorizesException {
 	try {
-	    URL url = new URL(
-		    "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="
-			    + idTokenString);
+	    URL url = new URL("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + idTokenString);
 	    ObjectMapper mapper = new ObjectMapper();
 
 	    // Json format from the URL to GoogleValidateInfo instance
-	    GoogleValidateInfo validateInfo = mapper.readValue(url,
-		    GoogleValidateInfo.class);
+	    GoogleValidateInfo validateInfo = mapper.readValue(url, GoogleValidateInfo.class);
 	    return validateInfo;
 	} catch (Exception ex) {
 	    throw new UnauthorizesException();
 	}
+    }
+
+    private User createUser(String idTokenString) {
+	GoogleValidateInfo google = verifyUserIdToken(idTokenString);
+	User user = new User();
+	Calendar cal = Calendar.getInstance();
+	cal.setTime(Calendar.getInstance().getTime());
+
+	user.setEmail(google.getEmail());
+	user.setFirstName(google.getGiven_name());
+	user.setLastName(google.getFamily_name());
+	user.setGoogleId(google.getSub());
+	user.setCreated(cal);
+	userDao.save(user);
+	System.out.println(user);
+
+	return user;
     }
 
 }

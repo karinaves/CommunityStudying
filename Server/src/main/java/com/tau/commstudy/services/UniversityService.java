@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.University;
 import com.tau.commstudy.entities.daos.UniversityDao;
-import com.tau.commstudy.exceptions.TableArgumentException;
 
 @Service
 public class UniversityService {
@@ -21,9 +20,9 @@ public class UniversityService {
     /**
      * Creates and Saves to DB a University entity.
      * 
-     * @param String
-     *            University university object
-     * @return the saved Course entity
+     * @param University
+     *            object
+     * @return the saved University entity
      * @throws ValidationException
      *             if not saved
      */
@@ -37,15 +36,11 @@ public class UniversityService {
      * @param id
      *            must not be {@literal null}.
      * @return the entity with the given id or {@literal null} if none found
-     * @throws TableArgumentException
+     * @throws IllegalArgumentException
      *             if {@code id} is {@literal null}
      */
-    public University get(Long id) throws TableArgumentException {
-	try {
-	    return universityDao.findOne(id);
-	} catch (IllegalArgumentException e) {
-	    throw new TableArgumentException(University.class, "id", "null");
-	}
+    public University get(Long id) throws IllegalArgumentException {
+	return universityDao.findOne(id);
     }
 
     /**
@@ -67,16 +62,16 @@ public class UniversityService {
      * 
      * @param Long
      *            id, Long facultyId
-     * @return the saved University entity
-     * @throws TableArgumentException
-     *             if id or universityId is null
+     * @return true if added
+     * @throws ValidationException
+     *             if id or facultyId is null
      */
-    public University addFaculty(Long id, Long facultyId) throws ValidationException {
+    public boolean addFaculty(Long id, Long facultyId) throws ValidationException {
 	University university = get(id);
 	Faculty faculty = facultyService.get(facultyId);
 	university.getFaculties().add(faculty);
 	universityDao.save(university);
-	return university;
+	return true;
     }
 
 }

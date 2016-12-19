@@ -23,7 +23,11 @@ public class UserController {
     public User getOrCreateUser(String idTokenString) throws Exception {
 	// if an exception is thrown that it is caught in runtime by
 	// @ExceptionHandler
+<<<<<<< HEAD
+	User user = userService.getOrCreate(idTokenString);
+=======
 	User user = userService.get(idTokenString);
+>>>>>>> b1d0813f3d454182a1e0d9408afe1bc0715ed211
 	return user;
 
     }

@@ -21,9 +21,9 @@ public class UniversityService {
     /**
      * Creates and Saves to DB a University entity.
      * 
-     * @param String
-     *            University university object
-     * @return the saved Course entity
+     * @param University
+     *            object
+     * @return the saved University entity
      * @throws ValidationException
      *             if not saved
      */
@@ -37,15 +37,11 @@ public class UniversityService {
      * @param id
      *            must not be {@literal null}.
      * @return the entity with the given id or {@literal null} if none found
-     * @throws TableArgumentException
+     * @throws IllegalArgumentException
      *             if {@code id} is {@literal null}
      */
-    public University get(Long id) throws TableArgumentException {
-	try {
-	    return universityDao.findOne(id);
-	} catch (IllegalArgumentException e) {
-	    throw new TableArgumentException(University.class, "id", "null");
-	}
+    public University get(Long id) throws IllegalArgumentException {
+	return universityDao.findOne(id);
     }
 
     /**

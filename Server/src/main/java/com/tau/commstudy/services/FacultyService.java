@@ -29,22 +29,42 @@ public class FacultyService {
     /**
      * Creates and Saves to DB a Faculty entity.
      * 
-     * @param String
-     *            name- not null, Long facultyUniversityId
+     * @param Faculty
+     *            object
      * @return the saved Faculty entity
-     * @throws ArgumentException
-     *             if name is null
+     * @throws ValidationException
+     *             if not saved
      */
-    public Faculty add(String name, Long facultyUniversityId) throws TableArgumentException {
-	try {
-	    Faculty faculty = new Faculty();
-	    faculty.setName(name);
-	    faculty.setFacultyUniversityId(facultyUniversityId);
-	    return facultyDao.save(faculty);
-	} catch (ValidationException e) {
-	    throw new TableArgumentException(Faculty.class, "name", "null");
+    public Faculty add(Faculty faculty) throws TableArgumentException {
+	return facultyDao.save(faculty);
+    }
 
-	}
+    /**
+     * Retrieves an entity by its id.
+     * 
+     * @param id
+     *            must not be {@literal null}.
+     * @return the entity with the given id or {@literal null} if none found
+     * @return the saved Faculty entity
+     * @throws IllegalArgumentException
+     *             if {@code id} is {@literal null}
+     */
+    public Faculty get(Long id) throws IllegalArgumentException {
+	return facultyDao.findOne(id);
+    }
+
+    /**
+     * Deletes an entity by its id.
+     * 
+     * @param id
+     *            must not be {@literal null}.
+     * @return true if deleted or not in DB
+     * @throws IllegalArgumentException
+     *             if {@code id} is {@literal null}
+     */
+    public boolean delete(Long id) throws IllegalArgumentException {
+	facultyDao.delete(id);
+	return true;
     }
 
     /**
@@ -61,41 +81,6 @@ public class FacultyService {
 	University university = universityService.get(universityId);
 	faculty.getUniversities().add(university);
 	return faculty;
-    }
-
-    /**
-     * Retrieves an entity by its id.
-     * 
-     * @param id
-     *            must not be {@literal null}.
-     * @return the entity with the given id or {@literal null} if none found
-     * @throws TableArgumentException
-     *             if {@code id} is {@literal null}
-     */
-    public Faculty get(Long id) throws TableArgumentException {
-	try {
-	    return facultyDao.findOne(id);
-	} catch (IllegalArgumentException e) {
-	    throw new TableArgumentException(Faculty.class, "id", "null");
-	}
-    }
-
-    /**
-     * Deletes an entity by its id.
-     * 
-     * @param id
-     *            must not be {@literal null}.
-     * @return void if deleted or not in DB
-     * @throws TableArgumentException
-     *             if {@code id} is {@literal null}
-     */
-    public void delete(Long id) throws TableArgumentException {
-	try {
-	    facultyDao.delete(id);
-	} catch (IllegalArgumentException e) {
-	    throw new TableArgumentException(Faculty.class, "id", "null");
-
-	}
     }
 
     public List<Faculty> getAllFaculties(String idTokenString) throws UnauthorizesException {

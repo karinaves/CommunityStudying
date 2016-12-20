@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tau.commstudy.beans.PostBean;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
@@ -126,18 +125,20 @@ public class PostController {
 	return true;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/checkByMoed") // get,
-									// all
-									// fields
-									// in a
-									// bean
-    public boolean checkByMoed(PostBean bean) {
-	// List<Post> posts = dao
-	// .findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedAndTestQuestion_Test_CourseOrderByTimeDesc(
-	// b);
-	if (bean == null)
-	    return false;
-	return true;
-    }
+    // @RequestMapping(method = RequestMethod.GET, value = "/checkByMoed") //
+    // get,
+    // // all
+    // // fields
+    // // in a
+    // // bean
+    //// public boolean checkByMoed(PostBean bean) {
+    //// // List<Post> posts = dao
+    //// //
+    // .findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedAndTestQuestion_Test_CourseOrderByTimeDesc(
+    //// // b);
+    //// if (bean == null)
+    //// return false;
+    //// return true;
+    //// }
 
 }

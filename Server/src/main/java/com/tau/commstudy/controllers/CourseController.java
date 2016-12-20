@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tau.commstudy.beans.UserAllData;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.services.CourseService;
 
@@ -37,4 +38,12 @@ public class CourseController {
     public boolean addFaculty(Long id, Long facultyId) throws Exception {
 	return courseService.addFaculty(id, facultyId);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getUserAllData")
+    public UserAllData<Course> getUserAndAllData(String idTokenString, Long facultyId) throws Exception {
+	UserAllData<Course> courses = courseService.getUserAndAllData(idTokenString, facultyId);
+	return courses;
+
+    }
+
 }

@@ -5,9 +5,11 @@ import javax.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tau.commstudy.beans.UserAllData;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.daos.CourseDao;
+import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
 public class CourseService {
@@ -74,6 +76,16 @@ public class CourseService {
 	course.setFaculty(faculty);
 	courseDao.save(course);
 	return true;
+
+    }
+
+    public UserAllData<Course> getUserAndAllData(String idTokenString, Long facultyId) throws UnauthorizesException {
+	UserAllData<Course> data = new UserAllData<>();
+	data.setAllData(courseDao.findByFaculty_IdOrderByName(facultyId));
+
+	// User user = userService.get(idTokenString); // can throw
+	// data.setUserData(userService.getAllFaculties());
+	return data;
 
     }
 

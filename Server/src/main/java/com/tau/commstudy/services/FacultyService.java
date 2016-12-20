@@ -1,14 +1,10 @@
 package com.tau.commstudy.services;
 
-import java.util.Collections;
-import java.util.List;
-
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Lists;
 import com.tau.commstudy.beans.UserAllData;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.University;
@@ -82,17 +78,10 @@ public class FacultyService {
 	return true;
     }
 
-    private List<Faculty> getAllSorted() {
-	List<Faculty> faculties = null;
-	faculties = Lists.newArrayList(facultyDao.findAll());
-	// no faculties Error to handle
-	Collections.sort(faculties); // sort by faculty name
-	return faculties;
-    }
-
-    public UserAllData<Faculty> getUserAllData(String idTokenString) throws UnauthorizesException {
+    public UserAllData<Faculty> getUserAndAllData(String idTokenString) throws UnauthorizesException {
 	UserAllData<Faculty> data = new UserAllData<>();
-	data.setAllData(getAllSorted());
+	data.setAllData(facultyDao.findAllByOrderByName());
+
 	// User user = userService.get(idTokenString); // can throw
 	// data.setUserData(userService.getAllFaculties());
 	return data;

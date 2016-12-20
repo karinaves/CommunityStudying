@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "faculties")
 @XmlRootElement
-public class Faculty implements Comparable<Faculty> {
+public class Faculty {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -59,11 +59,6 @@ public class Faculty implements Comparable<Faculty> {
 
     public void setFacultyUniversityId(Long facultyUniversityId) {
 	this.facultyUniversityId = facultyUniversityId;
-    }
-
-    @Override
-    public int compareTo(Faculty o) {
-	return this.name.compareTo(o.getName());
     }
 
 }

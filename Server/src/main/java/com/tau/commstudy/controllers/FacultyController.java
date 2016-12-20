@@ -48,8 +48,8 @@ public class FacultyController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getUserAllData")
-    public UserAllData<Faculty> getOrCreateUser(String idTokenString) throws Exception {
-	UserAllData<Faculty> faculties = facultyService.getUserAllData(idTokenString);
+    public UserAllData<Faculty> getUserAndAllData(String idTokenString) throws Exception {
+	UserAllData<Faculty> faculties = facultyService.getUserAndAllData(idTokenString);
 	return faculties;
 
     }

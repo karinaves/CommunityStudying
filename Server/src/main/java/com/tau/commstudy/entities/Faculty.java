@@ -1,18 +1,13 @@
 package com.tau.commstudy.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "faculties")
@@ -22,10 +17,8 @@ public class Faculty implements Comparable<Faculty> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToMany(mappedBy = "faculties")
-    @JsonIgnore
-    @NotNull
-    private Set<University> universities = new HashSet<>();
+    @ManyToOne
+    private University university;
 
     @NotNull
     private String name;
@@ -44,12 +37,12 @@ public class Faculty implements Comparable<Faculty> {
 	this.id = id;
     }
 
-    public Long getFacultyUniversityId() {
-	return facultyUniversityId;
+    public University getUniversity() {
+	return university;
     }
 
-    public void setFacultyUniversityId(Long facultyUniversityId) {
-	this.facultyUniversityId = facultyUniversityId;
+    public void setUniversity(University university) {
+	this.university = university;
     }
 
     public String getName() {
@@ -60,12 +53,12 @@ public class Faculty implements Comparable<Faculty> {
 	this.name = name;
     }
 
-    public Set<University> getUniversities() {
-	return universities;
+    public Long getFacultyUniversityId() {
+	return facultyUniversityId;
     }
 
-    public void setUniversities(Set<University> universities) {
-	this.universities = universities;
+    public void setFacultyUniversityId(Long facultyUniversityId) {
+	this.facultyUniversityId = facultyUniversityId;
     }
 
     @Override

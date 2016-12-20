@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.entities.University;
+import com.tau.commstudy.services.FacultyService;
 import com.tau.commstudy.services.UniversityService;
 
 @RestController
@@ -17,7 +18,10 @@ public class UniversityController {
     @Autowired
     private UniversityService universityService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/add")
+    @Autowired
+    private FacultyService facultyService;
+
+    @RequestMapping(method = RequestMethod.POST, value = "/add")
     public University add(@RequestBody University university) throws Exception {
 	return universityService.add(university);
     }
@@ -34,7 +38,7 @@ public class UniversityController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/addFaculty")
     public boolean addFaculty(Long id, Long facultyId) throws Exception {
-	return universityService.addFaculty(id, facultyId);
+	return facultyService.addUniversity(facultyId, id);
     }
 
 }

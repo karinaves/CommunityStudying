@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.tau.commstudy.beans.UserAllData;
 import com.tau.commstudy.entities.Faculty;
+import com.tau.commstudy.entities.University;
 import com.tau.commstudy.entities.daos.FacultyDao;
-import com.tau.commstudy.exceptions.TableArgumentException;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
@@ -20,8 +20,7 @@ public class FacultyService {
 
     @Autowired
     private FacultyDao facultyDao;
-    @Autowired
-    private UserService userService;
+
     @Autowired
     private UniversityService universityService;
 
@@ -34,7 +33,7 @@ public class FacultyService {
      * @throws ValidationException
      *             if not saved
      */
-    public Faculty add(Faculty faculty) throws TableArgumentException {
+    public Faculty add(Faculty faculty) throws ValidationException {
 	return facultyDao.save(faculty);
     }
 
@@ -76,14 +75,15 @@ public class FacultyService {
      *             if id or universityId is null
      */
     public boolean addUniversity(Long id, Long universityId) throws ValidationException {
-	return universityService.addFaculty(universityId, id);
-
+	Faculty faculty = get(id);
+	University university = universityService.get(universityId);
+	faculty.setUniversity(university);
+	facultyDao.save(faculty);
+	return true;
     }
 
     private List<Faculty> getAllSorted() {
 	List<Faculty> faculties = null;
-	User user = userService.getOrCreate(idTokenString); // can throw
-							    // UnauthorizesException
 	faculties = Lists.newArrayList(facultyDao.findAll());
 	// no faculties Error to handle
 	Collections.sort(faculties); // sort by faculty name

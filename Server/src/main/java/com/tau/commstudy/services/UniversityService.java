@@ -5,7 +5,6 @@ import javax.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.University;
 import com.tau.commstudy.entities.daos.UniversityDao;
 
@@ -14,8 +13,6 @@ public class UniversityService {
 
     @Autowired
     private UniversityDao universityDao;
-    @Autowired
-    private FacultyService facultyService;
 
     /**
      * Creates and Saves to DB a University entity.
@@ -54,23 +51,6 @@ public class UniversityService {
      */
     public boolean delete(Long id) throws IllegalArgumentException {
 	universityDao.delete(id);
-	return true;
-    }
-
-    /**
-     * Adds to University Entity A Faculty entity .
-     * 
-     * @param Long
-     *            id, Long facultyId
-     * @return true if added
-     * @throws ValidationException
-     *             if id or facultyId is null
-     */
-    public boolean addFaculty(Long id, Long facultyId) throws ValidationException {
-	University university = get(id);
-	Faculty faculty = facultyService.get(facultyId);
-	university.getFaculties().add(faculty);
-	universityDao.save(university);
 	return true;
     }
 

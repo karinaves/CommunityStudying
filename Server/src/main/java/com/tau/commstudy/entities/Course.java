@@ -17,11 +17,13 @@ public class Course implements Comparable<Course> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
+
     @ManyToOne
     private Faculty faculty;
+
     @NotNull
     private String name;
+
     private Long courseUniversityId;
 
     public Course() {
@@ -34,14 +36,6 @@ public class Course implements Comparable<Course> {
 
     public void setId(Long id) {
 	this.id = id;
-    }
-
-    public Long getCourseUniversityId() {
-	return courseUniversityId;
-    }
-
-    public void setCourseUniversityId(long courseUniversityId) {
-	this.courseUniversityId = courseUniversityId;
     }
 
     public Faculty getFaculty() {
@@ -60,9 +54,9 @@ public class Course implements Comparable<Course> {
 	this.name = name;
     }
 
-    @Override
-    public int compareTo(Course o) {
-	return this.name.compareTo(o.getName());
+
+    public void setCourseUniversityId(Long courseUniversityId) {
+	this.courseUniversityId = courseUniversityId;
     }
 
 }

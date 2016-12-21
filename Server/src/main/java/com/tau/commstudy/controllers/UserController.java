@@ -2,6 +2,7 @@ package com.tau.commstudy.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/getOrCreate")
     public User getOrCreateUser(String idTokenString) throws Exception {
 	// if an exception is thrown that it is caught in runtime by

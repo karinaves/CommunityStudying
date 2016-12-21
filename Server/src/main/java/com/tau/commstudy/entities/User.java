@@ -25,6 +25,15 @@ public class User {
     private String firstName;
     private String lastName;
     private String googleId;
+    private String pictureUrl;
+
+    public String getPictureUrl() {
+	return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+	this.pictureUrl = pictureUrl;
+    }
 
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar created;

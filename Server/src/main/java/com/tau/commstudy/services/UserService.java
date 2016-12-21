@@ -37,6 +37,7 @@ public class UserService {
      *         validation failed, return null.
      *
      */
+
     public User getOrCreate(String idTokenString) throws UnauthorizesException {
 	User user = get(idTokenString);
 	// creating new User
@@ -85,9 +86,10 @@ public class UserService {
 	cal.setTime(Calendar.getInstance().getTime());
 
 	user.setEmail(google.getEmail());
-	user.setFirstName(google.getGiven_name());
-	user.setLastName(google.getFamily_name());
+	user.setFirstName(google.getGiven_name().substring(0, 1).toUpperCase() + google.getGiven_name().substring(1));
+	user.setLastName(google.getFamily_name().substring(0, 1).toUpperCase() + google.getFamily_name().substring(1));
 	user.setGoogleId(google.getSub());
+	user.setPictureUrl(google.getPicture());
 	user.setCreated(cal);
 	userDao.save(user);
 	System.out.println(user);

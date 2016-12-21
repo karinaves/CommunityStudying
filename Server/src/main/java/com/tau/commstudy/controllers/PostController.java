@@ -10,10 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tau.commstudy.beans.PostBean;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
+import com.tau.commstudy.entities.Test;
+import com.tau.commstudy.entities.TestQuestion;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.PostDao;
+import com.tau.commstudy.entities.daos.TestDao;
+import com.tau.commstudy.entities.daos.TestQuestionDao;
 
 @RestController
 @RequestMapping("/post")
@@ -21,6 +26,11 @@ public class PostController {
 
     @Autowired
     private PostDao dao;
+
+    @Autowired
+    private TestDao testDao;
+
+    TestQuestionDao questionDao;
 
     @RequestMapping(method = RequestMethod.POST, value = "/create")
     public Post createPost(@RequestBody Post newPost) {
@@ -125,20 +135,72 @@ public class PostController {
 	return true;
     }
 
-    // @RequestMapping(method = RequestMethod.GET, value = "/checkByMoed") //
-    // get,
-    // // all
-    // // fields
-    // // in a
-    // // bean
-    //// public boolean checkByMoed(PostBean bean) {
-    //// // List<Post> posts = dao
-    //// //
-    // .findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedAndTestQuestion_Test_CourseOrderByTimeDesc(
-    //// // b);
-    //// if (bean == null)
-    //// return false;
-    //// return true;
-    //// }
+    /**
+     * check if posts for this test moed already exist
+     *
+     * @param bean
+     * @return TRUE or FALSE
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/checkByMoed") // get,
+									// all
+									// fields
+									// in a
+									// bean
+    public boolean checkByMoed(PostBean bean) {
+	List<Post> posts = dao
+		.findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedAndTestQuestion_Test_CourseOrderByTimeDesc(
+			bean.getTest().getYear(), bean.getTest().getSemester(), bean.getTest().getMoed(),
+			bean.getCourse());
+	if (posts == null || posts.isEmpty())
+	    return false;
+	return true;
+    }
+
+    /**
+     * finds all posts connected to a specific testQuestion.
+     *
+     * @param bean
+     *            - the field testQuestion should be given
+     * @return List of posts
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/getByTestQuestion")
+    public List<Post> getByTestQuestion(@RequestBody PostBean bean) {
+	// 1. use findByfields if this test exists
+	// 2. in the specific test, find by question number
+	return dao.findByTestQuestionOrderByTimeDesc(bean.getTestQuestion());
+    }
+
+    /**
+     * finds all posts connected to a question, search by question info
+     *
+     * @param bean
+     *            the used fields are: -course -year -semester -moed
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/getByQuestion")
+    public List<Post> getByQuestion(@RequestBody PostBean bean) {
+	// 1. use findByfields if this test exists
+	// 2. in the specific test, find by question number
+	Test test = testDao.findByCourseAndYearAndSemesterAndMoed(bean.getCourse(), bean.getYear(), bean.getSemester(),
+		bean.getMoed());
+	if (test == null)
+	    return null;
+	bean.setTest(test);
+
+	TestQuestion question = questionDao.findByTestAndQuestionNumber(test, bean.getQuestionNumber());
+	if (question == null)
+	    return null;
+	bean.setTestQuestion(question);
+
+	return getByTestQuestion(bean);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/checkByQuestion")
+    public boolean checkByQuestion(@RequestBody PostBean bean) {
+	if (getByQuestion(bean) == null)
+	    return false;
+
+	return true;
+    }
 
 }

@@ -13,10 +13,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "test_questions")
+@Table(name = "test_questions", uniqueConstraints = @UniqueConstraint(columnNames = { "test", "questionNumber" }))
 @XmlRootElement
 public class TestQuestion {
 
@@ -24,7 +25,7 @@ public class TestQuestion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private int numberInTest;
+    private int questionNumber;
 
     private int answers;
 
@@ -81,11 +82,11 @@ public class TestQuestion {
     }
 
     public int getNumberInTest() {
-	return numberInTest;
+	return questionNumber;
     }
 
     public void setNumberInTest(int numberInTest) {
-	this.numberInTest = numberInTest;
+	this.questionNumber = numberInTest;
     }
 
 }

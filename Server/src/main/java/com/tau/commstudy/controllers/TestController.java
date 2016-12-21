@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.beans.GoogleValidateInfo;
 import com.tau.commstudy.entities.Comment;
+import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.Tag;
+import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.daos.CommentDao;
 import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.entities.daos.TagDao;
+import com.tau.commstudy.entities.daos.TestDao;
 
 @RestController
 @RequestMapping("/test")
@@ -22,8 +25,8 @@ public class TestController {
 
     GoogleValidateInfo googleValidateInfo;
 
-    // @Autowired
-    // private TestDao dao;
+    @Autowired
+    private static TestDao dao;
 
     @Autowired
     private TagDao tagDao;
@@ -79,6 +82,11 @@ public class TestController {
 	postDao.save(post);
 
 	return "hello " + name + "!" + age;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getByMoed")
+    public static Test getByMoed(Course course, Integer year, Character semester, Character moed) {
+	return dao.findByCourseAndYearAndSemesterAndMoed(course, year, semester, moed);
     }
 
 }

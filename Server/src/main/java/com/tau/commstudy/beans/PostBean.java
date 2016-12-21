@@ -21,6 +21,8 @@ public class PostBean {
 
     private TestQuestion testQuestion;
 
+    private Integer questionNumber;
+
     private Test test;
 
     private Course course;
@@ -115,6 +117,14 @@ public class PostBean {
 
     public void setMoed(Character moed) {
 	this.moed = moed;
+    }
+
+    public Integer getQuestionNumber() {
+	return questionNumber;
+    }
+
+    public void setQuestionNumber(Integer questionNumber) {
+	this.questionNumber = questionNumber;
     }
 
 }

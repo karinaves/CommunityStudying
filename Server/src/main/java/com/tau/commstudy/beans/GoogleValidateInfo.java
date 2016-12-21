@@ -77,10 +77,9 @@ public class GoogleValidateInfo {
 
     @Override
     public String toString() {
-	return "GoogleValidateInfo [email=" + email + ", email_verified="
-		+ email_verified + ", name=" + name + ", picture=" + picture
-		+ ", family_name=" + family_name + ", given_name=" + given_name
-		+ ", sub=" + sub + "]";
+	return "GoogleValidateInfo [email=" + email + ", email_verified=" + email_verified + ", name=" + name
+		+ ", picture=" + picture + ", family_name=" + family_name + ", given_name=" + given_name + ", sub="
+		+ sub + "]";
     }
 
 }

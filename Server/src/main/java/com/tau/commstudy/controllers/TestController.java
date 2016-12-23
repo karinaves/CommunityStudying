@@ -17,7 +17,8 @@ import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.daos.CommentDao;
 import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.entities.daos.TagDao;
-import com.tau.commstudy.entities.daos.TestDao;
+import com.tau.commstudy.services.CourseService;
+import com.tau.commstudy.services.TestService;
 
 @RestController
 @RequestMapping("/test")
@@ -26,7 +27,10 @@ public class TestController {
     GoogleValidateInfo googleValidateInfo;
 
     @Autowired
-    private static TestDao dao;
+    private TestService testService;
+
+    @Autowired
+    private CourseService courseService;
 
     @Autowired
     private TagDao tagDao;
@@ -85,8 +89,9 @@ public class TestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getByMoed")
-    public static Test getByMoed(Course course, Integer year, Character semester, Character moed) {
-	return dao.findByCourseAndYearAndSemesterAndMoed(course, year, semester, moed);
+    public Test getByMoed(Long courseId, Integer year, Character semester, Character moed) {
+	Course course = courseService.get(courseId);
+	return testService.getByMoed(course, year, semester, moed);
     }
 
 }

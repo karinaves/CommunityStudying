@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.entities.TestQuestion;
-import com.tau.commstudy.entities.daos.TestQuestionDao;
+import com.tau.commstudy.services.TestQuestionService;
 
 @RestController
 @RequestMapping("/testQuestion")
+@CrossOrigin
 public class TestQuestionController {
 
     @Autowired
-    private TestQuestionDao dao;
+    private TestQuestionService service;
 
     // @RequestMapping(method = RequestMethod.GET, value = "/save")
     // public String saveQuestion(String title, String content, String userId) {
@@ -27,19 +28,18 @@ public class TestQuestionController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/save")
     public String saveByPost(@RequestBody TestQuestion q) {
-	dao.save(q);
+	service.saveByPost(q);
 
 	return "";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getById")
     public TestQuestion get(long id) {
-	return dao.findOne(id);
+	return service.get(id);
     }
 
-    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public Iterable<TestQuestion> getAll() {
-	return dao.findAll();
+	return service.getAll();
     }
 }

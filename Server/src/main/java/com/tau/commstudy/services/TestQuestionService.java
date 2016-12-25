@@ -21,10 +21,13 @@ public class TestQuestionService {
     // return "";
     // }
 
-    public String saveByPost(TestQuestion q) {
-	dao.save(q);
-
-	return "";
+    public TestQuestion add(TestQuestion q) {
+	try {
+	    return dao.save(q);
+	} catch (Exception ex) {
+	    System.out.println("Error creating the question:" + ex.toString());
+	    return null; // "Error creating the post:" + ex.toString();
+	}
     }
 
     public TestQuestion get(long id) {
@@ -38,4 +41,5 @@ public class TestQuestionService {
     public TestQuestion getByTestAndNumber(Test test, Integer questionNumber) {
 	return dao.findByTestAndQuestionNumber(test, questionNumber);
     }
+
 }

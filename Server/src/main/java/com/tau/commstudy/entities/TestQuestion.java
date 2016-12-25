@@ -25,7 +25,7 @@ public class TestQuestion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private int questionNumber;
+    private Integer questionNumber;
 
     private int answers;
 
@@ -45,7 +45,7 @@ public class TestQuestion {
 	return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
 	this.id = id;
     }
 
@@ -85,7 +85,7 @@ public class TestQuestion {
 	return questionNumber;
     }
 
-    public void setNumberInTest(int numberInTest) {
+    public void setNumberInTest(Integer numberInTest) {
 	this.questionNumber = numberInTest;
     }
 

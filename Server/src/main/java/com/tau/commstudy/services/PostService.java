@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tau.commstudy.beans.NewPostBean;
 import com.tau.commstudy.beans.PostCriteria;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
@@ -15,6 +16,7 @@ import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.TestQuestion;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.PostDao;
+import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
 public class PostService {
@@ -31,11 +33,16 @@ public class PostService {
     @Autowired
     private TestQuestionService questionService;
 
+    @Autowired
+    private UserService userService;
+
     public Post createPost(@RequestBody Post newPost) {
 	try {
 	    newPost.setTime(Calendar.getInstance());
+	    System.out.println("6");
 	    return dao.save(newPost);
 	} catch (Exception ex) {
+	    System.out.println("Error creating the post:" + ex.toString());
 	    return null; // "Error creating the post:" + ex.toString();
 	}
 
@@ -184,6 +191,51 @@ public class PostService {
 	    return false;
 
 	return true;
+    }
+
+    public Post addNewPost(NewPostBean bean, String userTokenId) throws UnauthorizesException {
+	// 1. check if such test exists
+	// 2. if not - create
+	// 3. check if such testQuestion exists
+	// 4. if not - create
+	// 5. create post related to testQuestion
+
+	User user = userService.get(userTokenId);
+	if (user == null)
+	    return null;
+
+	Course course = courseService.get(bean.getCourseId());
+	Test test = testService.getByMoed(course, bean.getYear(), bean.getSemester(), bean.getMoed());
+	if (test == null) // no such test in the table
+	{
+	    test = new Test();
+	    test.setCourse(course);
+	    test.setYear(bean.getYear());
+	    test.setSemester(bean.getSemester());
+	    test.setMoed(bean.getMoed());
+	    test = testService.add(test);
+	}
+
+	if (bean.getQuestionNumber() == null) // if no number was given
+	    bean.setQuestionNumber(0);
+
+	TestQuestion question = questionService.getByTestAndNumber(test, bean.getQuestionNumber());
+	if (question == null) {
+	    question = new TestQuestion();
+	    question.setNumberInTest(bean.getQuestionNumber());
+	    question.setTest(test);
+	    question = questionService.add(question);
+	}
+
+	Post post = new Post();
+	post.setTitle(bean.getTitle());
+	post.setContent(bean.getContent());
+	// post.setTags(bean.getTags());
+	post.setTestQuestions(question);
+	post.setTime(Calendar.getInstance());
+	post.setUser(user);
+
+	return createPost(post);
     }
 
 }

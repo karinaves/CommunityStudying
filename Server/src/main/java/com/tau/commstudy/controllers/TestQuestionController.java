@@ -28,7 +28,7 @@ public class TestQuestionController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/save")
     public String saveByPost(@RequestBody TestQuestion q) {
-	service.saveByPost(q);
+	service.add(q);
 
 	return "";
     }

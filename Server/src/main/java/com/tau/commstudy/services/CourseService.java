@@ -81,7 +81,7 @@ public class CourseService {
 
     public UserAllData<Course> getUserAndAllData(String idTokenString, Long facultyId) throws UnauthorizesException {
 	UserAllData<Course> data = new UserAllData<>();
-	data.setAllData(courseDao.findByFaculty_IdOrderByName(facultyId));
+	data.setAllData(courseDao.findByFaculty_IdOrderByNameHebrew(facultyId));
 
 	// User user = userService.get(idTokenString); // can throw
 	// data.setUserData(userService.getAllFaculties());

@@ -10,5 +10,5 @@ import com.tau.commstudy.entities.Course;
 
 @Transactional
 public interface CourseDao extends CrudRepository<Course, Long> {
-    public List<Course> findByFaculty_IdOrderByName(Long facultyId);
+    public List<Course> findByFaculty_IdOrderByNameHebrew(Long facultyId);
 }

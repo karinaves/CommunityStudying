@@ -48,4 +48,12 @@ public class CourseController {
 
     }
 
+    // @RequestMapping(method = RequestMethod.POST, value = "/test")
+    // public void add(@RequestBody ScriptTauBean bean) throws Exception {
+    // for (FacultyBean facultyBean : bean.getFaculties()) {
+    // System.out.println(facultyBean.getName());
+    // }
+
+    // }
+
 }

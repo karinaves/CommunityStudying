@@ -15,19 +15,19 @@ import com.tau.commstudy.entities.daos.TagDao;
 public class TagsService {
 
     @Autowired
-    private CourseService courceService;
+    private CourseService courseService;
 
     @Autowired
     private TagDao tagDao;
 
     public Set<Tag> getAllByCourseId(long courseId) throws Exception {
-	Course course = courceService.get(courseId);
+	Course course = courseService.get(courseId);
 	Set<Tag> tags = course.getTags();
 	return tags;
     }
 
     public Tag addNewTagToCourse(Long courseId, String tagName) throws ValidationException {
-	Course course = courceService.get(courseId);
+	Course course = courseService.get(courseId);
 	Set<Tag> courseTags = course.getTags();
 	for (Tag tag : courseTags) {
 	    if (tag.getName().equals(tagName)) {
@@ -38,7 +38,7 @@ public class TagsService {
 	tag.setName(tagName);
 	tagDao.save(tag);
 	courseTags.add(tag);
-	courceService.add(course);
+	courseService.add(course);
 	return tag;
     }
 }

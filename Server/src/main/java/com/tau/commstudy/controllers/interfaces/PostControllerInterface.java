@@ -2,6 +2,7 @@ package com.tau.commstudy.controllers.interfaces;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.tau.commstudy.beans.NewPostBean;
@@ -15,5 +16,8 @@ public interface PostControllerInterface {
 
     // path should be - "post/search" method = POST
     public List<Post> search(PostCriteria criteria);
+
+    // path should be - "post/{id}" method = GET
+    public Post getById(@PathVariable Long id);
 
 }

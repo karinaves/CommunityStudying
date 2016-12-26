@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,8 +29,9 @@ public class Tag {
     @JsonIgnore
     private Set<TestQuestion> questions = new HashSet<>();
 
-    @ManyToOne
-    private Course course;
+    @ManyToMany(mappedBy = "tags")
+    @JsonIgnore
+    private Set<Course> courses = new HashSet<>();;
 
     public Tag() {
 
@@ -69,12 +69,12 @@ public class Tag {
 	this.questions = questions;
     }
 
-    public Course getCourse() {
-	return course;
+    public Set<Course> getCourses() {
+	return courses;
     }
 
-    public void setCourse(Course course) {
-	this.course = course;
+    public void setCourses(Set<Course> courses) {
+	this.courses = courses;
     }
 
 }

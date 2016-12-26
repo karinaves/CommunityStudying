@@ -23,14 +23,6 @@ import com.tau.commstudy.services.TestService;
 @CrossOrigin
 public class PostController {
 
-    // @Autowired
-    // private PostDao dao;
-    //
-    // TestQuestionDao questionDao;
-    //
-    // @Autowired
-    // private TestDao testDao;
-
     @Autowired
     private PostService service;
 
@@ -92,10 +84,11 @@ public class PostController {
 	return service.getByMoed(course, year, semester, moed);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/checkByMoedK") // get,
-									 // all
-									 // fields
-									 // separately
+    @RequestMapping(method = RequestMethod.GET, value = "/checkByMoedK")
+    // get,
+    // all
+    // fields
+    // separately
     public boolean checkByMoedK(Integer year, Character semester, Character moed, Course course) {
 	return service.checkByMoedK(year, semester, moed, course);
     }
@@ -106,56 +99,15 @@ public class PostController {
      * @param bean
      * @return TRUE or FALSE
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/checkByMoed") // get,
-									// all
-									// fields
-									// in a
-									// bean
+    @RequestMapping(method = RequestMethod.GET, value = "/checkByMoed")
+    // get,
+    // all
+    // fields
+    // in a
+    // bean
     public boolean checkByMoed(PostCriteria criteria) {
 	return service.checkByMoed(criteria);
     }
-
-    // /**
-    // * finds all posts connected to a specific testQuestion.
-    // *
-    // * @param bean
-    // * - the field testQuestion should be given
-    // * @return List of posts
-    // */
-    // @RequestMapping(method = RequestMethod.GET, value = "/getByTestQuestion")
-    // public List<Post> getByTestQuestion(@RequestBody PostBean bean) {
-    // // 1. use findByfields if this test exists
-    // // 2. in the specific test, find by question number
-    // return service.getByTestQuestion(question);
-    // }
-    //
-    // /**
-    // * finds all posts connected to a question, search by question info
-    // *
-    // * @param bean
-    // * the used fields are: -course -year -semester -moed
-    // * @return
-    // */
-    // @RequestMapping(method = RequestMethod.GET, value = "/getByQuestion")
-    // public List<Post> getByQuestion(@RequestBody PostBean bean) {
-    // // 1. use findByfields if this test exists
-    // // 2. in the specific test, find by question number
-    // Test test =
-    // testDao.findByCourseAndYearAndSemesterAndMoed(bean.getCourse(),
-    // bean.getYear(), bean.getSemester(),
-    // bean.getMoed());
-    // if (test == null)
-    // return null;
-    // bean.setTest(test);
-    //
-    // TestQuestion question = questionDao.findByTestAndQuestionNumber(test,
-    // bean.getQuestionNumber());
-    // if (question == null)
-    // return null;
-    // bean.setTestQuestion(question);
-    //
-    // return getByTestQuestion(bean);
-    // }
 
     @RequestMapping(method = RequestMethod.GET, value = "/search")
     public List<Post> search(PostCriteria criteria) {

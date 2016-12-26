@@ -26,8 +26,11 @@ public class TagsController {
 
     }
 
-    // public Tag addNewTag() throws Exception {
-    // Tag tag = tagsService.addNewTag()
-    // }
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/addTagToCourse")
+    public Tag addNewTagToCourse(Long courseId, String tagName) throws Exception {
+	Tag tag = tagsService.addNewTagToCourse(courseId, tagName);
+	return tag;
+    }
 
 }

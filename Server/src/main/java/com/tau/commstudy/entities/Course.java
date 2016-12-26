@@ -22,9 +22,12 @@ public class Course {
     private Faculty faculty;
 
     @NotNull
-    private String name;
+    private String nameEnglish;
 
-    private Long courseUniversityId;
+    @NotNull
+    private String nameHebrew;
+
+    private Long universityId;
 
     public Course() {
 
@@ -46,20 +49,28 @@ public class Course {
 	this.faculty = faculty;
     }
 
-    public String getName() {
-	return name;
+    public String getNameEnglish() {
+	return nameEnglish;
     }
 
-    public void setName(String name) {
-	this.name = name;
+    public void setNameEnglish(String nameEnglish) {
+	this.nameEnglish = nameEnglish;
     }
 
-    public Long getCourseUniversityId() {
-	return courseUniversityId;
+    public String getNameHebrew() {
+	return nameHebrew;
     }
 
-    public void setCourseUniversityId(Long courseUniversityId) {
-	this.courseUniversityId = courseUniversityId;
+    public void setNameHebrew(String nameHebrew) {
+	this.nameHebrew = nameHebrew;
+    }
+
+    public Long getUniversityId() {
+	return universityId;
+    }
+
+    public void setUniversityId(Long universityId) {
+	this.universityId = universityId;
     }
 
 }

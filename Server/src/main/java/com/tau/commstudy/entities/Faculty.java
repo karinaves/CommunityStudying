@@ -23,7 +23,7 @@ public class Faculty {
     @NotNull
     private String name;
 
-    private Long universityId; // number of faculty in University
+    private String universityId; // number of faculty in University
 
     public Faculty() {
 
@@ -53,11 +53,11 @@ public class Faculty {
 	this.name = name;
     }
 
-    public Long getUniversityId() {
+    public String getUniversityId() {
 	return universityId;
     }
 
-    public void setUniversityId(Long universityId) {
+    public void setUniversityId(String universityId) {
 	this.universityId = universityId;
     }
 

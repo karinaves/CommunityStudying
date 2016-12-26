@@ -119,7 +119,7 @@ public class PostController {
 	return service.addNewPost(post, userTokenId);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/checkByQuestion")
+    @RequestMapping(method = RequestMethod.POST, value = "/checkByQuestion")
     public boolean checkByQuestion(@RequestBody PostCriteria criteria) {
 	return service.checkByQuestion(criteria);
     }

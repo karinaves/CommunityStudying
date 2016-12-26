@@ -222,7 +222,7 @@ public class PostService {
 	TestQuestion question = questionService.getByTestAndNumber(test, bean.getQuestionNumber());
 	if (question == null) {
 	    question = new TestQuestion();
-	    question.setNumberInTest(bean.getQuestionNumber());
+	    question.setQuestionNumber(bean.getQuestionNumber());
 	    question.setTest(test);
 	    question = questionService.add(question);
 	}

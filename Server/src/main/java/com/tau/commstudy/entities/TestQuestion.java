@@ -81,11 +81,11 @@ public class TestQuestion {
 	this.test = test;
     }
 
-    public int getNumberInTest() {
+    public int getQuestionNumber() {
 	return questionNumber;
     }
 
-    public void setNumberInTest(Integer numberInTest) {
+    public void setQuestionNumber(Integer numberInTest) {
 	this.questionNumber = numberInTest;
     }
 

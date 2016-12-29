@@ -14,9 +14,11 @@ import com.tau.commstudy.beans.PostCriteria;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
+import com.tau.commstudy.exceptions.UnauthorizesException;
 import com.tau.commstudy.services.PostService;
 import com.tau.commstudy.services.TestQuestionService;
 import com.tau.commstudy.services.TestService;
+import com.tau.commstudy.services.UserService;
 
 @RestController
 @RequestMapping("/post")
@@ -28,6 +30,9 @@ public class PostController {
 
     @Autowired
     private TestService testService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private TestQuestionService questionService;
@@ -70,7 +75,8 @@ public class PostController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getByUser")
-    public Iterable<Post> getByUser(User user) {
+    public Iterable<Post> getByUser(String userTokenId) throws UnauthorizesException {
+	User user = userService.get(userTokenId);
 	return service.getByUser(user);
     }
 
@@ -109,8 +115,8 @@ public class PostController {
 	return service.checkByMoed(criteria);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/search")
-    public List<Post> search(PostCriteria criteria) {
+    @RequestMapping(method = RequestMethod.POST, value = "/search")
+    public List<Post> search(@RequestBody PostCriteria criteria) {
 	return service.search(criteria);
     }
 

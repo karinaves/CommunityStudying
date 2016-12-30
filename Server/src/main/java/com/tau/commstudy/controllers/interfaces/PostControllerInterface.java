@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.tau.commstudy.beans.NewPostBean;
 import com.tau.commstudy.beans.PostCriteria;
+import com.tau.commstudy.beans.UpdatePostBean;
 import com.tau.commstudy.entities.Post;
 
 public interface PostControllerInterface {
@@ -19,5 +20,8 @@ public interface PostControllerInterface {
 
     // path should be - "post/{id}" method = GET
     public Post getById(@PathVariable Long id);
+
+    // path should be - "post/update/{id}?userTokenId="
+    public Post updatePost(@RequestBody UpdatePostBean updateBean, Long id, String userTokenId);
 
 }

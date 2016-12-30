@@ -31,6 +31,9 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar time;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar lastUpdated;
+
     private String title;
 
     @NotNull
@@ -117,12 +120,20 @@ public class Post {
 	this.user = user;
     }
 
-    public TestQuestion getTestQuestions() {
+    public TestQuestion getTestQuestion() {
 	return testQuestion;
     }
 
-    public void setTestQuestions(TestQuestion testQuestions) {
-	this.testQuestion = testQuestions;
+    public void setTestQuestion(TestQuestion testQuestion) {
+	this.testQuestion = testQuestion;
+    }
+
+    public Calendar getLastUpdated() {
+	return lastUpdated;
+    }
+
+    public void setLastUpdated(Calendar lastUpdated) {
+	this.lastUpdated = lastUpdated;
     }
 
 }

@@ -20,7 +20,7 @@ public class University {
     @NotNull
     private String name;
 
-    private Long universityNum;
+    private String universityId;
 
     private String address;
 
@@ -44,12 +44,12 @@ public class University {
 	this.name = name;
     }
 
-    public Long getUniversityNum() {
-	return universityNum;
+    public String getUniversityId() {
+	return universityId;
     }
 
-    public void setUniversityNum(Long universityNum) {
-	this.universityNum = universityNum;
+    public void setUniversityId(String universityId) {
+	this.universityId = universityId;
     }
 
     public String getAddress() {

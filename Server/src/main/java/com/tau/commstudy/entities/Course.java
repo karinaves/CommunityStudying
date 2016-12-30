@@ -13,7 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -28,16 +27,14 @@ public class Course {
     @ManyToOne
     private Faculty faculty;
 
-    @NotNull
     private String nameEnglish;
 
-    @NotNull
     private String nameHebrew;
 
-    private Long universityId;
+    private String universityId;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "courses_to_tags", joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
+    @JoinTable(name = "courses_to_tags", joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id") )
     private Set<Tag> tags;
 
     public Course() {
@@ -76,11 +73,11 @@ public class Course {
 	this.nameHebrew = nameHebrew;
     }
 
-    public Long getUniversityId() {
+    public String getUniversityId() {
 	return universityId;
     }
 
-    public void setUniversityId(Long universityId) {
+    public void setUniversityId(String universityId) {
 	this.universityId = universityId;
     }
 
@@ -90,6 +87,12 @@ public class Course {
 
     public void setTags(Set<Tag> tags) {
 	this.tags = tags;
+    }
+
+    @Override
+    public String toString() {
+	return "Course [id=" + id + ", faculty=" + faculty + ", nameEnglish=" + nameEnglish + ", nameHebrew="
+		+ nameHebrew + ", universityId=" + universityId + ", tags=" + tags + "]";
     }
 
 }

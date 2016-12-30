@@ -1,20 +1,22 @@
 package com.tau.commstudy.controllers;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tau.commstudy.beans.NewCommentBean;
+import com.tau.commstudy.controllers.interfaces.CommentControllerInterface;
 import com.tau.commstudy.entities.Comment;
 import com.tau.commstudy.entities.daos.CommentDao;
 
 @RestController
 @RequestMapping("/comment")
-public class CommentController {
+public class CommentController implements CommentControllerInterface {
 
     @Autowired
     private CommentDao dao;
@@ -51,7 +53,6 @@ public class CommentController {
 	return dao.findOne(id);
     }
 
-    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public Iterable<Comment> getAll() {
 	return dao.findAll();
@@ -86,6 +87,30 @@ public class CommentController {
 	    return "Error updating rating for comment: " + ex.toString();
 	}
 	return "Comment succesfully updated!";
+    }
+
+    @Override
+    public List<Comment> getAllByPostId(Long postId) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    public Comment addNewComment(NewCommentBean commentBean, String userTokenId) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    public Boolean acceptComment(Long id, String userTokenId) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    public Comment updateCommentContent(String content, Long id, String userTokenId) {
+	// TODO Auto-generated method stub
+	return null;
     }
 
 }

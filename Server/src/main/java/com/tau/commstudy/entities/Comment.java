@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,6 +24,9 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar timeStamp;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar lastUpdated;
+
     private String content;
     private int answerRate;
 
@@ -33,6 +35,8 @@ public class Comment {
 
     @ManyToOne
     private User user;
+
+    private Boolean isAccepted;
 
     public Comment() {
 
@@ -84,6 +88,22 @@ public class Comment {
 
     public void setUser(User user) {
 	this.user = user;
+    }
+
+    public Boolean getIsAccepted() {
+	return isAccepted;
+    }
+
+    public void setIsAccepted(Boolean isAccepted) {
+	this.isAccepted = isAccepted;
+    }
+
+    public Calendar getLastUpdated() {
+	return lastUpdated;
+    }
+
+    public void setLastUpdated(Calendar lastUpdated) {
+	this.lastUpdated = lastUpdated;
     }
 
 }

@@ -2,6 +2,7 @@ package com.tau.commstudy.controllers.interfaces;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.tau.commstudy.beans.NewCommentBean;
@@ -12,6 +13,16 @@ public interface CommentControllerInterface {
     // path should be "commment/getByPost/{postId}" - method GET
     public List<Comment> getAllByPostId(Long postId);
 
-    // path should be "commment/?userTokenId" - method POST
-    public Comment addNewComment(@RequestBody NewCommentBean commentBean, Long userTokenId);
+    // path should be "commment/?userTokenId=" - method POST
+    public Comment addNewComment(@RequestBody NewCommentBean commentBean, String userTokenId);
+
+    // path should be "comment/accept/{id}" - method GET
+    // return true only if the right user accepted it, otherwise - throw an
+    // exception
+    public Boolean acceptComment(@PathVariable Long id, String userTokenId);
+
+    // path should be "comment/updateContent/{id}?userTokenId="
+    // should only work if comment.user == user
+    // should set the content + set lastUpadted timestamp
+    public Comment updateCommentContent(@RequestBody String content, Long id, String userTokenId);
 }

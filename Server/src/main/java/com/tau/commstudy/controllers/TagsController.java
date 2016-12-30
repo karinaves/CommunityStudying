@@ -13,12 +13,12 @@ import com.tau.commstudy.services.TagsService;
 
 @RestController
 @RequestMapping("/tag")
+@CrossOrigin
 public class TagsController {
 
     @Autowired
     private TagsService tagsService;
 
-    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/getAllByCourseId")
     public Set<Tag> getAllByCourseId(long courseId) throws Exception {
 	Set<Tag> tags = tagsService.getAllByCourseId(courseId);
@@ -26,7 +26,6 @@ public class TagsController {
 
     }
 
-    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/addTagToCourse")
     public Tag addNewTagToCourse(Long courseId, String tagName) throws Exception {
 	Tag tag = tagsService.addNewTagToCourse(courseId, tagName);

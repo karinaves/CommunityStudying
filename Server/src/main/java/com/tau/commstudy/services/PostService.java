@@ -231,7 +231,7 @@ public class PostService {
 	post.setTitle(bean.getTitle());
 	post.setContent(bean.getContent());
 	// post.setTags(bean.getTags());
-	post.setTestQuestions(question);
+	post.setTestQuestion(question);
 	post.setTime(Calendar.getInstance());
 	post.setUser(user);
 

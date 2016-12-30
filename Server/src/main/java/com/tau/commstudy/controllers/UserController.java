@@ -15,12 +15,12 @@ import com.tau.commstudy.services.UserService;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/getOrCreate")
     public User getOrCreateUser(String idTokenString) throws Exception {
 	// if an exception is thrown that it is caught in runtime by

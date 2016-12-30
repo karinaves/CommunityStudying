@@ -1,11 +1,17 @@
 package com.tau.commstudy.entities;
 
 import java.util.Calendar;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,11 +27,16 @@ public class User {
 
     @NotNull
     private String email;
-
     private String firstName;
     private String lastName;
     private String googleId;
     private String pictureUrl;
+    private Integer userRating;
+    private boolean isAdmin;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
+    private Set<Course> courses;
 
     public String getPictureUrl() {
 	return pictureUrl;
@@ -91,6 +102,30 @@ public class User {
 
     public void setCreated(Calendar created) {
 	this.created = created;
+    }
+
+    public Set<Course> getCourses() {
+	return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+	this.courses = courses;
+    }
+
+    public Integer getUserRating() {
+	return userRating;
+    }
+
+    public void setUserRating(Integer userRating) {
+	this.userRating = userRating;
+    }
+
+    public boolean isAdmin() {
+	return isAdmin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+	this.isAdmin = isAdmin;
     }
 
 }

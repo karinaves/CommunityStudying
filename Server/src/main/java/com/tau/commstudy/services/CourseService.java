@@ -1,5 +1,7 @@
 package com.tau.commstudy.services;
 
+import java.util.Set;
+
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +89,10 @@ public class CourseService {
 	// data.setUserData(userService.getAllFaculties());
 	return data;
 
+    }
+
+    public Set<Course> getAllById(Set<Long> coursesIds) {
+	return courseDao.findByIdIn(coursesIds);
     }
 
 }

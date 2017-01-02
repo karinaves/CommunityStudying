@@ -3,6 +3,7 @@ package com.tau.commstudy.services;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private CourseService courseService;
 
     public User get(String idTokenString) throws UnauthorizesException {
 	GoogleValidateInfo google = verifyUserIdToken(idTokenString);
@@ -92,6 +96,13 @@ public class UserService {
 	userDao.save(user);
 
 	return user;
+    }
+
+    public Boolean updateUserCourses(Set<Long> coursesIds, String userTokenId) {
+	User user = getOrCreate(userTokenId);
+	user.setCourses(courseService.getAllById(coursesIds));
+	userDao.save(user);
+	return true;
     }
 
 }

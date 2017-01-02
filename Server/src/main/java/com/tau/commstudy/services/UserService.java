@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
 public class UserService {
-
+    public static Logger logger = Logger.getLogger(UserService.class);
     @Autowired
     private UserDao userDao;
 
@@ -49,6 +50,7 @@ public class UserService {
 	if (user == null) {
 	    user = createUser(idTokenString);
 	}
+	logger.debug("******************************************");
 	return user;
     }
 

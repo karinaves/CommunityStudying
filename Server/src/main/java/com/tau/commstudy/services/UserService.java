@@ -49,8 +49,6 @@ public class UserService {
 
     public List<Faculty> getFaculties(String idTokenString) throws UnauthorizesException {
 	List<Faculty> faculties = null;
-	User user = get(idTokenString);
-
 	return faculties;
     }
 
@@ -92,7 +90,6 @@ public class UserService {
 	user.setPictureUrl(google.getPicture());
 	user.setCreated(cal);
 	userDao.save(user);
-	System.out.println(user);
 
 	return user;
     }

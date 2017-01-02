@@ -18,7 +18,7 @@ import com.tau.commstudy.services.FacultyService;
 import com.tau.commstudy.services.UniversityService;
 
 @Service
-public class ScriptTau {
+public class ScriptTauService {
     @Autowired
     private UniversityService universityService;
     @Autowired
@@ -30,7 +30,7 @@ public class ScriptTau {
     private ScriptTauBean bean = null;
     private University university = null;
 
-    public ScriptTau() {
+    public ScriptTauService() {
     }
 
     public void init(String path, Long tauId) {

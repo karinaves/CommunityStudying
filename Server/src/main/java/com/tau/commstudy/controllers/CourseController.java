@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.beans.UserAllData;
 import com.tau.commstudy.entities.Course;
-import com.tau.commstudy.scripts.ScriptTau;
 import com.tau.commstudy.services.CourseService;
 
 @RestController
@@ -46,17 +45,6 @@ public class CourseController {
     public UserAllData<Course> getUserAndAllData(String idTokenString, Long facultyId) throws Exception {
 	UserAllData<Course> courses = courseService.getUserAndAllData(idTokenString, facultyId);
 	return courses;
-
-    }
-
-    @Autowired
-    private ScriptTau st;
-
-    @RequestMapping(method = RequestMethod.GET, value = "/test")
-    public void dataBase() throws Exception {
-	Long l = new Long(1);
-	st.init("C:\\Users\\Mike\\Desktop\\final_json.txt", l);
-	st.run();
 
     }
 

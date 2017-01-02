@@ -23,7 +23,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotNull
     private String email;
@@ -35,7 +35,7 @@ public class User {
     private boolean isAdmin;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
+    @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id") )
     private Set<Course> courses;
 
     public String getPictureUrl() {
@@ -52,11 +52,11 @@ public class User {
     public User() {
     }
 
-    public User(long id) {
+    public User(Long id) {
 	this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
 	return id;
     }
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tau.commstudy.beans.GoogleValidateInfo;
 import com.tau.commstudy.entities.Faculty;
+import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.UserDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
@@ -103,6 +104,18 @@ public class UserService {
 	user.setCourses(courseService.getAllById(coursesIds));
 	userDao.save(user);
 	return true;
+    }
+
+    public Boolean like(Post post) {
+	User user = post.getUser();
+	if (user.getUserRating() == null) {
+	    user.setUserRating(1);
+	} else {
+	    user.setUserRating(user.getUserRating() + 1);
+	}
+	userDao.save(user);
+	return true;
+
     }
 
 }

@@ -25,6 +25,9 @@ public class PostService {
     private PostDao dao;
 
     @Autowired
+    private UserService usereService;
+
+    @Autowired
     private CourseService courseService;
 
     @Autowired
@@ -70,13 +73,15 @@ public class PostService {
     }
 
     /**
-     * increases the number of votes by 1
+     * increases the number of votes of post and number of votes of user by 1
      */
     public String like(long id) {
 	try {
 	    Post post = dao.findOne(id);
 	    post.setVotes(post.getVotes() + 1);
 	    dao.save(post);
+
+	    Boolean b = userService.like(post);
 	} catch (Exception ex) {
 	    return "Error updating votes for post: " + ex.toString();
 	}

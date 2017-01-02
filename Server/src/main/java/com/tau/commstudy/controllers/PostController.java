@@ -84,7 +84,7 @@ public class PostController implements PostControllerInterface {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getByCourse")
-    public Iterable<Post> getByCourse(Course course) {
+    public List<Post> getByCourse(Course course) {
 	return service.getByCourse(course);
     }
 

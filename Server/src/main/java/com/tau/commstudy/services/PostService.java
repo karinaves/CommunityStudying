@@ -111,12 +111,21 @@ public class PostService {
 	return dao.findByUser(user);
     }
 
-    public Iterable<Post> getByCourse(Course course) {
+    public List<Post> getByCourse(Course course) {
 	return dao.findByTestQuestion_Test_CourseOrderByTimeDesc(course);
     }
 
     public List<Post> getByTest(Test test) {
 	return dao.findByTestQuestion_TestOrderByTimeDesc(test);
+    }
+
+    public List<Post> getByYear(Course course, Integer year) {
+	return dao.findByTestQuestion_Test_CourseAndTestQuestion_Test_YearOrderByTimeDesc(course, year);
+    }
+
+    private List<Post> getBySemester(Course course, Integer year, Character semester) {
+	return dao.findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_CourseOrderByTimeDesc(
+		year, semester, course);
     }
 
     public List<Post> getByMoed(Course course, Integer year, Character semester, Character moed) {
@@ -175,7 +184,23 @@ public class PostService {
      * @return List of posts
      */
     public List<Post> search(PostCriteria criteria) {
+	// if only year given - find posts for this year's tests
 	Course course = courseService.get(criteria.getCourseId());
+
+	if (criteria.getMoed() == null) {
+	    if (criteria.getSemester() == null) {
+		if (criteria.getYear() == null) {
+		    // return by course
+		    return getByCourse(course);
+		}
+		// return by year
+		return getByYear(course, criteria.getYear());
+	    }
+	    // return by semester
+	    return getBySemester(course, criteria.getYear(), criteria.getSemester());
+	}
+
+	// return by test
 	Test test = testService.getByMoed(course, criteria.getYear(), criteria.getSemester(), criteria.getMoed());
 	if (test == null) // no such test in the table
 	    return null;

@@ -14,7 +14,7 @@ public interface PostDao extends CrudRepository<Post, Long> {
 
     public Iterable<Post> findByUser(User user);
 
-    public Iterable<Post> findByTestQuestion_Test_CourseOrderByTimeDesc(Course course);
+    public List<Post> findByTestQuestion_Test_CourseOrderByTimeDesc(Course course);
 
     public List<Post> findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_MoedAndTestQuestion_Test_CourseOrderByTimeDesc(
 	    Integer year, Character semester, Character moed, Course course);
@@ -22,4 +22,10 @@ public interface PostDao extends CrudRepository<Post, Long> {
     public List<Post> findByTestQuestionOrderByTimeDesc(TestQuestion testQuestion);
 
     public List<Post> findByTestQuestion_TestOrderByTimeDesc(Test test);
+
+    public List<Post> findByTestQuestion_Test_CourseAndTestQuestion_Test_YearOrderByTimeDesc(Course course,
+	    Integer year);
+
+    public List<Post> findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_CourseOrderByTimeDesc(
+	    Integer year, Character semester, Course course);
 }

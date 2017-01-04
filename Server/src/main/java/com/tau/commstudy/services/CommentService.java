@@ -81,6 +81,7 @@ public class CommentService {
     }
 
     public Boolean acceptComment(Long id, String userTokenId) throws IllegalArgumentException, UnauthorizesException {
+	System.out.println(id);
 	Comment comment = getById(id);
 	User userPost = comment.getPost().getUser();
 	User user = userService.get(userTokenId);

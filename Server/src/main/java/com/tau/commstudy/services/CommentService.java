@@ -13,6 +13,7 @@ import com.tau.commstudy.entities.Comment;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.CommentDao;
+import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
@@ -20,6 +21,9 @@ public class CommentService {
 
     @Autowired
     private CommentDao dao;
+
+    @Autowired
+    private PostDao postDao;
 
     @Autowired
     private UserService userService;
@@ -81,14 +85,24 @@ public class CommentService {
     }
 
     public Boolean acceptComment(Long id, String userTokenId) throws IllegalArgumentException, UnauthorizesException {
-	System.out.println(id);
+	return changedCommentStatus(id, userTokenId, true);
+    }
+
+    public Boolean unacceptComment(Long id, String userTokenId) throws IllegalArgumentException, UnauthorizesException {
+	return changedCommentStatus(id, userTokenId, false);
+    }
+
+    private Boolean changedCommentStatus(Long id, String userTokenId, Boolean newStat) {
 	Comment comment = getById(id);
-	User userPost = comment.getPost().getUser();
+	Post post = comment.getPost();
+	User userPost = post.getUser();
 	User user = userService.get(userTokenId);
 	// User who accepted the comment is the user who asked the question
 	if (user.getId().equals(userPost.getId())) {
-	    comment.setIsAccepted(true);
+	    comment.setIsAccepted(newStat);
+	    post.setAcceptedComment(newStat);
 	    dao.save(comment);
+	    postDao.save(post);
 	    return true;
 	}
 	return false;

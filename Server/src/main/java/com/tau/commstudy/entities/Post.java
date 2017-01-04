@@ -54,6 +54,8 @@ public class Post {
     @ManyToOne
     private TestQuestion testQuestion;
 
+    Boolean acceptedComment;
+
     public Post() {
     }
 
@@ -135,6 +137,14 @@ public class Post {
 
     public void setLastUpdated(Calendar lastUpdated) {
 	this.lastUpdated = lastUpdated;
+    }
+
+    public Boolean getAcceptedComment() {
+	return acceptedComment;
+    }
+
+    public void setAcceptedComment(Boolean acceptedComment) {
+	this.acceptedComment = acceptedComment;
     }
 
 }

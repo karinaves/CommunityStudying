@@ -3,22 +3,28 @@ package com.tau.commstudy.services;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tau.commstudy.beans.GoogleValidateInfo;
 import com.tau.commstudy.entities.Faculty;
+import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.UserDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
 public class UserService {
-
+    public static Logger logger = Logger.getLogger(UserService.class);
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private CourseService courseService;
 
     public User get(String idTokenString) throws UnauthorizesException {
 	GoogleValidateInfo google = verifyUserIdToken(idTokenString);
@@ -44,6 +50,7 @@ public class UserService {
 	if (user == null) {
 	    user = createUser(idTokenString);
 	}
+	logger.debug("******************************************");
 	return user;
     }
 
@@ -92,6 +99,25 @@ public class UserService {
 	userDao.save(user);
 
 	return user;
+    }
+
+    public Boolean updateUserCourses(Set<Long> coursesIds, String userTokenId) {
+	User user = getOrCreate(userTokenId);
+	user.setCourses(courseService.getAllById(coursesIds));
+	userDao.save(user);
+	return true;
+    }
+
+    public Boolean like(Post post) {
+	User user = post.getUser();
+	if (user.getUserRating() == null) {
+	    user.setUserRating(1);
+	} else {
+	    user.setUserRating(user.getUserRating() + 1);
+	}
+	userDao.save(user);
+	return true;
+
     }
 
 }

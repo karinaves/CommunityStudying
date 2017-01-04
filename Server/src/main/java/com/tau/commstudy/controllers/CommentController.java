@@ -40,7 +40,7 @@ public class CommentController implements CommentControllerInterface {
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET, value = "/getAll/{postId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/getByPost/{postId}")
     public List<Comment> getAllByPostId(@PathVariable Long postId) throws Exception {
 	return service.getAllByPostId(postId);
     }

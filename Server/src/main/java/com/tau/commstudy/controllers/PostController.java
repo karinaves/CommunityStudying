@@ -40,13 +40,8 @@ public class PostController implements PostControllerInterface {
     @Autowired
     private TestQuestionService questionService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public Post createPost(@RequestBody Post newPost) {
-	return service.createPost(newPost);
-    }
-
-    @RequestMapping(method = RequestMethod.DELETE)
-    public String delete(Long id) {
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public boolean delete(@PathVariable Long id) throws Exception {
 	return service.delete(id);
     }
 

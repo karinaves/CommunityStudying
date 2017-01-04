@@ -52,16 +52,16 @@ public class PostService {
 	// return "Post succesfully saved!";
     }
 
-    public String delete(Long id) {
+    public boolean delete(Long id) {
 	if (id == null)
-	    return "long parameter 'id' needs to be provided";
+	    return false;
 
 	try {
 	    dao.delete(id);
 	} catch (Exception ex) {
-	    return "Error deleting the post:" + ex.toString();
+	    return false;
 	}
-	return "Post succesfully deleted!";
+	return true;
     }
 
     /**

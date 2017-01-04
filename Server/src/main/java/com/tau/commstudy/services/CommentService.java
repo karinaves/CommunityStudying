@@ -40,8 +40,8 @@ public class CommentService {
      * @throws ValidationException
      *             if not saved
      */
-    public Comment add(NewCommentBean commentBean, String userTokenId)
-	    throws ValidationException, IllegalArgumentException {
+    public Comment add(NewCommentBean commentBean, String userTokenId) throws ValidationException,
+	    IllegalArgumentException {
 	Comment comment = new Comment();
 	User user = userService.get(userTokenId);
 	Post post = postService.getById(commentBean.getPostId());
@@ -49,6 +49,7 @@ public class CommentService {
 	comment.setPost(post);
 	comment.setContent(commentBean.getContent());
 	comment.setTimeStamp(Calendar.getInstance());
+	comment.setIsAccepted(false);
 	return dao.save(comment);
     }
 

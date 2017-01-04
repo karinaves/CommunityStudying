@@ -46,9 +46,8 @@ public class CommentController implements CommentControllerInterface {
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.PUT, value = "/accept")
-    public Boolean acceptComment(Long id, String userTokenId) throws Exception {
-	System.out.println(id);
+    @RequestMapping(method = RequestMethod.GET, value = "/accept/{id}")
+    public Boolean acceptComment(@PathVariable Long id, String userTokenId) throws Exception {
 	return service.acceptComment(id, userTokenId);
     }
 

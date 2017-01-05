@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tau.commstudy.beans.GoogleValidateInfo;
+import com.tau.commstudy.entities.Comment;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
@@ -108,8 +109,20 @@ public class UserService {
 	return true;
     }
 
-    public Boolean like(Post post) {
+    public Boolean likePost(Post post) {
 	User user = post.getUser();
+	if (user.getUserRating() == null) {
+	    user.setUserRating(1);
+	} else {
+	    user.setUserRating(user.getUserRating() + 1);
+	}
+	userDao.save(user);
+	return true;
+
+    }
+
+    public Boolean likeComment(Comment comment) {
+	User user = comment.getUser();
 	if (user.getUserRating() == null) {
 	    user.setUserRating(1);
 	} else {

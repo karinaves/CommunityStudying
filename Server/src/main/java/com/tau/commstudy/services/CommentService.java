@@ -40,8 +40,8 @@ public class CommentService {
      * @throws ValidationException
      *             if not saved
      */
-    public Comment add(NewCommentBean commentBean, String userTokenId) throws ValidationException,
-	    IllegalArgumentException {
+    public Comment add(NewCommentBean commentBean, String userTokenId)
+	    throws ValidationException, IllegalArgumentException {
 	Comment comment = new Comment();
 	User user = userService.get(userTokenId);
 	Post post = postService.getById(commentBean.getPostId());
@@ -107,6 +107,19 @@ public class CommentService {
 	    return true;
 	}
 	return false;
+    }
+
+    public String like(long id) {
+	try {
+	    Comment comment = dao.findOne(id);
+	    comment.setAnswerRate(comment.getAnswerRate() + 1);
+	    dao.save(comment);
+
+	    Boolean b = userService.likeComment(comment);
+	} catch (Exception ex) {
+	    return "Error updating likes for comment: " + ex.toString();
+	}
+	return "Comment succesfully updated!";
     }
 
 }

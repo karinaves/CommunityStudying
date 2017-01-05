@@ -81,7 +81,7 @@ public class PostService {
 	    post.setVotes(post.getVotes() + 1);
 	    dao.save(post);
 
-	    Boolean b = userService.like(post);
+	    Boolean b = userService.likePost(post);
 	} catch (Exception ex) {
 	    return "Error updating votes for post: " + ex.toString();
 	}

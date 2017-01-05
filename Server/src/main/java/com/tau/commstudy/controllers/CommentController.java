@@ -57,4 +57,9 @@ public class CommentController implements CommentControllerInterface {
 	return null;
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/like")
+    public String like(long id) {
+	return service.like(id);
+    }
+
 }

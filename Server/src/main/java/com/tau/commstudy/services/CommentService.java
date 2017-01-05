@@ -96,10 +96,10 @@ public class CommentService {
     private Boolean changedCommentStatus(Long id, String userTokenId, Boolean newStat) {
 	Comment comment = getById(id);
 	Post post = comment.getPost();
-	User userPost = post.getUser();
-	User user = userService.get(userTokenId);
+	User owner = post.getUser();
+	User editor = userService.get(userTokenId);
 	// User who accepted the comment is the user who asked the question
-	if (user.getId().equals(userPost.getId())) {
+	if (userService.isAuthorizedEditUser(owner, editor)) {
 	    comment.setIsAccepted(newStat);
 	    post.setAcceptedComment(newStat);
 	    dao.save(comment);

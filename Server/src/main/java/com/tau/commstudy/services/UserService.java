@@ -133,4 +133,12 @@ public class UserService {
 
     }
 
+    // --------------- Aid Functions ----------------
+
+    public boolean isAuthorizedEditUser(User owner, User editor) {
+	if (owner == null || editor == null)
+	    return false;
+	return owner.getId().equals(editor.getId());
+    }
+
 }

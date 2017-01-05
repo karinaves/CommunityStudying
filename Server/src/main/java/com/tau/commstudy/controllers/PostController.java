@@ -3,7 +3,6 @@ package com.tau.commstudy.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,23 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mysema.query.BooleanBuilder;
-import com.mysema.query.types.ExpressionUtils;
-import com.mysema.query.types.Predicate;
-import com.mysema.query.types.expr.BooleanExpression;
 import com.tau.commstudy.beans.NewPostBean;
 import com.tau.commstudy.beans.PostCriteria;
 import com.tau.commstudy.beans.UpdatePostBean;
 import com.tau.commstudy.controllers.interfaces.PostControllerInterface;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
-import com.tau.commstudy.entities.QTest;
 import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.entities.daos.TestDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
-import com.tau.commstudy.predicates.PostPredicates;
 import com.tau.commstudy.services.PostService;
 import com.tau.commstudy.services.TestQuestionService;
 import com.tau.commstudy.services.TestService;
@@ -157,71 +150,7 @@ public class PostController implements PostControllerInterface {
 
     @RequestMapping(method = RequestMethod.POST, value = "/check")
     public Iterable<Test> check() {
-	// QCustomer customer = QCustomer.customer;
-	// BooleanExpression customerHasBirthday = customer.birthday.eq(today);
-	// BooleanExpression isLongTermCustomer =
-	// customer.createdAt.lt(today.minusYears(2));
-	// customerRepository.findAll(customerHasBirthday.and(isLongTermCustomer));
-	QTest test = QTest.test;
-	BooleanExpression testIsYear = test.year.eq(2011);
-	return testDao.findAll(testIsYear);
-	// System.out.println(arg0);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/check2")
-    public Iterable<Post> check2() {
-	// QCustomer customer = QCustomer.customer;
-	// BooleanExpression customerHasBirthday = customer.birthday.eq(today);
-	// BooleanExpression isLongTermCustomer =
-	// customer.createdAt.lt(today.minusYears(2));
-	// customerRepository.findAll(customerHasBirthday.and(isLongTermCustomer));
-
-	// QTest test = QTest.test;
-	// BooleanExpression testIsYear = test.year.eq(2011);
-	// return dao.findAll(testIsYear);
-	System.out.println("1");
-	Integer a;
-	BooleanBuilder searchCriteria = new BooleanBuilder();
-	Predicate year = PostPredicates.byYear(null);
-	System.out.println("2");
-	Predicate moed = PostPredicates.byMoed('a');
-	Predicate faculty = PostPredicates.byFaculty((long) 1);
-	Predicate course = PostPredicates.byCourse((long) 1);
-	searchCriteria.and(PostPredicates.byFaculty((long) 1));
-	searchCriteria.and(PostPredicates.byCourse((long) 1));
-	Predicate where = ExpressionUtils.allOf(year, moed);
-	Predicate where2 = ExpressionUtils.allOf(faculty);
-	System.out.println("3");
-	// dao.findAll(PostPredicates.byYear(null).and(moed));
-	return dao.findAll(where2, orderByTime());
-
-	// return dao.findAll(year.and());
-	// dao.findAll(byWhateverId(someParam).and(bySomethingElseId(1));
-	// System.out.println(arg0);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/check3")
-    public Iterable<Post> check3() {
-	// QCustomer customer = QCustomer.customer;
-	// BooleanExpression customerHasBirthday = customer.birthday.eq(today);
-	// BooleanExpression isLongTermCustomer =
-	// customer.createdAt.lt(today.minusYears(2));
-	// customerRepository.findAll(customerHasBirthday.and(isLongTermCustomer));
-	PostCriteria criteria = new PostCriteria();
-	criteria.setFacultyId((long) 1);
-	criteria.setCourseId((long) 1);
-	criteria.setYear(2010);
-	criteria.setSemester('a');
-	criteria.setMoed('b');
-	criteria.setQuestionNumber(1);
-
-	return service.search(criteria);
-
-	// System.out.println(arg0);
-    }
-
-    private Sort orderByTime() {
-	return new Sort(Sort.Direction.DESC, "time");
+	return null;
     }
 
 }

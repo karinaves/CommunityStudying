@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.mysema.query.annotations.QueryInit;
+
 @Entity
 @Table(name = "posts")
 @XmlRootElement
@@ -51,6 +53,7 @@ public class Post {
     private User user;
 
     @ManyToOne
+    @QueryInit("test.course.faculty.id")
     private TestQuestion testQuestion;
 
     public Post() {

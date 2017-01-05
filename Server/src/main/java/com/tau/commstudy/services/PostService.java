@@ -4,10 +4,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mysema.query.BooleanBuilder;
 import com.tau.commstudy.beans.NewPostBean;
 import com.tau.commstudy.beans.PostCriteria;
 import com.tau.commstudy.entities.Course;
@@ -17,6 +19,7 @@ import com.tau.commstudy.entities.TestQuestion;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
+import com.tau.commstudy.predicates.PostPredicates;
 
 @Service
 public class PostService {
@@ -183,7 +186,7 @@ public class PostService {
      *            -questionNumber
      * @return List of posts
      */
-    public List<Post> search(PostCriteria criteria) {
+    public List<Post> search3(PostCriteria criteria) {
 	// if only year given - find posts for this year's tests
 	Course course = courseService.get(criteria.getCourseId());
 
@@ -211,8 +214,72 @@ public class PostService {
 	return getByTestAndNumber(test, criteria.getQuestionNumber());
     }
 
+    /**
+     * finds all posts by the given parameters the function uses Querydsl
+     * queries
+     *
+     * @param criteria
+     *            the fields are: -faculty -course -year -semester -moed
+     *            -questionNumber
+     * @return List of corresponding posts
+     */
+    public List<Post> search(PostCriteria criteria) {
+
+	BooleanBuilder searchCriteria = new BooleanBuilder();
+
+	if (criteria.getFacultyId() == null)
+	    // return all
+	    return searchBy(searchCriteria);
+
+	// add faculty parameter to search
+	searchCriteria.and(PostPredicates.byFaculty(criteria.getFacultyId()));
+	if (criteria.getCourseId() == null)
+	    // return by faculty
+	    return searchBy(searchCriteria);
+
+	// add course parameter to search
+	searchCriteria.and(PostPredicates.byCourse(criteria.getCourseId()));
+	if (criteria.getYear() == null)
+	    // return by course
+	    return searchBy(searchCriteria);
+
+	// add year parameter to search
+	searchCriteria.and(PostPredicates.byYear(criteria.getYear()));
+	if (criteria.getSemester() == null)
+	    // return by year
+	    return searchBy(searchCriteria);
+
+	// add semester parameter to search
+	searchCriteria.and(PostPredicates.bySemester(criteria.getSemester()));
+	if (criteria.getMoed() == null)
+	    // return by semester
+	    return searchBy(searchCriteria);
+
+	// add moed parameter to search
+	searchCriteria.and(PostPredicates.byMoed(criteria.getMoed()));
+	if (criteria.getQuestionNumber() == null)
+	    // return by moed
+	    return searchBy(searchCriteria);
+
+	// add question number parameter to search
+	searchCriteria.and(PostPredicates.byQuestionNumber(criteria.getQuestionNumber()));
+
+	// return by question number
+	return searchBy(searchCriteria);
+    }
+
+    List<Post> searchBy(BooleanBuilder searchCriteria) {
+	if (dao.count(searchCriteria) == 0)
+	    return null;
+	return (List<Post>) dao.findAll(searchCriteria, orderByTime());
+    }
+
+    private Sort orderByTime() {
+	return new Sort(Sort.Direction.DESC, "time");
+    }
+
     public boolean checkByQuestion(PostCriteria criteria) {
-	if (search(criteria) == null)
+	if (search3(criteria) == null)
 	    return false;
 
 	return true;

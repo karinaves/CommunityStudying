@@ -98,15 +98,15 @@ public class CommentService {
 	Post post = comment.getPost();
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);
-	// User who accepted the comment is the user who asked the question
-	if (userService.isAuthorizedEditUser(owner, editor)) {
-	    comment.setIsAccepted(newStat);
-	    post.setAcceptedComment(newStat);
-	    dao.save(comment);
-	    postDao.save(post);
-	    return true;
+	// unAuthorized
+	if (!userService.isAuthorizedEditUser(owner, editor)) {
+	    return false;
 	}
-	return false;
+	comment.setIsAccepted(newStat);
+	post.setAcceptedComment(newStat);
+	dao.save(comment);
+	postDao.save(post);
+	return true;
     }
 
     public String like(long id) {
@@ -120,6 +120,21 @@ public class CommentService {
 	    return "Error updating likes for comment: " + ex.toString();
 	}
 	return "Comment succesfully updated!";
+    }
+
+    public Comment updateCommentContent(String content, Long id, String userTokenId)
+	    throws UnauthorizesException, IllegalArgumentException {
+	Comment comment = this.getById(id);
+	User owner = comment.getUser();
+	User editor = userService.get(userTokenId);
+	if (!userService.isAuthorizedEditUser(owner, editor)) {
+	    return null;
+	}
+	comment.setContent(content);
+	comment.setLastUpdated(Calendar.getInstance());
+	comment = dao.save(comment);
+
+	return comment;
     }
 
 }

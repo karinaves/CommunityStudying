@@ -256,14 +256,15 @@ public class PostService {
     public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
 	    throws UnauthorizesException, IllegalArgumentException {
 	Post post = this.getById(id);
-	User editor = userService.get(userTokenId);
 	User owner = post.getUser();
+	User editor = userService.get(userTokenId);
 	// unAuthorized
 	if (!userService.isAuthorizedEditUser(owner, editor)) {
 	    return null;
 	}
 	post.setTitle(updateBean.getTitle());
 	post.setContent(updateBean.getContent());
+	post.setLastUpdated(Calendar.getInstance());
 	post = dao.save(post);
 	return post;
 

@@ -84,8 +84,8 @@ public class PostService {
 	    Post post = dao.findOne(id);
 	    post.setVotes(post.getVotes() + 1);
 	    dao.save(post);
+	    userService.likePost(post);
 
-	    Boolean b = userService.likePost(post);
 	} catch (Exception ex) {
 	    return "Error updating votes for post: " + ex.toString();
 	}
@@ -217,6 +217,10 @@ public class PostService {
 
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
+	// free text can be the only search param
+	if (criteria.getInContentText() != null && !criteria.getInContentText().equals(""))
+	    searchCriteria.and(PostPredicates.byContentLike(criteria.getInContentText()));
+
 	if (criteria.getFacultyId() == null)
 	    // return all
 	    return searchBy(searchCriteria);
@@ -320,8 +324,8 @@ public class PostService {
 	return createPost(post);
     }
 
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
-	    throws UnauthorizesException, IllegalArgumentException {
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) throws UnauthorizesException,
+	    IllegalArgumentException {
 	Post post = this.getById(id);
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);

@@ -8,6 +8,7 @@ public class PostCriteria {
     private Character semester;
     private Character moed;
     private Integer questionNumber;
+    private String inContentText;
 
     public PostCriteria() {
     }
@@ -58,6 +59,14 @@ public class PostCriteria {
 
     public void setQuestionNumber(Integer questionNumber) {
 	this.questionNumber = questionNumber;
+    }
+
+    public String getInContentText() {
+	return inContentText;
+    }
+
+    public void setInContentText(String inContentText) {
+	this.inContentText = inContentText;
     }
 
 }

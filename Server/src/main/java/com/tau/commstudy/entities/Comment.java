@@ -2,6 +2,7 @@ package com.tau.commstudy.entities;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar lastUpdated;
 
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private int answerRate;

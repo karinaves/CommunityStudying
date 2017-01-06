@@ -2,6 +2,7 @@ package com.tau.commstudy.entities.daos;
 
 import java.util.List;
 
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 import com.tau.commstudy.entities.Course;
@@ -10,7 +11,7 @@ import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.TestQuestion;
 import com.tau.commstudy.entities.User;
 
-public interface PostDao extends CrudRepository<Post, Long> {
+public interface PostDao extends CrudRepository<Post, Long>, QueryDslPredicateExecutor<Post> {
 
     public Iterable<Post> findByUser(User user);
 

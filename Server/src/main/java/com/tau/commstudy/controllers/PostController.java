@@ -16,7 +16,10 @@ import com.tau.commstudy.beans.UpdatePostBean;
 import com.tau.commstudy.controllers.interfaces.PostControllerInterface;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
+import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.User;
+import com.tau.commstudy.entities.daos.PostDao;
+import com.tau.commstudy.entities.daos.TestDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 import com.tau.commstudy.services.PostService;
 import com.tau.commstudy.services.TestQuestionService;
@@ -36,6 +39,12 @@ public class PostController implements PostControllerInterface {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TestDao testDao;
+
+    @Autowired
+    private PostDao dao;
 
     @Autowired
     private TestQuestionService questionService;
@@ -131,6 +140,11 @@ public class PostController implements PostControllerInterface {
     @Override
     public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) {
 	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/check")
+    public Iterable<Test> check() {
 	return null;
     }
 

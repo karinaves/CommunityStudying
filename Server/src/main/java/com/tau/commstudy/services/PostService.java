@@ -284,7 +284,7 @@ public class PostService {
     }
 
     public boolean checkByQuestion(PostCriteria criteria) {
-	if (search3(criteria) == null)
+	if (search(criteria) == null)
 	    return false;
 
 	return true;

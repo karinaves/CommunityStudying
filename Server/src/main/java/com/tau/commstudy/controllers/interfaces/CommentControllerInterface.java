@@ -24,5 +24,5 @@ public interface CommentControllerInterface {
     // path should be "comment/updateContent/{id}?userTokenId="
     // should only work if comment.user == user
     // should set the content + set lastUpadted timestamp
-    public Comment updateCommentContent(@RequestBody String content, Long id, String userTokenId);
+    public Comment updateCommentContent(@RequestBody String content, Long id, String userTokenId) throws Exception;
 }

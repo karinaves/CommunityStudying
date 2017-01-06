@@ -51,10 +51,10 @@ public class CommentController implements CommentControllerInterface {
 	return service.acceptComment(id, userTokenId);
     }
 
-    @Override
-    public Comment updateCommentContent(String content, Long id, String userTokenId) {
-	// TODO Auto-generated method stub
-	return null;
+    @RequestMapping(method = RequestMethod.PUT, value = "update/{id}")
+    public Comment updateCommentContent(@RequestBody String content, @PathVariable Long id, String userTokenId)
+	    throws Exception {
+	return service.updateCommentContent(content, id, userTokenId);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/like")

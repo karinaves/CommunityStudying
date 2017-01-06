@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mysema.query.BooleanBuilder;
 import com.tau.commstudy.beans.NewPostBean;
 import com.tau.commstudy.beans.PostCriteria;
+import com.tau.commstudy.beans.UpdatePostBean;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.Test;
@@ -93,22 +94,6 @@ public class PostService {
 
     public Iterable<Post> getAll() {
 	return dao.findAll();
-    }
-
-    /**
-     * This updates only the content, title of the post. All the other fields
-     * (including id and time) stay the same
-     */
-    public String updatePost(Post givenPost) {
-	try {
-	    Post post = dao.findOne(givenPost.getId());
-	    post.setContent(givenPost.getContent());
-	    post.setTitle(givenPost.getTitle());
-	    dao.save(post);
-	} catch (Exception ex) {
-	    return "Error updating the post: " + ex.toString();
-	}
-	return "Post succesfully updated!";
     }
 
     public Post getById(long id) {
@@ -333,6 +318,23 @@ public class PostService {
 	post.setUser(user);
 
 	return createPost(post);
+    }
+
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
+	    throws UnauthorizesException, IllegalArgumentException {
+	Post post = this.getById(id);
+	User owner = post.getUser();
+	User editor = userService.get(userTokenId);
+	// unAuthorized
+	if (!userService.isAuthorizedEditUser(owner, editor)) {
+	    return null;
+	}
+	post.setTitle(updateBean.getTitle());
+	post.setContent(updateBean.getContent());
+	post.setLastUpdated(Calendar.getInstance());
+	post = dao.save(post);
+	return post;
+
     }
 
 }

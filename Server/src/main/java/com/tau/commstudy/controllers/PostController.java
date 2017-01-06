@@ -71,9 +71,9 @@ public class PostController implements PostControllerInterface {
      * This updates only the content, title of the post. All the other fields
      * (including id and time) stay the same
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/update")
-    public String updatePost(@RequestBody Post givenPost) {
-	return service.updatePost(givenPost);
+    @RequestMapping(method = RequestMethod.PUT, value = "update/{id}")
+    public Post updatePost(@RequestBody UpdatePostBean updateBean, @PathVariable Long id, String userTokenId) {
+	return service.updatePost(updateBean, id, userTokenId);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
@@ -135,17 +135,6 @@ public class PostController implements PostControllerInterface {
     @RequestMapping(method = RequestMethod.POST, value = "/checkByQuestion")
     public boolean checkByQuestion(@RequestBody PostCriteria criteria) {
 	return service.checkByQuestion(criteria);
-    }
-
-    @Override
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) {
-	// TODO Auto-generated method stub
-	return null;
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/check")
-    public Iterable<Test> check() {
-	return null;
     }
 
 }

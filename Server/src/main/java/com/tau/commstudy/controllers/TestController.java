@@ -102,24 +102,4 @@ public class TestController {
 	return testService.search(criteria);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/check3")
-    public List<Test> check3() {
-	// QCustomer customer = QCustomer.customer;
-	// BooleanExpression customerHasBirthday = customer.birthday.eq(today);
-	// BooleanExpression isLongTermCustomer =
-	// customer.createdAt.lt(today.minusYears(2));
-	// customerRepository.findAll(customerHasBirthday.and(isLongTermCustomer));
-	TestCriteria criteria = new TestCriteria();
-	criteria.setFacultyId((long) 1);
-	criteria.setCourseId((long) 1);
-	// criteria.setYear(2011);
-	// criteria.setSemester('a');
-	// criteria.setMoed('b');
-	// criteria.setQuestionNumber(1);
-	System.out.println("1");
-	return testService.search(criteria);
-
-	// System.out.println(arg0);
-    }
-
 }

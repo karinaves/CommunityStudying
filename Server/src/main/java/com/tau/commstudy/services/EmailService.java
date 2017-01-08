@@ -25,8 +25,8 @@ public class EmailService {
 	msg.setFrom(new InternetAddress("studybuddytau@gmail.com"));
 	;
 	msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
-	msg.setSubject("New comment to your question");
-	msg.setText("Someone has commented to your question: " + title + " on Studdy Buddy TAU.");
+	msg.setSubject("New comment to your question in Studdy Buddy TAU");
+	msg.setText("Someone has commented to your question: " + title + " .");
 	msg.setHeader("X-Mailer", "Tov Are's program");
 	msg.setSentDate(new Date(0));
 	SMTPTransport t = (SMTPTransport) session.getTransport("smtps");

@@ -59,7 +59,6 @@ public class UserService {
 		System.out.println("Error sending email: " + ex.toString());
 	    }
 	}
-	logger.debug("******************************************");
 	return user;
     }
 

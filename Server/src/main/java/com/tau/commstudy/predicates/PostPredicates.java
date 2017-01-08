@@ -53,7 +53,7 @@ public final class PostPredicates {
 	return post.user.id.eq(id);
     }
 
-    public static BooleanExpression byContentLike(String content) {
+    public static BooleanExpression byContentOrTitleLike(String content) {
 	QPost post = QPost.post;
 
 	// get all posts
@@ -61,7 +61,7 @@ public final class PostPredicates {
 	    return post.isNotNull();
 
 	// if parameter is OK return usual predicate
-	return post.content.like("%" + content + "%");
+	return post.content.like("%" + content + "%").or(post.title.like("%" + content + "%"));
     }
 
     public static BooleanExpression byQuestionNumber(Integer questionNumber) {

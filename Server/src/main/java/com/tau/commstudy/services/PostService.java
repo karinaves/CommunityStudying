@@ -219,7 +219,7 @@ public class PostService {
 
 	// free text can be the only search param
 	if (criteria.getInContentText() != null && !criteria.getInContentText().equals(""))
-	    searchCriteria.and(PostPredicates.byContentLike(criteria.getInContentText()));
+	    searchCriteria.and(PostPredicates.byContentOrTitleLike(criteria.getInContentText()));
 
 	if (criteria.getFacultyId() == null)
 	    // return all

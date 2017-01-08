@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.controllers.interfaces.UserControllerInterface;
+import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 import com.tau.commstudy.services.UserService;
@@ -29,8 +30,8 @@ public class UserController implements UserControllerInterface {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/updateCourses")
-    public Boolean updateUserCourses(@RequestBody Set<Long> coursesIds, String userTokenId) {
-	return userService.updateUserCourses(coursesIds, userTokenId);
+    public Boolean updateUserCourses(@RequestBody Set<Course> courses, String userTokenId) {
+	return userService.updateUserCourses(courses, userTokenId);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getOrCreate")

@@ -57,9 +57,14 @@ public class CommentController implements CommentControllerInterface {
 	return service.updateCommentContent(content, id, userTokenId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/like")
+    @RequestMapping(method = RequestMethod.GET, value = "/like")
     public String like(long id) {
 	return service.like(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/dislike")
+    public String dislike(long id) {
+	return service.dislike(id);
     }
 
 }

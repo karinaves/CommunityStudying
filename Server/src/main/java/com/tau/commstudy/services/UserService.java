@@ -133,6 +133,18 @@ public class UserService {
 
     }
 
+    public Boolean dislikeComment(Comment comment) {
+	User user = comment.getUser();
+	if (user.getUserRating() == null || user.getUserRating().equals(0)) {
+	    user.setUserRating(0);
+	} else {
+	    user.setUserRating(user.getUserRating() - 1);
+	}
+	userDao.save(user);
+	return true;
+
+    }
+
     // --------------- Aid Functions ----------------
 
     public boolean isAuthorizedEditUser(User owner, User editor) {

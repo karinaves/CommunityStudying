@@ -320,6 +320,7 @@ public class PostService {
 	post.setTestQuestion(question);
 	post.setTime(Calendar.getInstance());
 	post.setUser(user);
+	post.setAcceptedComment(false);
 
 	return createPost(post);
     }

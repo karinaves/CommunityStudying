@@ -1,6 +1,10 @@
 package com.tau.commstudy.beans;
 
+import java.util.Set;
+
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.tau.commstudy.entities.Tag;
 
 @XmlRootElement
 public class NewPostBean {
@@ -13,6 +17,7 @@ public class NewPostBean {
     private Integer questionNumber;
     private String title;
     private String content;
+    private Set<Tag> tags;
 
     public NewPostBean() {
     }
@@ -79,6 +84,14 @@ public class NewPostBean {
 
     public void setContent(String content) {
 	this.content = content;
+    }
+
+    public Set<Tag> getTags() {
+	return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+	this.tags = tags;
     }
 
 }

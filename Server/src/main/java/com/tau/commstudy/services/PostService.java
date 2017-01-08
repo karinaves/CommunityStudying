@@ -321,6 +321,7 @@ public class PostService {
 	post.setTime(Calendar.getInstance());
 	post.setUser(user);
 	post.setAcceptedComment(false);
+	post.setTags(bean.getTags());
 
 	return createPost(post);
     }

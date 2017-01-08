@@ -4,6 +4,7 @@ public class PostCriteria {
 
     private Long facultyId;
     private Long courseId;
+    private Long userId;
     private Integer year;
     private Character semester;
     private Character moed;
@@ -67,6 +68,14 @@ public class PostCriteria {
 
     public void setInContentText(String inContentText) {
 	this.inContentText = inContentText;
+    }
+
+    public Long getUserId() {
+	return userId;
+    }
+
+    public void setUserId(Long userId) {
+	this.userId = userId;
     }
 
 }

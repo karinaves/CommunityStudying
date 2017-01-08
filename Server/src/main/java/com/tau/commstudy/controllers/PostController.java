@@ -136,4 +136,25 @@ public class PostController implements PostControllerInterface {
 	return service.checkByQuestion(criteria);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/check3")
+    public Iterable<Post> check3() {
+	// QCustomer customer = QCustomer.customer;
+	// BooleanExpression customerHasBirthday = customer.birthday.eq(today);
+	// BooleanExpression isLongTermCustomer =
+	// customer.createdAt.lt(today.minusYears(2));
+	// customerRepository.findAll(customerHasBirthday.and(isLongTermCustomer));
+	PostCriteria criteria = new PostCriteria();
+	criteria.setUserId((long) 2);
+	criteria.setFacultyId((long) 1);
+	criteria.setCourseId((long) 1);
+	// criteria.setYear(2010);
+	// criteria.setSemester('a');
+	// criteria.setMoed('b');
+	// criteria.setQuestionNumber(1);
+
+	return service.search(criteria);
+
+	// System.out.println(arg0);
+    }
+
 }

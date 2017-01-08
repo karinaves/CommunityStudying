@@ -217,6 +217,10 @@ public class PostService {
 
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
+	// add userId parameter to search
+	if (criteria.getUserId() != null)
+	    searchCriteria.and(PostPredicates.byUserId(criteria.getUserId()));
+
 	// free text can be the only search param
 	if (criteria.getInContentText() != null && !criteria.getInContentText().equals(""))
 	    searchCriteria.and(PostPredicates.byContentOrTitleLike(criteria.getInContentText()));
@@ -326,8 +330,8 @@ public class PostService {
 	return createPost(post);
     }
 
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) throws UnauthorizesException,
-	    IllegalArgumentException {
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
+	    throws UnauthorizesException, IllegalArgumentException {
 	Post post = this.getById(id);
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);

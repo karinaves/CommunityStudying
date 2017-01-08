@@ -27,6 +27,9 @@ public class UserService {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private EmailService emailService;
+
     public User get(String idTokenString) throws UnauthorizesException {
 	GoogleValidateInfo google = verifyUserIdToken(idTokenString);
 	User user = userDao.findByGoogleId(google.getSub());
@@ -50,6 +53,11 @@ public class UserService {
 	// creating new User
 	if (user == null) {
 	    user = createUser(idTokenString);
+	    try {
+		emailService.emailNewUser(user.getEmail(), user.getFirstName());
+	    } catch (Exception ex) {
+		System.out.println("Error sending email: " + ex.toString());
+	    }
 	}
 	logger.debug("******************************************");
 	return user;

@@ -31,6 +31,9 @@ public class CommentService {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private EmailService emailService;
+
     /**
      * Creates and Saves to DB a Comment entity.
      * 
@@ -49,7 +52,13 @@ public class CommentService {
 	comment.setPost(post);
 	comment.setContent(commentBean.getContent());
 	comment.setTimeStamp(Calendar.getInstance());
+	User author = post.getUser();
 	comment.setIsAccepted(false);
+	try {
+	    emailService.emailComment(author.getEmail(), post.getTitle());
+	} catch (Exception ex) {
+	    System.out.println("Error sending email: " + ex.toString());
+	}
 	return dao.save(comment);
     }
 

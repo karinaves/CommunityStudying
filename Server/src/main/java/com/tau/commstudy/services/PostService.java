@@ -343,4 +343,16 @@ public class PostService {
 
     }
 
+    /**
+     * returns posts by courses of the user
+     * 
+     * @param userTokenId
+     * @return posts of the user's courses
+     */
+    public List<Post> getByUserCourses(String userTokenId) {
+	User user = userService.get(userTokenId);
+
+	return dao.findByTestQuestion_Test_CourseInOrderByTimeDesc(user.getCourses());
+    }
+
 }

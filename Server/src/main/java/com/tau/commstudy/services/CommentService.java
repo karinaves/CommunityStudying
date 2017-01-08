@@ -91,7 +91,7 @@ public class CommentService {
     }
 
     public List<Comment> getAllByPostId(Long postId) throws IllegalArgumentException {
-	return dao.findByPost_IdOrderByAnswerRateDesc(postId);
+	return dao.findByPost_IdOrderByIsAcceptedDescAnswerRateDesc(postId);
     }
 
     public Boolean acceptComment(Long id, String userTokenId) throws IllegalArgumentException, UnauthorizesException {

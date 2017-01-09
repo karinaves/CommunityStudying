@@ -19,16 +19,21 @@ public class TestService {
     @Autowired
     private TestDao dao;
 
-    public Test getById(Long id) {
+    public boolean delete(Long id) throws IllegalArgumentException {
+	dao.delete(id);
+	return true;
+    }
+
+    public Test add(Test test) {
+	return dao.save(test);
+    }
+
+    public Test getById(Long id) throws IllegalArgumentException {
 	return dao.findOne(id);
     }
 
     public Test getByMoed(Course course, Integer year, Character semester, Character moed) {
 	return dao.findByCourseAndYearAndSemesterAndMoed(course, year, semester, moed);
-    }
-
-    public Test add(Test test) {
-	return dao.save(test);
     }
 
     public List<Test> search(TestCriteria criteria) {
@@ -69,6 +74,8 @@ public class TestService {
 	return searchBy(searchCriteria);
     }
 
+    // ------------Aid Functions---------------------------
+
     private List<Test> searchBy(BooleanBuilder searchCriteria) {
 	if (dao.count(searchCriteria) == 0)
 	    return null;
@@ -78,4 +85,5 @@ public class TestService {
     private Sort orderByTime() {
 	return new Sort(Sort.Direction.DESC, "year", "semester", "moed");
     }
+
 }

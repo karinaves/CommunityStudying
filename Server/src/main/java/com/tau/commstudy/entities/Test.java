@@ -36,7 +36,7 @@ public class Test {
 
     @OneToMany(mappedBy = "test")
     @JsonIgnore
-    private Set<File> file;
+    private Set<File> files;
 
     public Test() {
 
@@ -106,12 +106,12 @@ public class Test {
 	this.course = course;
     }
 
-    public Set<File> getFile() {
-	return file;
+    public Set<File> getFiles() {
+	return files;
     }
 
-    public void setFile(Set<File> file) {
-	this.file = file;
+    public void setFiles(Set<File> files) {
+	this.files = files;
     }
 
     public void setYear(Integer year) {

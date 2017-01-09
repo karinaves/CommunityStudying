@@ -54,7 +54,7 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     @JsonIgnore
-    private Set<File> file;
+    private Set<File> files;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "posts_to_tags", joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id") )
@@ -169,12 +169,12 @@ public class Post {
 	this.comments = comments;
     }
 
-    public Set<File> getFile() {
-	return file;
+    public Set<File> getFiles() {
+	return files;
     }
 
-    public void setFile(Set<File> file) {
-	this.file = file;
+    public void setFiles(Set<File> files) {
+	this.files = files;
     }
 
 }

@@ -3,7 +3,6 @@ package com.tau.commstudy.entities;
 import java.util.Calendar;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,8 +33,8 @@ public class User {
     private Integer userRating;
     private boolean isAdmin;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id") )
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
     private Set<Course> courses;
 
     public String getPictureUrl() {

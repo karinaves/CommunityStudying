@@ -51,6 +51,11 @@ public class CommentController implements CommentControllerInterface {
 	return service.acceptComment(id, userTokenId);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/unaccept/{id}")
+    public Boolean unacceptComment(@PathVariable Long id, String userTokenId) throws Exception {
+	return service.unacceptComment(id, userTokenId);
+    }
+
     @RequestMapping(method = RequestMethod.PUT, value = "update/{id}")
     public Comment updateCommentContent(@RequestBody String content, @PathVariable Long id, String userTokenId)
 	    throws Exception {

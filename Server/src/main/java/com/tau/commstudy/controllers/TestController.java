@@ -1,14 +1,17 @@
 package com.tau.commstudy.controllers;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.beans.GoogleValidateInfo;
+import com.tau.commstudy.beans.TestCriteria;
 import com.tau.commstudy.entities.Comment;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
@@ -92,6 +95,11 @@ public class TestController {
     public Test getByMoed(Long courseId, Integer year, Character semester, Character moed) {
 	Course course = courseService.get(courseId);
 	return testService.getByMoed(course, year, semester, moed);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/search")
+    public List<Test> search(@RequestBody TestCriteria criteria) {
+	return testService.search(criteria);
     }
 
 }

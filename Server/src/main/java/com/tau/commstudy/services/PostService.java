@@ -217,9 +217,13 @@ public class PostService {
 
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
+	// add userId parameter to search
+	if (criteria.getUserId() != null)
+	    searchCriteria.and(PostPredicates.byUserId(criteria.getUserId()));
+
 	// free text can be the only search param
 	if (criteria.getInContentText() != null && !criteria.getInContentText().equals(""))
-	    searchCriteria.and(PostPredicates.byContentLike(criteria.getInContentText()));
+	    searchCriteria.and(PostPredicates.byContentOrTitleLike(criteria.getInContentText()));
 
 	if (criteria.getFacultyId() == null)
 	    // return all
@@ -321,12 +325,13 @@ public class PostService {
 	post.setTime(Calendar.getInstance());
 	post.setUser(user);
 	post.setAcceptedComment(false);
+	post.setTags(bean.getTags());
 
 	return createPost(post);
     }
 
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) throws UnauthorizesException,
-	    IllegalArgumentException {
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
+	    throws UnauthorizesException, IllegalArgumentException {
 	Post post = this.getById(id);
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);
@@ -340,6 +345,18 @@ public class PostService {
 	post = dao.save(post);
 	return post;
 
+    }
+
+    /**
+     * returns posts by courses of the user
+     * 
+     * @param userTokenId
+     * @return posts of the user's courses
+     */
+    public List<Post> getByUserCourses(String userTokenId) {
+	User user = userService.get(userTokenId);
+
+	return dao.findByTestQuestion_Test_CourseInOrderByTimeDesc(user.getCourses());
     }
 
 }

@@ -16,7 +16,6 @@ import com.tau.commstudy.beans.UpdatePostBean;
 import com.tau.commstudy.controllers.interfaces.PostControllerInterface;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
-import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.entities.daos.TestDao;
@@ -57,7 +56,7 @@ public class PostController implements PostControllerInterface {
     /**
      * increases the number of votes by 1
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/like")
+    @RequestMapping(method = RequestMethod.GET, value = "/like")
     public String like(long id) {
 	return service.like(id);
     }
@@ -135,6 +134,11 @@ public class PostController implements PostControllerInterface {
     @RequestMapping(method = RequestMethod.POST, value = "/checkByQuestion")
     public boolean checkByQuestion(@RequestBody PostCriteria criteria) {
 	return service.checkByQuestion(criteria);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getByUserCourses")
+    public List<Post> getByUserCourses(String userTokenId) {
+	return service.getByUserCourses(userTokenId);
     }
 
 }

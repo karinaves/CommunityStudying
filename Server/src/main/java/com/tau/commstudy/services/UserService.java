@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tau.commstudy.beans.GoogleValidateInfo;
 import com.tau.commstudy.entities.Comment;
+import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
@@ -109,9 +110,9 @@ public class UserService {
 	return user;
     }
 
-    public Boolean updateUserCourses(Set<Long> coursesIds, String userTokenId) {
+    public Boolean updateUserCourses(Set<Course> courses, String userTokenId) {
 	User user = getOrCreate(userTokenId);
-	user.setCourses(courseService.getAllById(coursesIds));
+	user.setCourses(courses);
 	userDao.save(user);
 	return true;
     }

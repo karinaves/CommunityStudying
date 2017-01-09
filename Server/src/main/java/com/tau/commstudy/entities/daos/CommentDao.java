@@ -10,6 +10,6 @@ import com.tau.commstudy.entities.Comment;
 
 @Transactional
 public interface CommentDao extends CrudRepository<Comment, Long> {
-    public List<Comment> findByPost_IdOrderByAnswerRateDesc(Long postId);
+    public List<Comment> findByPost_IdOrderByIsAcceptedDescAnswerRateDesc(Long postId);
 
 }

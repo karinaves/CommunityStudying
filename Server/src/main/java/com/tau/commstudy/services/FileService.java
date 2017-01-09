@@ -43,10 +43,10 @@ public class FileService {
 	User owner, editor = userService.get(userTokenId);
 
 	// update only test post or comment - not combined
-	if (test != null)
+	if (test != null) {
 	    file.setTest(test);
-
-	else if (post != null || comment != null) {
+	    return dao.save(file);
+	} else if (post != null || comment != null) {
 	    owner = post != null ? post.getUser() : comment.getUser();
 	    // check user is authorized to edit
 	    if (!userService.isAuthorizedEditUser(owner, editor))

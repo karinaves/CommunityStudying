@@ -1,5 +1,9 @@
 package com.tau.commstudy.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ValidationException;
@@ -10,14 +14,17 @@ import org.springframework.stereotype.Service;
 import com.tau.commstudy.beans.UserAllData;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Faculty;
+import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.CourseDao;
-import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
 public class CourseService {
 
     @Autowired
     private FacultyService facultyService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private CourseDao courseDao;
@@ -81,12 +88,31 @@ public class CourseService {
 
     }
 
-    public UserAllData<Course> getUserAndAllData(String idTokenString, Long facultyId) throws UnauthorizesException {
+    public UserAllData<Course> getUserAndAllData(String idTokenString, Long facultyId) {
 	UserAllData<Course> data = new UserAllData<>();
 	data.setAllData(courseDao.findByFaculty_IdOrderByNameHebrew(facultyId));
+	try {
+	    User user = userService.get(idTokenString); // can throw
+	    List<Course> userCourses = new ArrayList<>(user.getCourses());
+	    // sorts user information
+	    Collections.sort(userCourses, new Comparator<Course>() {
+		@Override
+		public int compare(Course o1, Course o2) {
+		    if (o1.getNameHebrew() != null && o2.getNameHebrew() != null)
+			return o1.getNameHebrew().compareTo(o2.getNameHebrew());
+		    if (o1.getNameEnglish() != null && o2.getNameEnglish() != null)
+			return o1.getNameEnglish().compareTo(o2.getNameEnglish());
+		    return 0;
+		}
 
-	// User user = userService.get(idTokenString); // can throw
-	// data.setUserData(userService.getAllFaculties());
+	    });
+
+	    data.setUserData(userCourses);
+	}
+	// returns data without user profile information
+	catch (Exception e) {
+	    return data;
+	}
 	return data;
 
     }

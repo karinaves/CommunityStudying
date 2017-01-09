@@ -2,7 +2,6 @@ package com.tau.commstudy.services;
 
 import java.net.URL;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -31,7 +30,7 @@ public class UserService {
     @Autowired
     private EmailService emailService;
 
-    public User get(String idTokenString) throws UnauthorizesException {
+    public User get(String idTokenString) throws UnauthorizesException, IllegalArgumentException {
 	GoogleValidateInfo google = verifyUserIdToken(idTokenString);
 	User user = userDao.findByGoogleId(google.getSub());
 	return user;
@@ -62,13 +61,6 @@ public class UserService {
 	}
 	return user;
     }
-
-    public List<Faculty> getFaculties(String idTokenString) throws UnauthorizesException {
-	List<Faculty> faculties = null;
-	return faculties;
-    }
-
-    // -----------------Auxiliary functions-----------------------
 
     /**
      * Authenticate user login. verify the user's id token.
@@ -110,9 +102,30 @@ public class UserService {
 	return user;
     }
 
+    public Boolean updateUserFaculties(Set<Faculty> faculties, String userTokenId) {
+	User user = getOrCreate(userTokenId);
+	user.setFaculties(faculties);
+	userDao.save(user);
+	return true;
+    }
+
+    public Boolean addUserFaculties(Faculty faculty, String userTokenId) {
+	User user = get(userTokenId);
+	user.getFaculties().add(faculty);
+	userDao.save(user);
+	return true;
+    }
+
     public Boolean updateUserCourses(Set<Course> courses, String userTokenId) {
 	User user = getOrCreate(userTokenId);
 	user.setCourses(courses);
+	userDao.save(user);
+	return true;
+    }
+
+    public Boolean addUserCourse(Course course, String userTokenId) {
+	User user = get(userTokenId);
+	user.getCourses().add(course);
 	userDao.save(user);
 	return true;
     }

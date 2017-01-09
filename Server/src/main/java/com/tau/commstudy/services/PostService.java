@@ -217,6 +217,10 @@ public class PostService {
 
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
+	// add tags parameter to search
+	if (criteria.getTags() != null)
+	    searchCriteria.and(PostPredicates.byTags(criteria.getTags()));
+
 	// add userId parameter to search
 	if (criteria.getUserId() != null)
 	    searchCriteria.and(PostPredicates.byUserId(criteria.getUserId()));

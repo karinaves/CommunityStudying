@@ -1,5 +1,9 @@
 package com.tau.commstudy.beans;
 
+import java.util.Set;
+
+import com.tau.commstudy.entities.Tag;
+
 public class PostCriteria {
 
     private Long facultyId;
@@ -10,6 +14,7 @@ public class PostCriteria {
     private Character moed;
     private Integer questionNumber;
     private String inContentText;
+    private Set<Tag> tags;
 
     public PostCriteria() {
     }
@@ -76,6 +81,14 @@ public class PostCriteria {
 
     public void setUserId(Long userId) {
 	this.userId = userId;
+    }
+
+    public Set<Tag> getTags() {
+	return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+	this.tags = tags;
     }
 
 }

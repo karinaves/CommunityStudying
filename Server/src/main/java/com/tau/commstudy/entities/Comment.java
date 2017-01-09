@@ -16,8 +16,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "comments")
 @XmlRootElement
@@ -47,7 +45,6 @@ public class Comment {
     private User user;
 
     @OneToMany(mappedBy = "comment")
-    @JsonIgnore
     private Set<File> files;
 
     private Boolean isAccepted;

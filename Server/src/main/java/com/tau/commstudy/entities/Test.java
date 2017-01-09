@@ -13,10 +13,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-@Table(name = "test", uniqueConstraints = @UniqueConstraint(columnNames = { "course", "year", "semester", "moed" }) )
+@Table(name = "test", uniqueConstraints = @UniqueConstraint(columnNames = { "course", "year", "semester", "moed" }))
 @XmlRootElement
 public class Test {
     @Id
@@ -35,7 +33,6 @@ public class Test {
     private Course course;
 
     @OneToMany(mappedBy = "test")
-    @JsonIgnore
     private Set<File> files;
 
     public Test() {

@@ -12,6 +12,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "files")
 @XmlRootElement
@@ -25,12 +27,15 @@ public class File {
     private Calendar uploadTimestamp;
 
     @ManyToOne
+    @JsonIgnore
     private Comment comment;
 
     @ManyToOne
+    @JsonIgnore
     private Test test;
 
     @ManyToOne
+    @JsonIgnore
     private Post post;
 
     private String url;

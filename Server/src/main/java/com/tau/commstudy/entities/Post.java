@@ -53,11 +53,10 @@ public class Post {
     private Set<Comment> comments;
 
     @OneToMany(mappedBy = "post")
-    @JsonIgnore
     private Set<File> files;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "posts_to_tags", joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id") )
+    @JoinTable(name = "posts_to_tags", joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     private Set<Tag> tags;
 
     @NotNull

@@ -55,21 +55,10 @@ public final class PostPredicates {
 	    searchCriteria.and(post.isNotNull());
 	    return searchCriteria;
 	}
-	// BooleanExpression a;
-	// a.
 
-	// ArrayList<Predicate> tagPredicatesList = new ArrayList<Predicate>();
 	for (Tag tag : tags)
 	    searchCriteria.or(post.tags.contains(tag));
-	// tagPredicatesList.add(post.tags.contains(tag));
 
-	// Predicate [] tagPredicatesArray = new
-	// Predicate[tagPredicatesList.size()];
-	// tagPredicatesList.toArray(tagPredicatesArray);
-
-	// BooleanBuilder searchCriteria = new BooleanBuilder();
-	// searchCriteria.andAnyOf(tagPredicatesArray);
-	// if parameter is OK return usual predicate
 	return searchCriteria;
     }
 

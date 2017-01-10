@@ -1,8 +1,12 @@
 package com.tau.commstudy.predicates;
 
+import java.util.Set;
+
+import com.mysema.query.BooleanBuilder;
 import com.mysema.query.types.Predicate;
 import com.mysema.query.types.expr.BooleanExpression;
 import com.tau.commstudy.entities.QPost;
+import com.tau.commstudy.entities.Tag;
 
 public final class PostPredicates {
     private PostPredicates() {
@@ -40,6 +44,22 @@ public final class PostPredicates {
 
 	// if parameter is OK return usual predicate
 	return post.testQuestion.test.moed.eq(moed);
+    }
+
+    public static BooleanBuilder byTags(Set<Tag> tags) {
+	QPost post = QPost.post;
+	BooleanBuilder searchCriteria = new BooleanBuilder();
+
+	// get all posts
+	if (tags == null || tags.isEmpty()) {
+	    searchCriteria.and(post.isNotNull());
+	    return searchCriteria;
+	}
+
+	for (Tag tag : tags)
+	    searchCriteria.or(post.tags.contains(tag));
+
+	return searchCriteria;
     }
 
     public static BooleanExpression byUserId(Long id) {

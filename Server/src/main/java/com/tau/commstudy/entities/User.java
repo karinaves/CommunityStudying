@@ -34,8 +34,12 @@ public class User {
     private boolean isAdmin;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
+    @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id") )
     private Set<Course> courses;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_to_faculties", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "faculty_id", referencedColumnName = "id") )
+    private Set<Faculty> faculties;
 
     public String getPictureUrl() {
 	return pictureUrl;
@@ -59,7 +63,7 @@ public class User {
 	return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
 	this.id = id;
     }
 
@@ -125,6 +129,14 @@ public class User {
 
     public void setAdmin(boolean isAdmin) {
 	this.isAdmin = isAdmin;
+    }
+
+    public Set<Faculty> getFaculties() {
+	return faculties;
+    }
+
+    public void setFaculties(Set<Faculty> faculties) {
+	this.faculties = faculties;
     }
 
 }

@@ -332,12 +332,6 @@ public class PostService {
 	post.setAcceptedComment(false);
 	post.setTags(bean.getTags());
 
-	for (String fileUrl : bean.getFiles()) {
-	    NewFileBean fileBean = new NewFileBean();
-	    fileBean.setPostId(post.getId());
-	    fileBean.setUrl(fileUrl);
-	    fileService.add(fileBean, userTokenId);
-	}
 	Post postNew = createPost(post);
 	for (String fileUrl : bean.getFiles()) {
 	    NewFileBean fileBean = new NewFileBean();
@@ -348,8 +342,8 @@ public class PostService {
 	return postNew;
     }
 
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
-	    throws UnauthorizesException, IllegalArgumentException {
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) throws UnauthorizesException,
+	    IllegalArgumentException {
 	Post post = this.getById(id);
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);

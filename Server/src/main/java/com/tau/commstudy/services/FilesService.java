@@ -19,7 +19,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 @Service
-public class FileService {
+public class FilesService {
 
     public boolean uploadFiles(MultipartFile[] uploadingFiles) throws IOException {
 	long maxUploadSizeInMb = 5 * 1024 * 1024;

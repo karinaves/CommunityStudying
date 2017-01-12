@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tau.commstudy.services.FileService;
+import com.tau.commstudy.services.FilesService;
 
 @ControllerAdvice
 @RestController
@@ -20,7 +20,7 @@ import com.tau.commstudy.services.FileService;
 public class FilesController {
 
     @Autowired
-    private FileService fileService;
+    private FilesService fileService;
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "multipart/form-data")
     public boolean uploadContentFile(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles)

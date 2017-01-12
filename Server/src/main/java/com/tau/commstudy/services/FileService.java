@@ -28,13 +28,12 @@ public class FileService {
 	String secretAccessKey = keys[1];
 
 	AWSCredentials credentials = new BasicAWSCredentials(accessKeyID, secretAccessKey);
-	String keyName = "***";
 	String bucketName = "study-buddy-files";
 	try {
 	    AmazonS3 s3client = new AmazonS3Client(credentials);
 	    for (MultipartFile uploadedFile : uploadingFiles) {
 		File file = convert(uploadedFile);
-		keyName = uploadedFile.getOriginalFilename();
+		String keyName = uploadedFile.getOriginalFilename();
 		s3client.putObject(new PutObjectRequest(bucketName, keyName, file)
 			.withCannedAcl(CannedAccessControlList.PublicRead));
 		System.out.println(file.exists());
@@ -46,7 +45,6 @@ public class FileService {
 
 	    return false;
 	}
-	System.out.println(keyName);
 	return true;
     }
 
@@ -75,7 +73,6 @@ public class FileService {
 	    e.printStackTrace();
 	    return null;
 	}
-
     }
 
     private File convert(MultipartFile file) throws IOException {

@@ -47,7 +47,7 @@ public class FileService {
 	return true;
     }
 
-    public File convert(MultipartFile file) throws IOException {
+    private File convert(MultipartFile file) throws IOException {
 	File convFile = new File(file.getOriginalFilename());
 	convFile.createNewFile();
 	FileOutputStream fos = new FileOutputStream(convFile);

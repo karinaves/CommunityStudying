@@ -1,7 +1,5 @@
 package com.tau.commstudy.controllers;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +20,6 @@ public class FilesController {
     @Autowired
     private FileService fileService;
 
-    public static final String uploadingdir = System.getProperty("C:\\files");
-
-    @RequestMapping(value = "/upload2", method = RequestMethod.POST)
-    public String uploadingPost(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles) throws IOException {
-	for (MultipartFile uploadedFile : uploadingFiles) {
-	    File file = new File(uploadingdir + uploadedFile.getOriginalFilename());
-	    uploadedFile.transferTo(file);
-	}
-
-	return "redirect:/";
-    }
-
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "multipart/form-data")
     public boolean uploadContentFile(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles)
 	    throws IOException {
@@ -41,12 +27,4 @@ public class FilesController {
 	return fileService.uploadFiles(uploadingFiles);
     }
 
-    public File convert(MultipartFile file) throws IOException {
-	File convFile = new File(file.getOriginalFilename());
-	convFile.createNewFile();
-	FileOutputStream fos = new FileOutputStream(convFile);
-	fos.write(file.getBytes());
-	fos.close();
-	return convFile;
-    }
 }

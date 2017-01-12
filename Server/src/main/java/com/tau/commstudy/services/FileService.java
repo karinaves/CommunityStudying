@@ -22,7 +22,8 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 public class FileService {
 
     public boolean uploadFiles(MultipartFile[] uploadingFiles) throws IOException {
-
+	long maxUploadSizeInMb = 5 * 1024 * 1024;
+	String[] fileTypes = { "png", "docx", "doc", "txt", "pdf", "jpg", "bmp" };
 	String[] keys = getKeysFromFile();
 	String accessKeyID = keys[0];
 	String secretAccessKey = keys[1];
@@ -32,19 +33,31 @@ public class FileService {
 	try {
 	    AmazonS3 s3client = new AmazonS3Client(credentials);
 	    for (MultipartFile uploadedFile : uploadingFiles) {
+		Boolean fileType = false;
+		if (uploadedFile.getSize() > maxUploadSizeInMb) {
+		    return false;
+		}
+		for (String suffix : fileTypes) {
+		    if (uploadedFile.getOriginalFilename().endsWith(suffix)) {
+			fileType = true;
+			break;
+		    }
+		}
+		if (!fileType) {
+		    return false;
+		}
 		File file = convert(uploadedFile);
 		String keyName = uploadedFile.getOriginalFilename();
 		s3client.putObject(new PutObjectRequest(bucketName, keyName, file)
 			.withCannedAcl(CannedAccessControlList.PublicRead));
-		System.out.println(file.exists());
 	    }
 
 	} catch (AmazonServiceException ase) {
 	    return false;
 	} catch (AmazonClientException ace) {
-
 	    return false;
 	}
+
 	return true;
     }
 
@@ -81,6 +94,7 @@ public class FileService {
 	FileOutputStream fos = new FileOutputStream(convFile);
 	fos.write(file.getBytes());
 	fos.close();
+
 	return convFile;
     }
 }

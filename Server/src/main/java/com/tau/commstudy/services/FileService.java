@@ -1,7 +1,9 @@
 package com.tau.commstudy.services;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
@@ -21,8 +23,9 @@ public class FileService {
 
     public boolean uploadFiles(MultipartFile[] uploadingFiles) throws IOException {
 
-	String accessKeyID = "AKIAJBJANY4WXG3C3MTA";
-	String secretAccessKey = "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";
+	String[] keys = getKeysFromFile();
+	String accessKeyID = keys[0];
+	String secretAccessKey = keys[1];
 
 	AWSCredentials credentials = new BasicAWSCredentials(accessKeyID, secretAccessKey);
 	String keyName = "***";
@@ -45,6 +48,34 @@ public class FileService {
 	}
 	System.out.println(keyName);
 	return true;
+    }
+
+    private String[] getKeysFromFile() {
+	String csvFilePath = "C:\\wamp\\www\\accessKeys\\accessKeys.csv";
+	String[] keys = new String[2];
+	BufferedReader fileReader = null;
+
+	final String DELIMITER = ",";
+	try {
+	    String line = "";
+	    fileReader = new BufferedReader(new FileReader(csvFilePath));
+	    int i = 0;
+	    while ((line = fileReader.readLine()) != null) {
+		String[] row = line.split(DELIMITER);
+		keys[i] = row[1];
+		i++;
+	    }
+	    try {
+		fileReader.close();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
+	    return keys;
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    return null;
+	}
+
     }
 
     private File convert(MultipartFile file) throws IOException {

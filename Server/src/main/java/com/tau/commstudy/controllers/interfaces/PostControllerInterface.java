@@ -16,7 +16,7 @@ public interface PostControllerInterface {
     public Post addNewPost(@RequestBody NewPostBean post, String userTokenId);
 
     // path should be - "post/search" method = POST
-    public List<Post> search(PostCriteria criteria);
+    public List<Post> search(PostCriteria criteria, int page, int size);
 
     // path should be - "post/{id}" method = GET
     public Post getById(@PathVariable Long id);

@@ -1,6 +1,8 @@
 package com.tau.commstudy.controllers;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +18,7 @@ import com.tau.commstudy.beans.UpdatePostBean;
 import com.tau.commstudy.controllers.interfaces.PostControllerInterface;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
+import com.tau.commstudy.entities.Tag;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.PostDao;
 import com.tau.commstudy.entities.daos.TestDao;
@@ -125,8 +128,8 @@ public class PostController implements PostControllerInterface {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/search")
-    public List<Post> search(@RequestBody PostCriteria criteria) {
-	return service.search(criteria);
+    public List<Post> search(@RequestBody PostCriteria criteria, int page, int size) {
+	return service.search(criteria, page, size);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/")
@@ -137,6 +140,75 @@ public class PostController implements PostControllerInterface {
     @RequestMapping(method = RequestMethod.POST, value = "/checkByQuestion")
     public boolean checkByQuestion(@RequestBody PostCriteria criteria) {
 	return service.checkByQuestion(criteria);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/check3")
+    public Iterable<Post> check3() {
+	// QCustomer customer = QCustomer.customer;
+	// BooleanExpression customerHasBirthday = customer.birthday.eq(today);
+	// BooleanExpression isLongTermCustomer =
+	// customer.createdAt.lt(today.minusYears(2));
+	// customerRepository.findAll(customerHasBirthday.and(isLongTermCustomer));
+	PostCriteria criteria = new PostCriteria();
+	// criteria.setUserId((long) 2);
+	criteria.setFacultyId((long) 1);
+	criteria.setCourseId((long) 1);
+	// criteria.setYear(2010);
+	// criteria.setSemester('a');
+	// criteria.setMoed('b');
+	// criteria.setQuestionNumber(1);
+
+	return service.search(criteria, 1, 2);
+
+	// System.out.println(arg0);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/check4")
+    public Post check4() throws Exception {
+	// String token =
+	// "eyJhbGciOiJSUzI1NiIsImtpZCI6ImUyNTI0ZmJlMDEwNjE2YTZlODcxYWY5NjljMzQwYjgwYzY3MjA4OTQifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiaWF0IjoxNDgyNjU2NzYwLCJleHAiOjE0ODI2NjAzNjAsImF0X2hhc2giOiJESFVxejNxMEdzeVRQY19lR01yeUJBIiwiYXVkIjoiMTA4NzU1OTY0NDM5My01NW90NW10M3NhZnViamwya25tMzAycmoydWFzcjBnbC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwNTA3NDYyNzAzOTIxMjU5OTA4MiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiIxMDg3NTU5NjQ0MzkzLTU1b3Q1bXQzc2FmdWJqbDJrbm0zMDJyajJ1YXNyMGdsLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaGQiOiJtYWlsLnRhdS5hYy5pbCIsImVtYWlsIjoia2FyaW5hdmVza2VyQG1haWwudGF1LmFjLmlsIiwibmFtZSI6IkthcmluYSBWZXNrZXIiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDQuZ29vZ2xldXNlcmNvbnRlbnQuY29tLy1GSnJ2dFZ6MTktNC9BQUFBQUFBQUFBSS9BQUFBQUFBQUFBQS9BS0JfVTh0S04yQXg5YXVQV2xVR3hjZVNGVWRiNE9NUmtBL3M5Ni1jL3Bob3RvLmpwZyIsImdpdmVuX25hbWUiOiJLYXJpbmEiLCJmYW1pbHlfbmFtZSI6IlZlc2tlciJ9.lupyId2OKB-IVpKQYPVBM30zPBsUYLVS-81nSTVK2qwODFa_7rzXsHwwJJEFZo4b471W1dhZRZ5qll-eRqbsK7qPAD29ekf3RK8WwO6hyDSaeFVrS9-KiOFcjesRry-sIxOA7icf2zQUQCPDf-xpT7jeer6kJB1oaftrLhUbDauS0IFr60WMRGVTbpWf7ySc9TE25WXaqDv62hMOXbfl82-Zw31Tw0h5SXTXiUd-vc-m0g3Nao41xmCutjbfaDKRLkOuKFliq2WLt46pS8S9_nBEr1JzLFS-LY779ZD_r64Pzx2anzI-6SyKr8ajTJOVvIEycwgvsYRRGKc8nOQIyw";
+	//
+	// NewPostBean bean = new NewPostBean();
+	// bean.setCourseId((long) 1);
+	// bean.setMoed('b');
+	// bean.setSemester('a');
+	// bean.setYear(2010);
+	// bean.setQuestionNumber(1);
+	// bean.setTitle("automatic check4");
+	// bean.setContent("check tokenId");
+	// return addNewPost(bean, token);
+
+	// Post post = getById((long) 12);
+	// Set<Tag> tags = new HashSet<Tag>();
+	// Tag tag1 = tagsController.addNewTagToCourse((long) 1, "one");
+	// tags.add(tag1);
+	// tags.add(tagsController.addNewTagToCourse((long) 1, "three"));
+	// post.setTags(tags);
+	// return dao.save(post);
+
+	Post post = getById((long) 13);
+	Set<Tag> tags = new HashSet<Tag>();
+	tags.add(tagsController.addNewTagToCourse((long) 1, "seven"));
+	post.setTags(tags);
+	return getById((long) 13);
+	// dao.save(post);
+
+	// post = getById((long) 12);
+	// tags.add(tagsController.addNewTagToCourse((long) 1, "three"));
+	// post.setTags(tags);
+	// dao.save(post);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/check5")
+    public List<Post> check5() throws Exception {
+	Set<Tag> tags = new HashSet<Tag>();
+	System.out.println("1");
+	Tag tag1 = tagsController.addNewTagToCourse((long) 1, "five");
+	System.out.println("2 tag = " + tag1.getName());
+	tags.add(tag1);
+	PostCriteria criteria = new PostCriteria();
+	criteria.setTags(tags);
+	return service.search(criteria, 0, 5);
     }
 
 }

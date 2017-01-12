@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -211,9 +212,11 @@ public class PostService {
      * @param criteria
      *            the fields are: -faculty -course -year -semester -moed
      *            -questionNumber
+     * @param page
+     * @param size
      * @return List of corresponding posts
      */
-    public List<Post> search(PostCriteria criteria) {
+    public List<Post> search(PostCriteria criteria, int page, int size) {
 
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
@@ -231,49 +234,49 @@ public class PostService {
 
 	if (criteria.getFacultyId() == null)
 	    // return all
-	    return searchBy(searchCriteria);
+	    return searchBy(searchCriteria, page, size);
 
 	// add faculty parameter to search
 	searchCriteria.and(PostPredicates.byFaculty(criteria.getFacultyId()));
 	if (criteria.getCourseId() == null)
 	    // return by faculty
-	    return searchBy(searchCriteria);
+	    return searchBy(searchCriteria, page, size);
 
 	// add course parameter to search
 	searchCriteria.and(PostPredicates.byCourse(criteria.getCourseId()));
 	if (criteria.getYear() == null)
 	    // return by course
-	    return searchBy(searchCriteria);
+	    return searchBy(searchCriteria, page, size);
 
 	// add year parameter to search
 	searchCriteria.and(PostPredicates.byYear(criteria.getYear()));
 	if (criteria.getSemester() == null)
 	    // return by year
-	    return searchBy(searchCriteria);
+	    return searchBy(searchCriteria, page, size);
 
 	// add semester parameter to search
 	searchCriteria.and(PostPredicates.bySemester(criteria.getSemester()));
 	if (criteria.getMoed() == null)
 	    // return by semester
-	    return searchBy(searchCriteria);
+	    return searchBy(searchCriteria, page, size);
 
 	// add moed parameter to search
 	searchCriteria.and(PostPredicates.byMoed(criteria.getMoed()));
 	if (criteria.getQuestionNumber() == null)
 	    // return by moed
-	    return searchBy(searchCriteria);
+	    return searchBy(searchCriteria, page, size);
 
 	// add question number parameter to search
 	searchCriteria.and(PostPredicates.byQuestionNumber(criteria.getQuestionNumber()));
 
 	// return by question number
-	return searchBy(searchCriteria);
+	return searchBy(searchCriteria, page, size);
     }
 
-    List<Post> searchBy(BooleanBuilder searchCriteria) {
-	if (dao.count(searchCriteria) == 0)
+    List<Post> searchBy(BooleanBuilder searchCriteria, int page, int size) {
+	if (dao.findAll(searchCriteria, new PageRequest(page, size, orderByTime())) == null)
 	    return null;
-	return (List<Post>) dao.findAll(searchCriteria, orderByTime());
+	return (List<Post>) dao.findAll(searchCriteria, new PageRequest(page, size, orderByTime())).getContent();
     }
 
     private Sort orderByTime() {
@@ -281,7 +284,7 @@ public class PostService {
     }
 
     public boolean checkByQuestion(PostCriteria criteria) {
-	if (search(criteria) == null)
+	if (search(criteria, 0, 1) == null)
 	    return false;
 
 	return true;

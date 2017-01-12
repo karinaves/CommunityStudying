@@ -13,12 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysema.query.annotations.QueryInit;
 
 @Entity
@@ -45,6 +47,13 @@ public class Post {
     private int answers;
 
     private int votes;
+
+    @OneToMany(mappedBy = "post")
+    @JsonIgnore
+    private Set<Comment> comments;
+
+    @OneToMany(mappedBy = "post")
+    private Set<File> files;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "posts_to_tags", joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
@@ -149,6 +158,22 @@ public class Post {
 
     public void setAcceptedComment(Boolean acceptedComment) {
 	this.acceptedComment = acceptedComment;
+    }
+
+    public Set<Comment> getComments() {
+	return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+	this.comments = comments;
+    }
+
+    public Set<File> getFiles() {
+	return files;
+    }
+
+    public void setFiles(Set<File> files) {
+	this.files = files;
     }
 
 }

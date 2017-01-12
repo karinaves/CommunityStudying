@@ -48,6 +48,9 @@ public class PostController implements PostControllerInterface {
     @Autowired
     private TestQuestionService questionService;
 
+    @Autowired
+    private TagsController tagsController;
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public boolean delete(@PathVariable Long id) throws Exception {
 	return service.delete(id);
@@ -140,5 +143,4 @@ public class PostController implements PostControllerInterface {
     public List<Post> getByUserCourses(String userTokenId) {
 	return service.getByUserCourses(userTokenId);
     }
-
 }

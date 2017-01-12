@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,15 +21,17 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 @Service
-public class FilesService {
+public class UploadService {
 
-    public boolean uploadFiles(MultipartFile[] uploadingFiles) throws IOException {
+    public List<String> uploadFiles(MultipartFile[] uploadingFiles) throws IOException {
 	long maxUploadSizeInMb = 5 * 1024 * 1024;
 	String[] fileTypes = { "png", "docx", "doc", "txt", "pdf", "jpg", "bmp" };
 	String[] keys = getKeysFromFile();
+	String pathPrefix = "https://s3-eu-west-1.amazonaws.com/study-buddy-files/";
 	String accessKeyID = keys[0];
 	String secretAccessKey = keys[1];
-
+	String fileName = "";
+	List<String> result = new ArrayList<>();
 	AWSCredentials credentials = new BasicAWSCredentials(accessKeyID, secretAccessKey);
 	String bucketName = "study-buddy-files";
 	try {
@@ -35,7 +39,7 @@ public class FilesService {
 	    for (MultipartFile uploadedFile : uploadingFiles) {
 		Boolean fileType = false;
 		if (uploadedFile.getSize() > maxUploadSizeInMb) {
-		    return false;
+		    return null;
 		}
 		for (String suffix : fileTypes) {
 		    if (uploadedFile.getOriginalFilename().endsWith(suffix)) {
@@ -44,21 +48,23 @@ public class FilesService {
 		    }
 		}
 		if (!fileType) {
-		    return false;
+		    return null;
 		}
 		File file = convert(uploadedFile);
-		String keyName = uploadedFile.getOriginalFilename();
-		s3client.putObject(new PutObjectRequest(bucketName, keyName, file)
+		fileName = uploadedFile.getOriginalFilename();
+		s3client.putObject(new PutObjectRequest(bucketName, fileName, file)
 			.withCannedAcl(CannedAccessControlList.PublicRead));
+		result.add(pathPrefix + fileName);
 	    }
 
 	} catch (AmazonServiceException ase) {
-	    return false;
+	    result.clear();
+	    return null;
 	} catch (AmazonClientException ace) {
-	    return false;
+	    result.clear();
+	    return null;
 	}
-
-	return true;
+	return result;
     }
 
     private String[] getKeysFromFile() {

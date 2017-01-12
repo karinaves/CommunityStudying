@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tau.commstudy.beans.NewCommentBean;
+import com.tau.commstudy.beans.NewFileBean;
 import com.tau.commstudy.entities.Comment;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
@@ -34,6 +35,9 @@ public class CommentService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private FileService fileService;
+
     /**
      * Creates and Saves to DB a Comment entity.
      * 
@@ -43,8 +47,8 @@ public class CommentService {
      * @throws ValidationException
      *             if not saved
      */
-    public Comment add(NewCommentBean commentBean, String userTokenId) throws ValidationException,
-	    IllegalArgumentException {
+    public Comment add(NewCommentBean commentBean, String userTokenId)
+	    throws ValidationException, IllegalArgumentException {
 	Comment comment = new Comment();
 	User user = userService.get(userTokenId);
 	Post post = postService.getById(commentBean.getPostId());
@@ -59,7 +63,15 @@ public class CommentService {
 	} catch (Exception ex) {
 	    System.out.println("Error sending email: " + ex.toString());
 	}
-	return dao.save(comment);
+
+	Comment commentNew = dao.save(comment);
+	for (String fileUrl : commentBean.getFiles()) {
+	    NewFileBean fileBean = new NewFileBean();
+	    fileBean.setCommentId(commentNew.getId());
+	    fileBean.setUrl(fileUrl);
+	    fileService.add(fileBean, userTokenId);
+	}
+	return commentNew;
     }
 
     /**
@@ -144,8 +156,8 @@ public class CommentService {
 	return "Comment succesfully updated!";
     }
 
-    public Comment updateCommentContent(String content, Long id, String userTokenId) throws UnauthorizesException,
-	    IllegalArgumentException {
+    public Comment updateCommentContent(String content, Long id, String userTokenId)
+	    throws UnauthorizesException, IllegalArgumentException {
 	Comment comment = this.getById(id);
 	User owner = comment.getUser();
 	User editor = userService.get(userTokenId);

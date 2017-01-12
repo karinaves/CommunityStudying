@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mysema.query.BooleanBuilder;
+import com.tau.commstudy.beans.NewFileBean;
 import com.tau.commstudy.beans.NewPostBean;
 import com.tau.commstudy.beans.PostCriteria;
 import com.tau.commstudy.beans.UpdatePostBean;
@@ -29,7 +30,7 @@ public class PostService {
     private PostDao dao;
 
     @Autowired
-    private UserService usereService;
+    private FileService fileService;
 
     @Autowired
     private CourseService courseService;
@@ -331,7 +332,20 @@ public class PostService {
 	post.setAcceptedComment(false);
 	post.setTags(bean.getTags());
 
-	return createPost(post);
+	for (String fileUrl : bean.getFiles()) {
+	    NewFileBean fileBean = new NewFileBean();
+	    fileBean.setPostId(post.getId());
+	    fileBean.setUrl(fileUrl);
+	    fileService.add(fileBean, userTokenId);
+	}
+	Post postNew = createPost(post);
+	for (String fileUrl : bean.getFiles()) {
+	    NewFileBean fileBean = new NewFileBean();
+	    fileBean.setPostId(postNew.getId());
+	    fileBean.setUrl(fileUrl);
+	    fileService.add(fileBean, userTokenId);
+	}
+	return postNew;
     }
 
     public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)

@@ -205,6 +205,11 @@ public class PostService {
 	return getByTestAndNumber(test, criteria.getQuestionNumber());
     }
 
+    public Long count(PostCriteria criteria) {
+	BooleanBuilder searchCriteria = getSearchCriteria(criteria);
+	return dao.count(searchCriteria);
+    }
+
     /**
      * finds all posts by the given parameters the function uses Querydsl
      * queries
@@ -218,6 +223,11 @@ public class PostService {
      */
     public List<Post> search(PostCriteria criteria, int page, int size) {
 
+	BooleanBuilder searchCriteria = getSearchCriteria(criteria);
+	return searchBy(searchCriteria, page, size);
+    }
+
+    private BooleanBuilder getSearchCriteria(PostCriteria criteria) {
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
 	// add tags parameter to search
@@ -234,43 +244,44 @@ public class PostService {
 
 	if (criteria.getFacultyId() == null)
 	    // return all
-	    return searchBy(searchCriteria, page, size);
+	    return searchCriteria;
 
 	// add faculty parameter to search
 	searchCriteria.and(PostPredicates.byFaculty(criteria.getFacultyId()));
 	if (criteria.getCourseId() == null)
 	    // return by faculty
-	    return searchBy(searchCriteria, page, size);
+	    return searchCriteria;
 
 	// add course parameter to search
 	searchCriteria.and(PostPredicates.byCourse(criteria.getCourseId()));
 	if (criteria.getYear() == null)
 	    // return by course
-	    return searchBy(searchCriteria, page, size);
+	    return searchCriteria;
 
 	// add year parameter to search
 	searchCriteria.and(PostPredicates.byYear(criteria.getYear()));
 	if (criteria.getSemester() == null)
 	    // return by year
-	    return searchBy(searchCriteria, page, size);
+	    return searchCriteria;
 
 	// add semester parameter to search
 	searchCriteria.and(PostPredicates.bySemester(criteria.getSemester()));
 	if (criteria.getMoed() == null)
 	    // return by semester
-	    return searchBy(searchCriteria, page, size);
+	    return searchCriteria;
 
 	// add moed parameter to search
 	searchCriteria.and(PostPredicates.byMoed(criteria.getMoed()));
 	if (criteria.getQuestionNumber() == null)
 	    // return by moed
-	    return searchBy(searchCriteria, page, size);
+	    return searchCriteria;
 
 	// add question number parameter to search
 	searchCriteria.and(PostPredicates.byQuestionNumber(criteria.getQuestionNumber()));
 
 	// return by question number
-	return searchBy(searchCriteria, page, size);
+	return searchCriteria;
+
     }
 
     List<Post> searchBy(BooleanBuilder searchCriteria, int page, int size) {

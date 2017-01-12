@@ -129,6 +129,11 @@ public class PostController implements PostControllerInterface {
 	return service.search(criteria, page, size);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/count")
+    public Long count(@RequestBody PostCriteria criteria) {
+	return service.count(criteria);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/")
     public Post addNewPost(@RequestBody NewPostBean post, String userTokenId) {
 	return service.addNewPost(post, userTokenId);

@@ -23,7 +23,7 @@ public class UploadController {
     @Autowired
     private UploadService uploadService;
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "multipart/form-data")
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "multipart/form-data")
     public List<String> uploadContentFile(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles)
 	    throws IOException {
 	return uploadService.uploadFiles(uploadingFiles);

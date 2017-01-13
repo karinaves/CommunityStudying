@@ -16,7 +16,7 @@ import com.tau.commstudy.services.UploadService;
 
 @ControllerAdvice
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/upload")
 @CrossOrigin
 public class UploadController {
 

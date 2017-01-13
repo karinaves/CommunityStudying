@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tau.commstudy.beans.NewPostBean;
@@ -29,6 +30,8 @@ import com.tau.commstudy.services.UserService;
 @RequestMapping("/post")
 @CrossOrigin
 public class PostController implements PostControllerInterface {
+
+    private static final String SEARCH_SIZE_DEFAULT_VALUE = "100";
 
     @Autowired
     private PostService service;
@@ -125,7 +128,8 @@ public class PostController implements PostControllerInterface {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/search")
-    public List<Post> search(@RequestBody PostCriteria criteria, int page, int size) {
+    public List<Post> search(@RequestBody PostCriteria criteria, @RequestParam(defaultValue = "0") int page,
+	    @RequestParam(defaultValue = SEARCH_SIZE_DEFAULT_VALUE) int size) {
 	return service.search(criteria, page, size);
     }
 

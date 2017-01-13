@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +23,9 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 
 @Service
 public class UploadService {
+
+    @Value("${awsKeys.file}")
+    private String accessKeyFile;
 
     public List<String> uploadFiles(MultipartFile[] uploadingFiles) throws IOException {
 	long maxUploadSizeInMb = 5 * 1024 * 1024;
@@ -55,6 +59,7 @@ public class UploadService {
 		s3client.putObject(new PutObjectRequest(bucketName, fileName, file)
 			.withCannedAcl(CannedAccessControlList.PublicRead));
 		result.add(pathPrefix + fileName);
+		file.delete();
 	    }
 
 	} catch (AmazonServiceException ase) {
@@ -68,14 +73,13 @@ public class UploadService {
     }
 
     private String[] getKeysFromFile() {
-	String csvFilePath = "C:\\wamp\\www\\accessKeys\\accessKeys.csv";
 	String[] keys = new String[2];
 	BufferedReader fileReader = null;
 
 	final String DELIMITER = ",";
 	try {
 	    String line = "";
-	    fileReader = new BufferedReader(new FileReader(csvFilePath));
+	    fileReader = new BufferedReader(new FileReader(accessKeyFile));
 	    int i = 0;
 	    while ((line = fileReader.readLine()) != null) {
 		String[] row = line.split(DELIMITER);

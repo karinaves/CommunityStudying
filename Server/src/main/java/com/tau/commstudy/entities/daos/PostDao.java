@@ -1,6 +1,7 @@
 package com.tau.commstudy.entities.daos;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
@@ -24,9 +25,10 @@ public interface PostDao extends CrudRepository<Post, Long>, QueryDslPredicateEx
 
     public List<Post> findByTestQuestion_TestOrderByTimeDesc(Test test);
 
-    public List<Post> findByTestQuestion_Test_CourseAndTestQuestion_Test_YearOrderByTimeDesc(Course course,
-	    Integer year);
+    public List<Post> findByTestQuestion_Test_CourseAndTestQuestion_Test_YearOrderByTimeDesc(Course course, Integer year);
 
     public List<Post> findByTestQuestion_Test_YearAndTestQuestion_Test_SemesterAndTestQuestion_Test_CourseOrderByTimeDesc(
 	    Integer year, Character semester, Course course);
+
+    public List<Post> findByTestQuestion_Test_CourseInOrderByTimeDesc(Set<Course> course);
 }

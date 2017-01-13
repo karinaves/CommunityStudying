@@ -1,5 +1,6 @@
 package com.tau.commstudy.beans;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,6 +19,15 @@ public class NewPostBean {
     private String title;
     private String content;
     private Set<Tag> tags;
+    private List<String> files;
+
+    public List<String> getFiles() {
+	return files;
+    }
+
+    public void setFiles(List<String> files) {
+	this.files = files;
+    }
 
     public NewPostBean() {
     }

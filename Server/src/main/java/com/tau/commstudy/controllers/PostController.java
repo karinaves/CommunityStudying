@@ -144,4 +144,8 @@ public class PostController implements PostControllerInterface {
 	return service.checkByQuestion(criteria);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/getByUserCourses")
+    public List<Post> getByUserCourses(String userTokenId) {
+	return service.getByUserCourses(userTokenId);
+    }
 }

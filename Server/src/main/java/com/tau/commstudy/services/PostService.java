@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mysema.query.BooleanBuilder;
+import com.tau.commstudy.beans.NewFileBean;
 import com.tau.commstudy.beans.NewPostBean;
 import com.tau.commstudy.beans.PostCriteria;
 import com.tau.commstudy.beans.UpdatePostBean;
@@ -30,7 +31,7 @@ public class PostService {
     private PostDao dao;
 
     @Autowired
-    private UserService usereService;
+    private FileService fileService;
 
     @Autowired
     private CourseService courseService;
@@ -345,11 +346,18 @@ public class PostService {
 	post.setAcceptedComment(false);
 	post.setTags(bean.getTags());
 
-	return createPost(post);
+	Post postNew = createPost(post);
+	for (String fileUrl : bean.getFiles()) {
+	    NewFileBean fileBean = new NewFileBean();
+	    fileBean.setPostId(postNew.getId());
+	    fileBean.setUrl(fileUrl);
+	    fileService.add(fileBean, userTokenId);
+	}
+	return postNew;
     }
 
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
-	    throws UnauthorizesException, IllegalArgumentException {
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) throws UnauthorizesException,
+	    IllegalArgumentException {
 	Post post = this.getById(id);
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);
@@ -363,6 +371,18 @@ public class PostService {
 	post = dao.save(post);
 	return post;
 
+    }
+
+    /**
+     * returns posts by courses of the user
+     * 
+     * @param userTokenId
+     * @return posts of the user's courses
+     */
+    public List<Post> getByUserCourses(String userTokenId) {
+	User user = userService.get(userTokenId);
+
+	return dao.findByTestQuestion_Test_CourseInOrderByTimeDesc(user.getCourses());
     }
 
 }

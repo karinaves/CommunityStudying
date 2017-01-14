@@ -48,8 +48,13 @@ public class TestController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/search")
-    public List<Test> search(@RequestBody TestCriteria criteria) {
-	return service.search(criteria);
+    public List<Test> search(@RequestBody TestCriteria criteria, int page, int size) {
+	return service.search(criteria, page, size);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/count")
+    public Long count(@RequestBody TestCriteria criteria) {
+	return service.count(criteria);
     }
 
 }

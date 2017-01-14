@@ -3,6 +3,7 @@ package com.tau.commstudy.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -36,50 +37,61 @@ public class TestService {
 	return dao.findByCourseAndYearAndSemesterAndMoed(course, year, semester, moed);
     }
 
-    public List<Test> search(TestCriteria criteria) {
+    public List<Test> search(TestCriteria criteria, int page, int size) {
+
+	BooleanBuilder searchCriteria = getSearchCriteria(criteria);
+	return searchBy(searchCriteria, page, size);
+    }
+
+    private BooleanBuilder getSearchCriteria(TestCriteria criteria) {
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
 	if (criteria.getFacultyId() == null)
 	    // return all
-	    return searchBy(searchCriteria);
+	    return searchCriteria;
 
 	// add faculty parameter to search
 	searchCriteria.and(TestPredicates.byFaculty(criteria.getFacultyId()));
 	if (criteria.getCourseId() == null)
 	    // return by faculty
-	    return searchBy(searchCriteria);
+	    return searchCriteria;
 
 	// add course parameter to search
 	searchCriteria.and(TestPredicates.byCourse(criteria.getCourseId()));
 	if (criteria.getYear() == null)
 	    // return by course
-	    return searchBy(searchCriteria);
+	    return searchCriteria;
 
 	// add year parameter to search
 	searchCriteria.and(TestPredicates.byYear(criteria.getYear()));
 	if (criteria.getSemester() == null)
 	    // return by year
-	    return searchBy(searchCriteria);
+	    return searchCriteria;
 
 	// add semester parameter to search
 	searchCriteria.and(TestPredicates.bySemester(criteria.getSemester()));
 	if (criteria.getMoed() == null)
 	    // return by semester
-	    return searchBy(searchCriteria);
+	    return searchCriteria;
 
 	// add moed parameter to search
 	searchCriteria.and(TestPredicates.byMoed(criteria.getMoed()));
 
 	// return by moed
-	return searchBy(searchCriteria);
+	return searchCriteria;
+    }
+
+    public Long count(TestCriteria criteria) {
+	BooleanBuilder searchCriteria = getSearchCriteria(criteria);
+	return dao.count(searchCriteria);
     }
 
     // ------------Aid Functions---------------------------
 
-    private List<Test> searchBy(BooleanBuilder searchCriteria) {
-	if (dao.count(searchCriteria) == 0)
+    private List<Test> searchBy(BooleanBuilder searchCriteria, int page, int size) {
+	if (dao.findAll(searchCriteria, new PageRequest(page, size, orderByTime())) == null)
 	    return null;
-	return (List<Test>) dao.findAll(searchCriteria, orderByTime());
+	return dao.findAll(searchCriteria, new PageRequest(page, size, orderByTime())).getContent();
     }
 
     private Sort orderByTime() {

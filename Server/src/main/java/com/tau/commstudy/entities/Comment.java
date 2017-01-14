@@ -117,4 +117,12 @@ public class Comment {
 	this.lastUpdated = lastUpdated;
     }
 
+    public Set<File> getFiles() {
+	return files;
+    }
+
+    public void setFiles(Set<File> files) {
+	this.files = files;
+    }
+
 }

@@ -296,7 +296,8 @@ public class PostService {
     }
 
     public boolean checkByQuestion(PostCriteria criteria) {
-	if (search(criteria, 0, 1) == null)
+	List<Post> results = search(criteria, 0, 1);
+	if (results == null || results.isEmpty())
 	    return false;
 
 	return true;

@@ -1,11 +1,20 @@
 package com.tau.commstudy.services;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.querydsl.QSort;
 import org.springframework.stereotype.Service;
 
+import com.mysema.query.BooleanBuilder;
+import com.tau.commstudy.entities.QTestQuestion;
+import com.tau.commstudy.entities.Tag;
 import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.TestQuestion;
 import com.tau.commstudy.entities.daos.TestQuestionDao;
+import com.tau.commstudy.predicates.QuestionPredicates;
 
 @Service
 public class TestQuestionService {
@@ -40,6 +49,23 @@ public class TestQuestionService {
 
     public TestQuestion getByTestAndNumber(Test test, Integer questionNumber) {
 	return dao.findByTestAndQuestionNumber(test, questionNumber);
+    }
+
+    public List<TestQuestion> getByTags(Set<Tag> tags, int page, int size) {
+	BooleanBuilder searchCriteria = QuestionPredicates.byTags(tags);
+	return searchBy(searchCriteria, page, size);
+    }
+
+    private List<TestQuestion> searchBy(BooleanBuilder searchCriteria, int page, int size) {
+	return dao.findAll(searchCriteria, new PageRequest(page, size, orderByTime())).getContent();
+    }
+
+    private QSort orderByTime() {
+	QSort sort = new QSort(QTestQuestion.testQuestion.test.year.desc());
+	sort = sort.and(QTestQuestion.testQuestion.test.semester.desc());
+	sort = sort.and(QTestQuestion.testQuestion.test.moed.desc());
+	sort = sort.and(QTestQuestion.testQuestion.questionNumber.asc());
+	return sort;
     }
 
 }

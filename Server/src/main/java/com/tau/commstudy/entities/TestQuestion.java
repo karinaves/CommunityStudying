@@ -1,5 +1,6 @@
 package com.tau.commstudy.entities;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,6 +39,9 @@ public class TestQuestion {
 
     @ManyToOne
     private Test test;
+
+    @OneToMany(mappedBy = "testQuestion")
+    private List<Post> posts;
 
     public TestQuestion() {
     }

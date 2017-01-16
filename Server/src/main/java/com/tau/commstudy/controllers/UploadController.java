@@ -1,6 +1,5 @@
 package com.tau.commstudy.controllers;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,9 @@ public class UploadController {
     private UploadService uploadService;
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "multipart/form-data")
-    public List<String> uploadContentFile(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles)
-	    throws IOException {
-	return uploadService.uploadFiles(uploadingFiles);
+    public List<String> uploadContentFile(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
+	    String userTokenId) throws Exception {
+	return uploadService.uploadFiles(uploadingFiles, userTokenId);
     }
 
 }

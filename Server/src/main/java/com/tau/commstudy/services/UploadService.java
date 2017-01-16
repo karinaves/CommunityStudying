@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
 public class UploadService {
@@ -27,7 +29,14 @@ public class UploadService {
     @Value("${awsKeys.file}")
     private String accessKeyFile;
 
-    public List<String> uploadFiles(MultipartFile[] uploadingFiles) throws IOException {
+    @Autowired
+    UserService userService;
+
+    public List<String> uploadFiles(MultipartFile[] uploadingFiles, String userTokenId)
+	    throws IOException, UnauthorizesException, IllegalArgumentException {
+	// assert that user is logged in - or throws Exception
+	userService.get(userTokenId);
+
 	long maxUploadSizeInMb = 10 * 1024 * 1024;
 	String[] fileTypes = { "png", "docx", "doc", "txt", "pdf", "jpg", "bmp" };
 	String[] keys = getKeysFromFile();

@@ -42,4 +42,10 @@ public class TestQuestionController {
     public Iterable<TestQuestion> getAll() {
 	return service.getAll();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getSimilarQuestions/{testQuestionId}")
+    public Iterable<TestQuestion> getByTags(Long testQuestionId, int page, int size) {
+	return service.getSimilarQuestions(testQuestionId, page, size);
+    }
+
 }

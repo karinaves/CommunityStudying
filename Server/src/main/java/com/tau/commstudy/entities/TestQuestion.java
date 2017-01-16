@@ -12,9 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "test_questions", uniqueConstraints = @UniqueConstraint(columnNames = { "test", "questionNumber" }))
@@ -37,6 +40,10 @@ public class TestQuestion {
 
     @ManyToOne
     private Test test;
+
+    @OneToMany(mappedBy = "testQuestion")
+    @JsonIgnore
+    private Set<Post> posts;
 
     public TestQuestion() {
     }
@@ -87,6 +94,14 @@ public class TestQuestion {
 
     public void setQuestionNumber(Integer numberInTest) {
 	this.questionNumber = numberInTest;
+    }
+
+    public Set<Post> getPosts() {
+	return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+	this.posts = posts;
     }
 
 }

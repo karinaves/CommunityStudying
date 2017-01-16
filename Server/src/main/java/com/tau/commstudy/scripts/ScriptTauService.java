@@ -57,8 +57,15 @@ public class ScriptTauService {
 		    faculty = facultyService.add(faculty);
 
 		    for (Course course : schoolBean.getCourses()) {
+			String english = course.getNameEnglish();
+			String hebrew = course.getNameHebrew();
+			boolean hasEnglish = (english != null) && (english.length() > 0);
+			boolean hasHebrew = (hebrew != null) && (hebrew.length() > 0);
+			// does not have course name
+			if (!hasHebrew && !hasEnglish)
+			    continue;
+
 			course.setFaculty(faculty);
-			System.out.println(course);
 			courseService.add(course);
 		    }
 		}

@@ -93,7 +93,14 @@ public class CourseService {
 	data.setAllData(courseDao.findByFaculty_IdOrderByNameHebrew(facultyId));
 	try {
 	    User user = userService.get(idTokenString); // can throw
-	    List<Course> userCourses = new ArrayList<>(user.getCourses());
+	    List<Course> userCourses = new ArrayList<>();
+	    // add user courses by given faculty
+	    for (Course course : user.getCourses()) {
+		if (!course.getFaculty().getId().equals(facultyId))
+		    continue;
+		userCourses.add(course);
+	    }
+
 	    // sorts user information
 	    Collections.sort(userCourses, new Comparator<Course>() {
 		@Override

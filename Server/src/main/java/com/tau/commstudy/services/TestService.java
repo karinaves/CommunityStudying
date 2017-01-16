@@ -2,12 +2,16 @@ package com.tau.commstudy.services;
 
 import java.util.List;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.mysema.query.BooleanBuilder;
+import com.tau.commstudy.beans.NewFileBean;
+import com.tau.commstudy.beans.NewTestBean;
 import com.tau.commstudy.beans.TestCriteria;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Test;
@@ -19,6 +23,12 @@ public class TestService {
 
     @Autowired
     private TestDao dao;
+
+    @Autowired
+    private FileService fileService;
+
+    @Autowired
+    private CourseService courseService;
 
     public boolean delete(Long id) throws IllegalArgumentException {
 	dao.delete(id);
@@ -96,6 +106,53 @@ public class TestService {
 
     private Sort orderByTime() {
 	return new Sort(Sort.Direction.DESC, "year", "semester", "moed");
+    }
+
+    public Test addNewTest(NewTestBean testBean, String userTokenId)
+	    throws ValidationException, IllegalArgumentException {
+	Long courseId = testBean.getCourseId();
+	Integer year = testBean.getYear();
+	Course course = courseService.get(courseId);
+	Character semester = testBean.getSemester();
+	String teacher = testBean.getTeacher();
+	char difficulty = testBean.getDifficulty();
+	char numOfquestions = testBean.getNumOfquestions();
+	Long facultyId = course.getFaculty().getId();
+	Character moed = testBean.getMoed();
+
+	TestCriteria criteria = new TestCriteria();
+	criteria.setCourseId(courseId);
+	criteria.setFacultyId(facultyId);
+	criteria.setMoed(moed);
+	criteria.setSemester(semester);
+	criteria.setYear(year);
+
+	System.out.println(criteria);
+
+	List<Test> isTestExists = search(criteria, 0, 1);
+	System.out.println(isTestExists.size());
+	if (isTestExists == null || isTestExists.size() == 0) {
+	    Test test = new Test();
+	    test.setYear(testBean.getYear());
+	    test.setSemester(semester);
+	    test.setMoed(moed);
+	    test.setTeacher(teacher);
+	    test.setNumOfquestions(numOfquestions);
+	    test.setDifficulty(difficulty);
+	    test.setCourse(courseService.get(courseId));
+
+	    Test testNew = add(test);
+	    for (String fileUrl : testBean.getFiles()) {
+		NewFileBean fileBean = new NewFileBean();
+		fileBean.setTestId(testNew.getId());
+		fileBean.setUrl(fileUrl);
+		fileService.add(fileBean, userTokenId);
+	    }
+	    return testNew;
+	} else {
+	    return isTestExists.get(0);
+	}
+
     }
 
 }

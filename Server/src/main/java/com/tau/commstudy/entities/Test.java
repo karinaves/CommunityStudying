@@ -32,6 +32,13 @@ public class Test {
     @ManyToOne
     private Course course;
 
+    @Override
+    public String toString() {
+	return "Test [id=" + id + ", year=" + year + ", semester=" + semester + ", moed=" + moed + ", teacher="
+		+ teacher + ", numOfquestions=" + numOfquestions + ", difficulty=" + difficulty + ", course=" + course
+		+ ", files=" + files + "]";
+    }
+
     @OneToMany(mappedBy = "test")
     private Set<File> files;
 

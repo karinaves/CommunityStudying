@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tau.commstudy.beans.NewTestBean;
 import com.tau.commstudy.beans.TestCriteria;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Test;
@@ -55,6 +56,11 @@ public class TestController {
     @RequestMapping(method = RequestMethod.POST, value = "/count")
     public Long count(@RequestBody TestCriteria criteria) {
 	return service.count(criteria);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/")
+    public Test addNewTest(@RequestBody NewTestBean test, String userTokenId) {
+	return service.addNewTest(test, userTokenId);
     }
 
 }

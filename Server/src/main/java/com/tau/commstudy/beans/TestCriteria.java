@@ -52,4 +52,10 @@ public class TestCriteria {
 	this.moed = moed;
     }
 
+    @Override
+    public String toString() {
+	return "TestCriteria [facultyId=" + facultyId + ", courseId=" + courseId + ", year=" + year + ", semester="
+		+ semester + ", moed=" + moed + "]";
+    }
+
 }

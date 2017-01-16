@@ -48,7 +48,6 @@ public class PostService {
     public Post createPost(@RequestBody Post newPost) {
 	try {
 	    newPost.setTime(Calendar.getInstance());
-	    System.out.println("6");
 	    return dao.save(newPost);
 	} catch (Exception ex) {
 	    System.out.println("Error creating the post:" + ex.toString());
@@ -81,17 +80,30 @@ public class PostService {
     /**
      * increases the number of votes of post and number of votes of user by 1
      */
-    public String like(long id) {
+    public Boolean like(Long id) {
 	try {
 	    Post post = dao.findOne(id);
 	    post.setVotes(post.getVotes() + 1);
 	    dao.save(post);
-	    userService.likePost(post);
+	    userService.incOrDecRank(post.getUser(), 1);
+	    return true;
 
 	} catch (Exception ex) {
-	    return "Error updating votes for post: " + ex.toString();
+	    return false;
 	}
-	return "Post succesfully updated!";
+    }
+
+    public Boolean dislike(Long id) {
+	try {
+	    Post post = dao.findOne(id);
+	    post.setVotes(post.getVotes() - 1);
+	    dao.save(post);
+	    userService.incOrDecRank(post.getUser(), -1);
+	    return true;
+
+	} catch (Exception ex) {
+	    return false;
+	}
     }
 
     public Iterable<Post> getAll() {
@@ -357,8 +369,8 @@ public class PostService {
 	return postNew;
     }
 
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) throws UnauthorizesException,
-	    IllegalArgumentException {
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
+	    throws UnauthorizesException, IllegalArgumentException {
 	Post post = this.getById(id);
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);

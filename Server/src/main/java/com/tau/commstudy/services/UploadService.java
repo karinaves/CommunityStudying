@@ -28,7 +28,7 @@ public class UploadService {
     private String accessKeyFile;
 
     public List<String> uploadFiles(MultipartFile[] uploadingFiles) throws IOException {
-	long maxUploadSizeInMb = 5 * 1024 * 1024;
+	long maxUploadSizeInMb = 10 * 1024 * 1024;
 	String[] fileTypes = { "png", "docx", "doc", "txt", "pdf", "jpg", "bmp" };
 	String[] keys = getKeysFromFile();
 	String pathPrefix = "https://s3-eu-west-1.amazonaws.com/study-buddy-files/";

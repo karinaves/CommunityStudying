@@ -47,7 +47,6 @@ public class ScriptTauService {
 
 	    for (FacultyBean facultyBean : this.bean.getFaculties()) {
 		String facName = facultyBean.getName();
-		System.out.println(facName);
 		for (SchoolBean schoolBean : facultyBean.getSchools()) {
 		    String name = String.format("%s - %s", facName, schoolBean.getName());
 		    Faculty faculty = new Faculty();

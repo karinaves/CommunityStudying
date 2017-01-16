@@ -1,6 +1,5 @@
 package com.tau.commstudy.entities;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "test_questions", uniqueConstraints = @UniqueConstraint(columnNames = { "test", "questionNumber" }))
@@ -41,7 +42,8 @@ public class TestQuestion {
     private Test test;
 
     @OneToMany(mappedBy = "testQuestion")
-    private List<Post> posts;
+    @JsonIgnore
+    private Set<Post> posts;
 
     public TestQuestion() {
     }
@@ -92,6 +94,14 @@ public class TestQuestion {
 
     public void setQuestionNumber(Integer numberInTest) {
 	this.questionNumber = numberInTest;
+    }
+
+    public Set<Post> getPosts() {
+	return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+	this.posts = posts;
     }
 
 }

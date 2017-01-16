@@ -1,5 +1,6 @@
 package com.tau.commstudy.services;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import org.springframework.data.querydsl.QSort;
 import org.springframework.stereotype.Service;
 
 import com.mysema.query.BooleanBuilder;
+import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.QTestQuestion;
 import com.tau.commstudy.entities.Tag;
 import com.tau.commstudy.entities.Test;
@@ -21,6 +23,9 @@ public class TestQuestionService {
 
     @Autowired
     private TestQuestionDao dao;
+
+    @Autowired
+    private PostService postService;
 
     // @RequestMapping(method = RequestMethod.GET, value = "/save")
     // public String saveQuestion(String title, String content, String userId) {
@@ -51,7 +56,14 @@ public class TestQuestionService {
 	return dao.findByTestAndQuestionNumber(test, questionNumber);
     }
 
-    public List<TestQuestion> getByTags(Set<Tag> tags, int page, int size) {
+    public List<TestQuestion> getSimilarQuestions(Long testQuestionId, int page, int size) {
+
+	TestQuestion question = dao.findOne(testQuestionId);
+	Set<Post> postsOfQuestions = question.getPosts();
+	Set<Tag> tags = new HashSet<Tag>();
+	for (Post post : postsOfQuestions)
+	    tags.addAll(post.getTags());
+
 	BooleanBuilder searchCriteria = QuestionPredicates.byTags(tags);
 	return searchBy(searchCriteria, page, size);
     }

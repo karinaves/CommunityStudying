@@ -176,4 +176,8 @@ public class Post {
 	this.files = files;
     }
 
+    public Integer getNumOfComments() {
+	return (comments == null) ? 0 : comments.size();
+    }
+
 }

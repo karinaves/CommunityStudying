@@ -12,6 +12,7 @@ import com.tau.commstudy.beans.UserAllData;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.services.CourseService;
 import com.tau.commstudy.services.FacultyService;
+import com.tau.commstudy.services.UserService;
 
 @RestController
 @RequestMapping("/faculty")
@@ -23,8 +24,12 @@ public class FacultyController {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(method = RequestMethod.POST, value = "/add")
-    public Faculty add(@RequestBody Faculty faculty) throws Exception {
+    public Faculty add(@RequestBody Faculty faculty, String userTokenId) throws Exception {
+	userService.assertAdminUser(userTokenId);
 	return facultyService.add(faculty);
 
     }
@@ -35,23 +40,26 @@ public class FacultyController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public boolean delete(@PathVariable Long id) throws Exception {
+    public boolean delete(@PathVariable Long id, String userTokenId) throws Exception {
+	userService.assertAdminUser(userTokenId);
 	return facultyService.delete(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/addUniversity")
-    public boolean addUniversity(Long id, Long universityId) throws Exception {
+    public boolean addUniversity(Long id, Long universityId, String userTokenId) throws Exception {
+	userService.assertAdminUser(userTokenId);
 	return facultyService.addUniversity(id, universityId);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/addCourse")
-    public boolean addCourse(Long id, Long courseId) throws Exception {
+    public boolean addCourse(Long id, Long courseId, String userTokenId) throws Exception {
+	userService.assertAdminUser(userTokenId);
 	return courseService.addFaculty(courseId, id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getUserAllData")
-    public UserAllData<Faculty> getUserAndAllData(String idTokenString) throws Exception {
-	UserAllData<Faculty> faculties = facultyService.getUserAndAllData(idTokenString);
+    public UserAllData<Faculty> getUserAndAllData(String userTokenId) throws Exception {
+	UserAllData<Faculty> faculties = facultyService.getUserAndAllData(userTokenId);
 	return faculties;
 
     }

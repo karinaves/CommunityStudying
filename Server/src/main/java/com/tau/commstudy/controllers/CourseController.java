@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tau.commstudy.beans.UserAllData;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.services.CourseService;
+import com.tau.commstudy.services.UserService;
 
 @RestController
 @RequestMapping("/course")
@@ -20,8 +21,12 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(method = RequestMethod.POST, value = "/add")
-    public Course add(@RequestBody Course course) throws Exception {
+    public Course add(@RequestBody Course course, String userTokenId) throws Exception {
+	userService.assertAdminUser(userTokenId);
 	return courseService.add(course);
 
     }
@@ -32,12 +37,14 @@ public class CourseController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public boolean delete(@PathVariable Long id) throws Exception {
+    public boolean delete(@PathVariable Long id, String userTokenId) throws Exception {
+	userService.assertAdminUser(userTokenId);
 	return courseService.delete(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/addFaculty")
-    public boolean addFaculty(Long id, Long facultyId) throws Exception {
+    public boolean addFaculty(Long id, Long facultyId, String userTokenId) throws Exception {
+	userService.assertAdminUser(userTokenId);
 	return courseService.addFaculty(id, facultyId);
     }
 

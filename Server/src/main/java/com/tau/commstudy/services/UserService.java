@@ -149,12 +149,11 @@ public class UserService {
 	return owner.getId().equals(editor.getId());
     }
 
-    public boolean isAdminUser(String userTokenId) {
-	try {
-	    return this.get(userTokenId).isAdmin();
-	} catch (Exception e) {
-	    return false;
-	}
+    public boolean assertAdminUser(String userTokenId) {
+	User user = this.get(userTokenId);
+	if (!user.isAdmin())
+	    throw new UnauthorizesException();
+	return true;
     }
 
 }

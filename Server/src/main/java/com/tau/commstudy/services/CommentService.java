@@ -130,30 +130,28 @@ public class CommentService {
 	return true;
     }
 
-    public String like(long id) {
+    public Boolean like(Long id) {
 	try {
 	    Comment comment = dao.findOne(id);
 	    comment.setAnswerRate(comment.getAnswerRate() + 1);
 	    dao.save(comment);
-
-	    Boolean b = userService.likeComment(comment);
+	    userService.incOrDecRank(comment.getUser(), 1);
+	    return true;
 	} catch (Exception ex) {
-	    return "Error updating likes for comment: " + ex.toString();
+	    return false;
 	}
-	return "Comment succesfully updated!";
     }
 
-    public String dislike(long id) {
+    public Boolean dislike(Long id) {
 	try {
 	    Comment comment = dao.findOne(id);
 	    comment.setAnswerRate(comment.getAnswerRate() - 1);
 	    dao.save(comment);
-
-	    Boolean b = userService.dislikeComment(comment);
+	    userService.incOrDecRank(comment.getUser(), -1);
+	    return false;
 	} catch (Exception ex) {
-	    return "Error updating likes for comment: " + ex.toString();
+	    return true;
 	}
-	return "Comment succesfully updated!";
     }
 
     public Comment updateCommentContent(String content, Long id, String userTokenId)

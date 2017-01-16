@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tau.commstudy.beans.GoogleValidateInfo;
-import com.tau.commstudy.entities.Comment;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Faculty;
-import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.UserDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
@@ -130,36 +128,13 @@ public class UserService {
 	return true;
     }
 
-    public Boolean likePost(Post post) {
-	User user = post.getUser();
+    public Boolean incOrDecRank(User user, int num) {
+	if (user == null)
+	    return false;
 	if (user.getUserRating() == null) {
-	    user.setUserRating(1);
+	    user.setUserRating(num);
 	} else {
-	    user.setUserRating(user.getUserRating() + 1);
-	}
-	userDao.save(user);
-	return true;
-
-    }
-
-    public Boolean likeComment(Comment comment) {
-	User user = comment.getUser();
-	if (user.getUserRating() == null) {
-	    user.setUserRating(1);
-	} else {
-	    user.setUserRating(user.getUserRating() + 1);
-	}
-	userDao.save(user);
-	return true;
-
-    }
-
-    public Boolean dislikeComment(Comment comment) {
-	User user = comment.getUser();
-	if (user.getUserRating() == null || user.getUserRating().equals(0)) {
-	    user.setUserRating(0);
-	} else {
-	    user.setUserRating(user.getUserRating() - 1);
+	    user.setUserRating(user.getUserRating() + num);
 	}
 	userDao.save(user);
 	return true;
@@ -172,6 +147,14 @@ public class UserService {
 	if (owner == null || editor == null)
 	    return false;
 	return owner.getId().equals(editor.getId());
+    }
+
+    public boolean isAdminUser(String userTokenId) {
+	try {
+	    return this.get(userTokenId).isAdmin();
+	} catch (Exception e) {
+	    return false;
+	}
     }
 
 }

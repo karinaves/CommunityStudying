@@ -63,12 +63,12 @@ public class CommentController implements CommentControllerInterface {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/like")
-    public String like(long id) {
+    public Boolean like(Long id) {
 	return service.like(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/dislike")
-    public String dislike(long id) {
+    public Boolean dislike(Long id) {
 	return service.dislike(id);
     }
 

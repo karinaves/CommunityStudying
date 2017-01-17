@@ -127,11 +127,8 @@ public class TestService {
 	criteria.setSemester(semester);
 	criteria.setYear(year);
 
-	System.out.println(criteria);
-
-	List<Test> isTestExists = search(criteria, 0, 1);
-	System.out.println(isTestExists.size());
-	if (isTestExists == null || isTestExists.size() == 0) {
+	List<Test> testsResults = search(criteria, 0, 1);
+	if (testsResults == null || testsResults.size() == 0) {
 	    Test test = new Test();
 	    test.setYear(testBean.getYear());
 	    test.setSemester(semester);
@@ -152,7 +149,16 @@ public class TestService {
 	    }
 	    return testNew;
 	} else {
-	    return isTestExists.get(0);
+	    Test currentTest = testsResults.get(0);
+	    if (testBean.getFiles() != null) {
+		for (String fileUrl : testBean.getFiles()) {
+		    NewFileBean fileBean = new NewFileBean();
+		    fileBean.setTestId(currentTest.getId());
+		    fileBean.setUrl(fileUrl);
+		    fileService.add(fileBean, userTokenId);
+		}
+	    }
+	    return currentTest;
 	}
 
     }

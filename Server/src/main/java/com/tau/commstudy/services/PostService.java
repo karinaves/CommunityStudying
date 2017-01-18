@@ -240,7 +240,7 @@ public class PostService {
 	return searchBy(searchCriteria, page, size);
     }
 
-    private BooleanBuilder getSearchCriteria(PostCriteria criteria) {
+    private BooleanBuilder getSearchCriteria2(PostCriteria criteria) {
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
 	// add tags parameter to search
@@ -288,6 +288,44 @@ public class PostService {
 	if (criteria.getQuestionNumber() == null)
 	    // return by moed
 	    return searchCriteria;
+
+	// add question number parameter to search
+	searchCriteria.and(PostPredicates.byQuestionNumber(criteria.getQuestionNumber()));
+
+	// return by question number
+	return searchCriteria;
+
+    }
+
+    private BooleanBuilder getSearchCriteria(PostCriteria criteria) {
+	BooleanBuilder searchCriteria = new BooleanBuilder();
+
+	// add tags parameter to search
+	if (criteria.getTags() != null)
+	    searchCriteria.and(PostPredicates.byTags(criteria.getTags()));
+
+	// add userId parameter to search
+	if (criteria.getUserId() != null)
+	    searchCriteria.and(PostPredicates.byUserId(criteria.getUserId()));
+
+	// free text can be the only search param
+	if (criteria.getInContentText() != null && !criteria.getInContentText().equals(""))
+	    searchCriteria.and(PostPredicates.byContentOrTitleLike(criteria.getInContentText()));
+
+	// add faculty parameter to search
+	searchCriteria.and(PostPredicates.byFaculty(criteria.getFacultyId()));
+
+	// add course parameter to search
+	searchCriteria.and(PostPredicates.byCourse(criteria.getCourseId()));
+
+	// add year parameter to search
+	searchCriteria.and(PostPredicates.byYear(criteria.getYear()));
+
+	// add semester parameter to search
+	searchCriteria.and(PostPredicates.bySemester(criteria.getSemester()));
+
+	// add moed parameter to search
+	searchCriteria.and(PostPredicates.byMoed(criteria.getMoed()));
 
 	// add question number parameter to search
 	searchCriteria.and(PostPredicates.byQuestionNumber(criteria.getQuestionNumber()));
@@ -388,7 +426,7 @@ public class PostService {
 
     /**
      * returns posts by courses of the user
-     * 
+     *
      * @param userTokenId
      * @return posts of the user's courses
      */

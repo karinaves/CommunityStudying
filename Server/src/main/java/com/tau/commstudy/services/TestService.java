@@ -53,7 +53,7 @@ public class TestService {
 	return searchBy(searchCriteria, page, size);
     }
 
-    private BooleanBuilder getSearchCriteria(TestCriteria criteria) {
+    private BooleanBuilder getSearchCriteria2(TestCriteria criteria) {
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
 	if (criteria.getFacultyId() == null)
@@ -91,6 +91,28 @@ public class TestService {
 	return searchCriteria;
     }
 
+    private BooleanBuilder getSearchCriteria(TestCriteria criteria) {
+	BooleanBuilder searchCriteria = new BooleanBuilder();
+
+	// add faculty parameter to search
+	searchCriteria.and(TestPredicates.byFaculty(criteria.getFacultyId()));
+
+	// add course parameter to search
+	searchCriteria.and(TestPredicates.byCourse(criteria.getCourseId()));
+
+	// add year parameter to search
+	searchCriteria.and(TestPredicates.byYear(criteria.getYear()));
+
+	// add semester parameter to search
+	searchCriteria.and(TestPredicates.bySemester(criteria.getSemester()));
+
+	// add moed parameter to search
+	searchCriteria.and(TestPredicates.byMoed(criteria.getMoed()));
+
+	// return by moed
+	return searchCriteria;
+    }
+
     public Long count(TestCriteria criteria) {
 	BooleanBuilder searchCriteria = getSearchCriteria(criteria);
 	return dao.count(searchCriteria);
@@ -108,8 +130,8 @@ public class TestService {
 	return new Sort(Sort.Direction.DESC, "year", "semester", "moed");
     }
 
-    public Test addNewTest(NewTestBean testBean, String userTokenId) throws ValidationException,
-	    IllegalArgumentException {
+    public Test addNewTest(NewTestBean testBean, String userTokenId)
+	    throws ValidationException, IllegalArgumentException {
 	Long courseId = testBean.getCourseId();
 	Integer year = testBean.getYear();
 	Course course = courseService.get(courseId);

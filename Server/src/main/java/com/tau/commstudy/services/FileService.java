@@ -44,19 +44,29 @@ public class FileService {
 
 	// update only test post or comment - not combined
 	if (test != null) {
+	    if (test.getFiles().size() == 0)
+		file.setPrimaryFile(true);
 	    file.setTest(test);
 	    return dao.save(file);
 	} else if (post != null || comment != null) {
 	    owner = post != null ? post.getUser() : comment.getUser();
+
 	    // check user is authorized to edit
 	    if (!userService.isAuthorizedEditUser(owner, editor))
 		throw new UnauthorizesException();
 
-	    if (post != null)
+	    // add File to post
+	    if (post != null) {
+		if (post.getFiles().size() == 0)
+		    file.setPrimaryFile(true);
 		file.setPost(post);
-	    else
+	    }
+	    // add File to comment
+	    else {
+		if (comment.getFiles().size() == 0)
+		    file.setPrimaryFile(true);
 		file.setComment(comment);
-
+	    }
 	    return dao.save(file);
 	}
 	throw new IllegalArgumentException("NewFileBean doesn't have Test/Post/Comment");

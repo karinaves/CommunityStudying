@@ -40,6 +40,8 @@ public class File {
 
     private String url;
 
+    private boolean primaryFile;
+
     public File() {
     }
 
@@ -89,6 +91,14 @@ public class File {
 
     public void setPost(Post post) {
 	this.post = post;
+    }
+
+    public boolean isPrimaryFile() {
+	return primaryFile;
+    }
+
+    public void setPrimaryFile(boolean primaryFile) {
+	this.primaryFile = primaryFile;
     }
 
 }

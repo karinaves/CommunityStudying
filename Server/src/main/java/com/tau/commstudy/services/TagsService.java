@@ -30,7 +30,7 @@ public class TagsService {
 	Course course = courseService.get(courseId);
 	Set<Tag> courseTags = course.getTags();
 	for (Tag tag : courseTags) {
-	    if (tag.getName().equals(tagName)) {
+	    if (tag.getName().equalsIgnoreCase(tagName)) {
 		return tag;
 	    }
 	}

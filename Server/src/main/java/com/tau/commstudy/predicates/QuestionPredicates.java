@@ -5,12 +5,13 @@ import java.util.Set;
 import com.mysema.query.BooleanBuilder;
 import com.tau.commstudy.entities.QTestQuestion;
 import com.tau.commstudy.entities.Tag;
+import com.tau.commstudy.entities.TestQuestion;
 
 public final class QuestionPredicates {
     private QuestionPredicates() {
     }
 
-    public static BooleanBuilder byTags(Set<Tag> tags) {
+    public static BooleanBuilder byTags(Set<Tag> tags, TestQuestion sourceQuestion) {
 	QTestQuestion question = QTestQuestion.testQuestion;
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
@@ -21,7 +22,8 @@ public final class QuestionPredicates {
 	}
 
 	for (Tag tag : tags)
-	    searchCriteria.or(question.questionNumber.goe(1).and(question.posts.any().tags.contains(tag)));
+	    searchCriteria.or(question.questionNumber.goe(1).and(question.posts.any().tags.contains(tag))
+		    .and(question.ne(sourceQuestion)));
 
 	return searchCriteria;
     }

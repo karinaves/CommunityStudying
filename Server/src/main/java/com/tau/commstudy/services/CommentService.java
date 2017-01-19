@@ -59,7 +59,7 @@ public class CommentService {
 	User author = post.getUser();
 	comment.setIsAccepted(false);
 	try {
-	    emailService.emailComment(author.getEmail(), post.getTitle());
+	    emailService.emailComment(author.getEmail(), post.getTitle(), post.getId(), post.getUser().getFirstName());
 	} catch (Exception ex) {
 	    System.out.println("Error sending email: " + ex.toString());
 	}

@@ -24,11 +24,16 @@ public class EmailService {
     @Value("${mailKeys.file}")
     private String mailKeyFile;
 
-    public Boolean emailComment(String email, String title) throws AddressException, MessagingException {
+    @Value("${clientDomain}")
+    private String clientDomain;
+
+    public Boolean emailComment(String email, String title, Long postId, String name)
+	    throws AddressException, MessagingException {
 	Properties props = System.getProperties();
 	String[] keys = getcredentialsFromFile();
 	String mail = keys[0];
 	String password = keys[1];
+	String postPath = clientDomain + "/#/questions/view/" + postId;
 	props.put("mail.smtps.host", "smtp.gmail.com");
 	props.put("mail.smtps.auth", "true");
 	Session session = Session.getInstance(props, null);
@@ -37,7 +42,8 @@ public class EmailService {
 	;
 	msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
 	msg.setSubject("התקבלה תגובה חדשה לשאלתך");
-	msg.setText("הגיבו לשאלתך: " + title + " .");
+	msg.setText("שלום " + name + "\n" + "התקבלה תגובה חדשה לשאלתך: " + title + " .\nתוכל/י לצפות בתגובה בלינק:\n"
+		+ postPath);
 	msg.setHeader("X-Mailer", "Tov Are's program");
 	msg.setSentDate(new Date(0));
 	SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
@@ -62,7 +68,7 @@ public class EmailService {
 	msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
 	msg.setSubject("Welcome to Study buddy TAU!");
 	msg.setText("שלום " + name + "\n\r"
-		+ ".ברוכ/ה הבא/ה, כעת תוכל/י לשאול שאלות על מבחנים ולקבל תשובות במהירות ובקלות.");
+		+ ".ברוכ/ה הבא/ה, זה המקום בו תוכל/י לשאול שאלות על מבחנים ולקבל תשובות במהירות ובקלות.");
 	msg.setHeader("X-Mailer", "Tov Are's program");
 	msg.setSentDate(new Date(0));
 	SMTPTransport t = (SMTPTransport) session.getTransport("smtps");

@@ -64,7 +64,7 @@ public class TestQuestionService {
 	for (Post post : postsOfQuestions)
 	    tags.addAll(post.getTags());
 
-	BooleanBuilder searchCriteria = QuestionPredicates.byTags(tags);
+	BooleanBuilder searchCriteria = QuestionPredicates.byTags(tags, question);
 	return searchBy(searchCriteria, page, size);
     }
 

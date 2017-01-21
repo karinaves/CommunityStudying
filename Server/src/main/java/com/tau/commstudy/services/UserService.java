@@ -149,6 +149,16 @@ public class UserService {
 	return owner.getId().equals(editor.getId());
     }
 
+    public boolean isAdminUser(String userTokenId) {
+	try {
+	    if (userTokenId == null)
+		return false;
+	    return get(userTokenId).isAdmin();
+	} catch (Exception e) {
+	    return false;
+	}
+    }
+
     public boolean assertAdminUser(String userTokenId) {
 	User user = this.get(userTokenId);
 	if (!user.isAdmin())

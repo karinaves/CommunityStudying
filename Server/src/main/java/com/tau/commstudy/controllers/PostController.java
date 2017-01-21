@@ -18,11 +18,8 @@ import com.tau.commstudy.controllers.interfaces.PostControllerInterface;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.User;
-import com.tau.commstudy.entities.daos.PostDao;
-import com.tau.commstudy.entities.daos.TestDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 import com.tau.commstudy.services.PostService;
-import com.tau.commstudy.services.TestQuestionService;
 import com.tau.commstudy.services.TestService;
 import com.tau.commstudy.services.UserService;
 
@@ -42,21 +39,9 @@ public class PostController implements PostControllerInterface {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private TestDao testDao;
-
-    @Autowired
-    private PostDao dao;
-
-    @Autowired
-    private TestQuestionService questionService;
-
-    @Autowired
-    private TagsController tagsController;
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public boolean delete(@PathVariable Long id) throws Exception {
-	return service.delete(id);
+    public boolean delete(@PathVariable Long id, String userTokenId) throws Exception {
+	return service.delete(id, userTokenId);
     }
 
     /**

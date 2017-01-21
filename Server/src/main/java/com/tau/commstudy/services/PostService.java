@@ -57,16 +57,15 @@ public class PostService {
 	// return "Post succesfully saved!";
     }
 
-    public boolean delete(Long id) {
-	if (id == null)
-	    return false;
-
-	try {
+    public boolean delete(Long id, String userTokenId) throws Exception {
+	Post post = dao.findOne(id);
+	User owner = post.getUser();
+	User editor = userService.get(userTokenId);
+	if (userService.isAuthorizedEditUser(owner, editor) || editor.isAdmin()) {
 	    dao.delete(id);
-	} catch (Exception ex) {
-	    return false;
+	    return true;
 	}
-	return true;
+	return false;
     }
 
     /**

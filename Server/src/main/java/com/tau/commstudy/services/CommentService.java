@@ -97,9 +97,15 @@ public class CommentService {
      * @throws IllegalArgumentException
      *             if {@code id} is {@literal null}
      */
-    public boolean delete(Long id) throws IllegalArgumentException {
-	dao.delete(id);
-	return true;
+    public boolean delete(Long id, String userTokenId) throws Exception {
+	Comment comment = dao.findOne(id);
+	User owner = comment.getUser();
+	User editor = userService.get(userTokenId);
+	if (userService.isAuthorizedEditUser(owner, editor) || editor.isAdmin()) {
+	    dao.delete(id);
+	    return true;
+	}
+	return false;
     }
 
     public List<Comment> getAllByPostId(Long postId) throws IllegalArgumentException {

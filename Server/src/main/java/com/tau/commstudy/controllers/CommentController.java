@@ -35,8 +35,8 @@ public class CommentController implements CommentControllerInterface {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public boolean delete(@PathVariable Long id) throws Exception {
-	return service.delete(id);
+    public boolean delete(@PathVariable Long id, String userTokenId) throws Exception {
+	return service.delete(id, userTokenId);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.tau.commstudy.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +45,7 @@ public class TestQuestionController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getSimilarQuestions/{testQuestionId}")
-    public Iterable<TestQuestion> getByTags(Long testQuestionId, int page, int size) {
+    public Iterable<TestQuestion> getByTags(@PathVariable Long testQuestionId, int page, int size) {
 	return service.getSimilarQuestions(testQuestionId, page, size);
     }
 

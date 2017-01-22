@@ -15,7 +15,6 @@ import com.tau.commstudy.entities.daos.FileDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 
 @Service
-
 public class FileService {
 
     @Autowired
@@ -44,7 +43,7 @@ public class FileService {
 
 	// update only test post or comment - not combined
 	if (test != null) {
-	    if (test.getFiles().size() == 0)
+	    if (test.getFiles() == null || test.getFiles().size() == 0)
 		file.setPrimaryFile(true);
 	    file.setTest(test);
 	    return dao.save(file);
@@ -57,13 +56,13 @@ public class FileService {
 
 	    // add File to post
 	    if (post != null) {
-		if (post.getFiles().size() == 0)
+		if (post.getFiles() == null || post.getFiles().size() == 0)
 		    file.setPrimaryFile(true);
 		file.setPost(post);
 	    }
 	    // add File to comment
 	    else {
-		if (comment.getFiles().size() == 0)
+		if (comment.getFiles() == null || comment.getFiles().size() == 0)
 		    file.setPrimaryFile(true);
 		file.setComment(comment);
 	    }

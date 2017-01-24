@@ -44,7 +44,7 @@ public class Comment {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "comment", orphanRemoval = true)
     private Set<File> files;
 
     private Boolean isAccepted;

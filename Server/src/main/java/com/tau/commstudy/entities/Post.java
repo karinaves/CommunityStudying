@@ -48,11 +48,11 @@ public class Post {
 
     private int votes;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", orphanRemoval = true)
     @JsonIgnore
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", orphanRemoval = true)
     private Set<File> files;
 
     @ManyToMany(fetch = FetchType.EAGER)

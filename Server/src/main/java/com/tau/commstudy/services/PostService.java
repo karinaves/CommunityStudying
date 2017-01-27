@@ -406,13 +406,13 @@ public class PostService {
 	return postNew;
     }
 
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
-	    throws UnauthorizesException, IllegalArgumentException {
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) throws UnauthorizesException,
+	    IllegalArgumentException {
 	Post post = this.getById(id);
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);
 	// unAuthorized
-	if (!userService.isAuthorizedEditUser(owner, editor)) {
+	if (!userService.isAuthorizedEditUser(owner, editor) && !editor.isAdmin()) {
 	    return null;
 	}
 	post.setTitle(updateBean.getTitle());

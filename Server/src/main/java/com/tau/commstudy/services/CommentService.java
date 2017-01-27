@@ -47,8 +47,8 @@ public class CommentService {
      * @throws ValidationException
      *             if not saved
      */
-    public Comment add(NewCommentBean commentBean, String userTokenId)
-	    throws ValidationException, IllegalArgumentException {
+    public Comment add(NewCommentBean commentBean, String userTokenId) throws ValidationException,
+	    IllegalArgumentException {
 	Comment comment = new Comment();
 	User user = userService.get(userTokenId);
 	Post post = postService.getById(commentBean.getPostId());
@@ -160,12 +160,12 @@ public class CommentService {
 	}
     }
 
-    public Comment updateCommentContent(String content, Long id, String userTokenId)
-	    throws UnauthorizesException, IllegalArgumentException {
+    public Comment updateCommentContent(String content, Long id, String userTokenId) throws UnauthorizesException,
+	    IllegalArgumentException {
 	Comment comment = this.getById(id);
 	User owner = comment.getUser();
 	User editor = userService.get(userTokenId);
-	if (!userService.isAuthorizedEditUser(owner, editor)) {
+	if (!userService.isAuthorizedEditUser(owner, editor) && !editor.isAdmin()) {
 	    return null;
 	}
 	comment.setContent(content);

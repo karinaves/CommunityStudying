@@ -27,10 +27,13 @@ public class EmailService {
     @Value("${clientDomain}")
     private String clientDomain;
 
-    public Boolean emailComment(String email, String title, Long postId, String name)
-	    throws AddressException, MessagingException {
+    private String emailUsername = null;
+    private String emailPassword = null;
+
+    public Boolean emailComment(String email, String title, Long postId, String name) throws AddressException,
+	    MessagingException {
 	Properties props = System.getProperties();
-	String[] keys = getcredentialsFromFile();
+	String[] keys = getCredentials();
 	String mail = keys[0];
 	String password = keys[1];
 	String postPath = clientDomain + "/#/questions/view/" + postId;
@@ -56,7 +59,7 @@ public class EmailService {
 
     public Boolean emailNewUser(String email, String name) throws AddressException, MessagingException {
 	Properties props = System.getProperties();
-	String[] keys = getcredentialsFromFile();
+	String[] keys = getCredentials();
 	String mail = keys[0];
 	String password = keys[1];
 	props.put("mail.smtps.host", "smtp.gmail.com");
@@ -79,8 +82,15 @@ public class EmailService {
 	return true;
     }
 
-    private String[] getcredentialsFromFile() {
+    private String[] getCredentials() {
 	String[] keys = new String[2];
+
+	if (emailUsername != null && emailPassword != null) {
+	    keys[0] = emailUsername;
+	    keys[1] = emailPassword;
+	    return keys;
+	}
+
 	BufferedReader fileReader = null;
 
 	final String DELIMITER = ",";
@@ -98,6 +108,10 @@ public class EmailService {
 	    } catch (IOException e) {
 		e.printStackTrace();
 	    }
+
+	    emailUsername = keys[0];
+	    emailPassword = keys[1];
+
 	    return keys;
 	} catch (Exception e) {
 	    e.printStackTrace();

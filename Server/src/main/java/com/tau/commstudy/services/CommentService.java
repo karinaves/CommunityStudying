@@ -126,7 +126,7 @@ public class CommentService {
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);
 	// unAuthorized
-	if (!userService.isAuthorizedEditUser(owner, editor)) {
+	if (!userService.isAuthorizedEditUser(owner, editor) && !editor.isAdmin()) {
 	    return false;
 	}
 	comment.setIsAccepted(newStat);

@@ -126,7 +126,6 @@ public class PostController implements PostControllerInterface {
     @RequestMapping(method = RequestMethod.POST, value = "/freeText")
     public List<Post> searchFreeText(@RequestBody String text, @RequestParam(defaultValue = "0") int page,
 	    @RequestParam(defaultValue = SEARCH_SIZE_DEFAULT_VALUE) int size) {
-	System.out.println("text = " + text);
 	return service.searchFreeText(text, page, size);
     }
 

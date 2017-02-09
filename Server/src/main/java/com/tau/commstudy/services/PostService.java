@@ -310,7 +310,6 @@ public class PostService {
 
 	while (i < words.length) {
 
-	    System.out.println("1: " + words[i]);
 	    // if it's a year, search both in year field and in content
 	    if (words[i].matches("\\d+") && Integer.parseInt(words[i]) > 1950 && Integer.parseInt(words[i]) < 2100) {
 		int year = Integer.parseInt(words[i]);
@@ -356,7 +355,6 @@ public class PostService {
 
 	    i++;
 	}
-	System.out.println(searchCriteria.toString());
 	return searchCriteria;
     }
 

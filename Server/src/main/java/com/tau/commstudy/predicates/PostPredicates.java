@@ -107,6 +107,23 @@ public final class PostPredicates {
 
     }
 
+    public static Predicate byCourseName(String courseName) {
+	QPost post = QPost.post;
+
+	System.out.println("2: " + courseName);
+	// get all posts
+	if (courseName == null)
+	    return post.isNotNull();
+
+	// if parameter is OK return usual predicate
+	// return post.testQuestion.test.course.nameHebrew.like("%" + courseName
+	// + "%")
+	// .or(post.testQuestion.test.course.nameEnglish.like("%" + courseName +
+	// "%"));
+	return post.testQuestion.test.course.nameHebrew.contains(courseName)
+		.or(post.testQuestion.test.course.nameEnglish.contains(courseName));
+    }
+
     public static Predicate byFaculty(Long facultyId) {
 	QPost post = QPost.post;
 

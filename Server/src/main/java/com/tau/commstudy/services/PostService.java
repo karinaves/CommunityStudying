@@ -239,6 +239,12 @@ public class PostService {
 	return searchBy(searchCriteria, page, size);
     }
 
+    public List<Post> searchFreeText(String text, int page, int size) {
+
+	BooleanBuilder searchCriteria = getFreeTextSearchCriteria(text);
+	return searchBy(searchCriteria, page, size);
+    }
+
     private BooleanBuilder getSearchCriteria2(PostCriteria criteria) {
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
@@ -296,6 +302,64 @@ public class PostService {
 
     }
 
+    private BooleanBuilder getFreeTextSearchCriteria(String text) {
+	BooleanBuilder searchCriteria = new BooleanBuilder();
+	int i = 0;
+
+	String[] words = text.split(" +");
+
+	while (i < words.length) {
+
+	    System.out.println("1: " + words[i]);
+	    // if it's a year, search both in year field and in content
+	    if (words[i].matches("\\d+") && Integer.parseInt(words[i]) > 1950 && Integer.parseInt(words[i]) < 2100) {
+		int year = Integer.parseInt(words[i]);
+		searchCriteria.andAnyOf(PostPredicates.byYear(year), PostPredicates.byContentOrTitleLike(words[i]));
+	    }
+
+	    // check if it's moed
+	    else if (words[i].equalsIgnoreCase("מועד") && i + 1 < words.length) {
+		if (words[i + 1].equalsIgnoreCase("א") || words[i + 1].equalsIgnoreCase("א'")) {
+		    searchCriteria.and(PostPredicates.byMoed('A'));
+		    i++;
+		} else if (words[i + 1].equalsIgnoreCase("ב") || words[i + 1].equalsIgnoreCase("ב'")) {
+		    searchCriteria.and(PostPredicates.byMoed('B'));
+		    i++;
+		} else if (words[i + 1].equalsIgnoreCase("ג") || words[i + 1].equalsIgnoreCase("ג'")) {
+		    searchCriteria.and(PostPredicates.byMoed('C'));
+		    i++;
+		} else
+		    searchCriteria.andAnyOf(PostPredicates.byCourseName(words[i]),
+			    PostPredicates.byContentOrTitleLike(words[i]));
+	    }
+
+	    // check if it's semester
+	    else if (words[i].equalsIgnoreCase("סמסטר") && i + 1 < words.length) {
+		if (words[i + 1].equalsIgnoreCase("א") || words[i + 1].equalsIgnoreCase("א'")) {
+		    searchCriteria.and(PostPredicates.bySemester('A'));
+		    i++;
+		} else if (words[i + 1].equalsIgnoreCase("ב") || words[i + 1].equalsIgnoreCase("ב'")) {
+		    searchCriteria.and(PostPredicates.bySemester('B'));
+		    i++;
+		} else if (words[i + 1].equalsIgnoreCase("קיץ")) {
+		    searchCriteria.and(PostPredicates.bySemester('C'));
+		    i++;
+		} else
+		    searchCriteria.andAnyOf(PostPredicates.byCourseName(words[i]),
+			    PostPredicates.byContentOrTitleLike(words[i]));
+	    }
+
+	    else if (words[i].length() > 1) {
+		searchCriteria.andAnyOf(PostPredicates.byCourseName(words[i]),
+			PostPredicates.byContentOrTitleLike(words[i]));
+	    }
+
+	    i++;
+	}
+	System.out.println(searchCriteria.toString());
+	return searchCriteria;
+    }
+
     private BooleanBuilder getSearchCriteria(PostCriteria criteria) {
 	BooleanBuilder searchCriteria = new BooleanBuilder();
 
@@ -310,6 +374,7 @@ public class PostService {
 	// free text can be the only search param
 	if (criteria.getInContentText() != null && !criteria.getInContentText().equals(""))
 	    searchCriteria.and(PostPredicates.byContentOrTitleLike(criteria.getInContentText()));
+	// searchCriteria.and(getFreeTextSearchCriteria(criteria.getInContentText()));
 
 	// add faculty parameter to search
 	searchCriteria.and(PostPredicates.byFaculty(criteria.getFacultyId()));
@@ -406,8 +471,8 @@ public class PostService {
 	return postNew;
     }
 
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) throws UnauthorizesException,
-	    IllegalArgumentException {
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
+	    throws UnauthorizesException, IllegalArgumentException {
 	Post post = this.getById(id);
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);

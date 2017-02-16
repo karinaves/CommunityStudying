@@ -48,7 +48,7 @@ public class EmailService {
 	msg.setText("שלום " + name + "\n" + "התקבלה תגובה חדשה לשאלתך: " + title + " .\nתוכל/י לצפות בתגובה בלינק:\n"
 		+ postPath);
 	msg.setHeader("X-Mailer", "Tov Are's program");
-	msg.setSentDate(new Date(0));
+	msg.setSentDate(new java.util.Date());
 	SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
 	t.connect("smtp.gmail.com", mail, password);
 	t.sendMessage(msg, msg.getAllRecipients());

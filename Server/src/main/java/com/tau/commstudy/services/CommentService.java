@@ -47,8 +47,8 @@ public class CommentService {
      * @throws ValidationException
      *             if not saved
      */
-    public Comment add(NewCommentBean commentBean, String userTokenId) throws ValidationException,
-	    IllegalArgumentException {
+    public Comment add(NewCommentBean commentBean, String userTokenId)
+	    throws ValidationException, IllegalArgumentException {
 	Comment comment = new Comment();
 	User user = userService.get(userTokenId);
 	Post post = postService.getById(commentBean.getPostId());
@@ -101,7 +101,16 @@ public class CommentService {
 	Comment comment = dao.findOne(id);
 	User owner = comment.getUser();
 	User editor = userService.get(userTokenId);
+	System.out.println(owner.getId());
+	System.out.println(editor.getId());
+
 	if (userService.isAuthorizedEditUser(owner, editor) || editor.isAdmin()) {
+	    // edge case - deleting an accepted comment
+	    if (comment.getIsAccepted()) {
+		Post post = comment.getPost();
+		post.setAcceptedComment(false);
+		postDao.save(post);
+	    }
 	    dao.delete(id);
 	    return true;
 	}
@@ -160,8 +169,8 @@ public class CommentService {
 	}
     }
 
-    public Comment updateCommentContent(String content, Long id, String userTokenId) throws UnauthorizesException,
-	    IllegalArgumentException {
+    public Comment updateCommentContent(String content, Long id, String userTokenId)
+	    throws UnauthorizesException, IllegalArgumentException {
 	Comment comment = this.getById(id);
 	User owner = comment.getUser();
 	User editor = userService.get(userTokenId);

@@ -36,11 +36,12 @@ public class UserController implements UserControllerInterface {
 
     @RequestMapping(method = RequestMethod.GET, value = "/getOrCreate")
     public User getOrCreateUser(String idTokenString) throws Exception {
-	// if an exception is thrown that it is caught in runtime by
-	// @ExceptionHandler
-	User user = userService.getOrCreate(idTokenString);
-	return user;
+	return userService.getOrCreate(idTokenString);
+    }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/login")
+    public User get(String idTokenString) throws Exception {
+	return userService.login(idTokenString);
     }
 
     @ExceptionHandler(UnauthorizesException.class)

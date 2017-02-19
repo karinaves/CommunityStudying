@@ -32,6 +32,13 @@ public class User {
     private String pictureUrl;
     private Integer userRating;
     private boolean isAdmin;
+    private boolean emailSubscribed;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar created;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar lastLogin;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id") )
@@ -48,9 +55,6 @@ public class User {
     public void setPictureUrl(String pictureUrl) {
 	this.pictureUrl = pictureUrl;
     }
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar created;
 
     public User() {
     }
@@ -137,6 +141,22 @@ public class User {
 
     public void setFaculties(Set<Faculty> faculties) {
 	this.faculties = faculties;
+    }
+
+    public Calendar getLastLogin() {
+	return lastLogin;
+    }
+
+    public void setLastLogin(Calendar lastLogin) {
+	this.lastLogin = lastLogin;
+    }
+
+    public boolean isEmailSubscribed() {
+	return emailSubscribed;
+    }
+
+    public void setEmailSubscribed(boolean emailSubscribed) {
+	this.emailSubscribed = emailSubscribed;
     }
 
 }

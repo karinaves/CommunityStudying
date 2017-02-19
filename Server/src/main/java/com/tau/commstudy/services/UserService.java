@@ -60,6 +60,12 @@ public class UserService {
 	return user;
     }
 
+    public User login(String idTokenString) throws UnauthorizesException {
+	User user = getOrCreate(idTokenString);
+	user.setLastLogin(Calendar.getInstance());
+	return user;
+    }
+
     /**
      * Authenticate user login. verify the user's id token.
      * 

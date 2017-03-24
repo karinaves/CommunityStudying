@@ -58,10 +58,27 @@ public class CommentService {
 	comment.setTimeStamp(Calendar.getInstance());
 	User author = post.getUser();
 	comment.setIsAccepted(false);
-	try {
-	    emailService.emailComment(author.getEmail(), post.getTitle(), post.getId(), post.getUser().getFirstName());
-	} catch (Exception ex) {
-	    System.out.println("Error sending email: " + ex.toString());
+	if (author.isEmailSubscribed() == true) {
+	    try {
+		emailService.emailCommentToPost(author.getEmail(), post.getTitle(), post.getId(),
+			post.getUser().getFirstName());
+	    } catch (Exception ex) {
+		System.out.println("Error sending email: " + ex.toString());
+	    }
+	}
+
+	List<Comment> comments = getAllByPostId(post.getId());
+	for (Comment prevComment : comments) {
+	    User commentUser = prevComment.getUser();
+	    if (commentUser != user && commentUser != author && commentUser.isEmailSubscribed() == true) {
+		try {
+		    emailService.emailCommentToComment(commentUser.getEmail(), post.getTitle(), post.getId(),
+			    commentUser.getFirstName());
+		} catch (Exception ex) {
+		    System.out.println("Error sending email: " + ex.toString());
+		}
+	    }
+
 	}
 
 	Comment commentNew = dao.save(comment);

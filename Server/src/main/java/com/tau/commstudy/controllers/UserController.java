@@ -50,4 +50,9 @@ public class UserController implements UserControllerInterface {
 	return e.getMessage();
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/getByUserCourses")
+    public Set<User> getAllByCourse(Set<Course> courses) {
+	return userService.getAllByCourse(courses);
+    }
+
 }

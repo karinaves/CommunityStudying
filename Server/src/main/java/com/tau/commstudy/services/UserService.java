@@ -101,6 +101,7 @@ public class UserService {
 	user.setGoogleId(google.getSub());
 	user.setPictureUrl(google.getPicture());
 	user.setCreated(cal);
+	user.setEmailSubscribed(true);
 	userDao.save(user);
 
 	return user;

@@ -62,7 +62,9 @@ public class EmailService {
 	String htmlText = "<head>" + "<style type=\"text/css\">" + "  .blue { color: #00f; }" + "</style>" + "</head>"
 		+ "<body dir='rtl'>" + "<h3 class=\"blue\">" + "שלום " + name + "," + "</h3>" + "<p>" + ""
 		+ "<strong>התקבלה תגובה חדשה לשאלתך: </strong>" + title + "." + "</p>" + "<p>" + "לצפייה " + "<a href="
-		+ postPath + " >לחץ כאן</a></p>" + "<img src=\'cid:image\'>" + "</body>";
+		+ postPath + " >לחץ כאן</a></p>" + "<p>" + "<br/> <br/> <br/>"
+		+ "<small>(ניתן לשנות את  הגדרות המיילים בדף עריכת פרופיל באתר) </small>" + "</p>"
+		+ "<img src=\'cid:image\'>" + "</body>";
 	messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
 	multipart.addBodyPart(messageBodyPart);
 
@@ -103,9 +105,8 @@ public class EmailService {
 	String htmlText = "<head>" + "<style type=\"text/css\">" + "  .blue { color: #00f; }" + "</style>" + "</head>"
 		+ "<body dir='rtl'>" + "<h3 class=\"blue\">" + "שלום " + name + "," + "</h3>" + "<p>" + "ברוך הבא, "
 		+ "<strong>סטדי-באדי</strong>" + " זה המקום בו תוכל לשאול שאלות על מבחנים ולקבל תשובות בקלות ובמהירות."
-		+ "</p>" + "<p>" + "לכניסה לאתר " + "<a href='http://www.studybuddytau.ml/#/'>לחץ כאן</a></p>"
-
-		+ "<img src=\'cid:image\'>" + "</body>";
+		+ "</p>" + "<p>" + "לכניסה לאתר " + "<a href=" + url + ">לחץ כאן</a></p>" + "<img src=\'cid:image\'>"
+		+ "</body>";
 	messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
 	multipart.addBodyPart(messageBodyPart);
 

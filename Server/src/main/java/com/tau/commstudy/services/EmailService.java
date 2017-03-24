@@ -51,7 +51,6 @@ public class EmailService {
 	Session session = Session.getInstance(props, null);
 	Message msg = new MimeMessage(session);
 	msg.setFrom(new InternetAddress(mail));
-	;
 	msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
 
 	msg.setSubject("התקבלה תגובה חדשה לשאלתך");
@@ -108,7 +107,51 @@ public class EmailService {
 		+ "<body dir='rtl'>" + "<h3 class=\"blue\">" + "שלום " + name + "," + "</h3>" + "<p>" + ""
 		+ "<strong>התקבלה תגובה חדשה בדיון בו השתתפת: </strong>" + title + "." + "</p>" + "<p>" + "לצפייה "
 		+ "<a href=" + postPath + " >לחץ כאן</a></p>" + "<img src=\'cid:image\'>" + "<p>"
-		+ "<small>ניתן לשנות את  הגדרות קבלת המיילים בדף עריכת פרופיל באתר* </small>" + "</p>" + "</body>";
+		+ "<small>ניתן לשנות את  הגדרות קבלת המיילים בדף עריכת פרופיל באתר </small>" + "</p>" + "</body>";
+	messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
+	multipart.addBodyPart(messageBodyPart);
+
+	// second part (the image)
+	messageBodyPart = new MimeBodyPart();
+	DataSource fds = new FileDataSource("C:\\wamp\\www\\CommunityStudying-Client\\public_html\\img\\logo.png");
+	messageBodyPart.setDataHandler(new DataHandler(fds));
+	messageBodyPart.setHeader("Content-ID", "<image>");
+	multipart.addBodyPart(messageBodyPart);
+	msg.setContent(multipart);
+
+	msg.setSentDate(new java.util.Date());
+	SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
+	t.connect("smtp.gmail.com", mail, password);
+	t.sendMessage(msg, msg.getAllRecipients());
+	System.out.println("Response: " + t.getLastServerResponse());
+	t.close();
+	return true;
+    }
+
+    public Boolean emailPostSameCourse(String email, String title, Long postId, String name, String courseName)
+	    throws AddressException, MessagingException {
+	Properties props = System.getProperties();
+	String[] keys = getCredentials();
+	String mail = keys[0];
+	String password = keys[1];
+	String postPath = url + "/#/questions/view/" + postId;
+	props.put("mail.smtps.host", "smtp.gmail.com");
+	props.put("mail.smtps.auth", "true");
+	Session session = Session.getInstance(props, null);
+	Message msg = new MimeMessage(session);
+	msg.setFrom(new InternetAddress(mail));
+	msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
+
+	msg.setSubject("פורסמה שאלה חדשה עבור קורס שאתה לוקח");
+	MimeMultipart multipart = new MimeMultipart("related");
+
+	// first part (the html)
+	BodyPart messageBodyPart = new MimeBodyPart();
+	String htmlText = "<head>" + "<style type=\"text/css\">" + "  .blue { color: #00f; }" + "</style>" + "</head>"
+		+ "<body dir='rtl'>" + "<h3 class=\"blue\">" + "שלום " + name + "," + "</h3>" + "<p>"
+		+ "<strong>פורסמה שאלה חדשה: </strong>" + title + ", " + "עבור הקורס: " + courseName + "." + "</p>"
+		+ "<p>" + "לצפייה " + "<a href=" + postPath + " >לחץ כאן</a></p>" + "<img src=\'cid:image\'>" + "<p>"
+		+ "<small>ניתן לשנות את  הגדרות קבלת המיילים בדף עריכת פרופיל באתר </small>" + "</p>" + "</body>";
 	messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
 	multipart.addBodyPart(messageBodyPart);
 

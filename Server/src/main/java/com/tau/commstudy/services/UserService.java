@@ -102,6 +102,7 @@ public class UserService {
 	user.setPictureUrl(google.getPicture());
 	user.setCreated(cal);
 	user.setEmailSubscribed(true);
+	user.setGetEmailForNewPost(true);
 	userDao.save(user);
 
 	return user;
@@ -173,4 +174,7 @@ public class UserService {
 	return true;
     }
 
+    public Set<User> getAllByCourse(Set<Course> courses) {
+	return userDao.findByCoursesIn(courses);
+    }
 }

@@ -33,6 +33,7 @@ public class User {
     private Integer userRating;
     private boolean isAdmin;
     private boolean emailSubscribed;
+    private boolean getEmailForNewPost;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar created;
@@ -41,12 +42,20 @@ public class User {
     private Calendar lastLogin;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id") )
+    @JoinTable(name = "user_to_courses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
     private Set<Course> courses;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_to_faculties", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "faculty_id", referencedColumnName = "id") )
+    @JoinTable(name = "user_to_faculties", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "faculty_id", referencedColumnName = "id"))
     private Set<Faculty> faculties;
+
+    public boolean isGetEmailForNewPost() {
+	return getEmailForNewPost;
+    }
+
+    public void setGetEmailForNewPost(boolean getEmailForNewPost) {
+	this.getEmailForNewPost = getEmailForNewPost;
+    }
 
     public String getPictureUrl() {
 	return pictureUrl;

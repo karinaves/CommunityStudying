@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tau.commstudy.beans.UserPrefsBean;
 import com.tau.commstudy.controllers.interfaces.UserControllerInterface;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.User;
@@ -53,6 +54,12 @@ public class UserController implements UserControllerInterface {
     @RequestMapping(method = RequestMethod.GET, value = "/getByUserCourses")
     public Set<User> getAllByCourse(Set<Course> courses) {
 	return userService.getAllByCourse(courses);
+    }
+
+    @Override
+    @RequestMapping(method = RequestMethod.POST, value = "/updateEmailPref")
+    public Boolean updateEmailPref(@RequestBody UserPrefsBean prefs, String userTokenId) {
+	return userService.updateUserPrefs(userTokenId, prefs);
     }
 
 }

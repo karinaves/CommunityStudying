@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tau.commstudy.beans.GoogleValidateInfo;
+import com.tau.commstudy.beans.UserPrefsBean;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.User;
@@ -176,5 +177,13 @@ public class UserService {
 
     public Set<User> getAllByCourse(Set<Course> courses) {
 	return userDao.findByCoursesIn(courses);
+    }
+
+    public boolean updateUserPrefs(String userTokenId, UserPrefsBean prefs) {
+	User user = get(userTokenId);
+	user.setEmailSubscribed(prefs.getIsEmailSubscribed());
+	user.setGetEmailForNewPost(prefs.getIsEmailSubscribedForNewPost());
+	userDao.save(user);
+	return true;
     }
 }

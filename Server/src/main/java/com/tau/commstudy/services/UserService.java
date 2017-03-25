@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tau.commstudy.beans.GoogleValidateInfo;
+import com.tau.commstudy.beans.UserPrefsBean;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.Faculty;
 import com.tau.commstudy.entities.User;
@@ -60,6 +61,12 @@ public class UserService {
 	return user;
     }
 
+    public User login(String idTokenString) throws UnauthorizesException {
+	User user = getOrCreate(idTokenString);
+	user.setLastLogin(Calendar.getInstance());
+	return user;
+    }
+
     /**
      * Authenticate user login. verify the user's id token.
      * 
@@ -95,6 +102,8 @@ public class UserService {
 	user.setGoogleId(google.getSub());
 	user.setPictureUrl(google.getPicture());
 	user.setCreated(cal);
+	user.setEmailSubscribed(true);
+	user.setGetEmailForNewPost(true);
 	userDao.save(user);
 
 	return user;
@@ -166,4 +175,15 @@ public class UserService {
 	return true;
     }
 
+    public Set<User> getAllByCourse(Set<Course> courses) {
+	return userDao.findByCoursesIn(courses);
+    }
+
+    public boolean updateUserPrefs(String userTokenId, UserPrefsBean prefs) {
+	User user = get(userTokenId);
+	user.setEmailSubscribed(prefs.getIsEmailSubscribed());
+	user.setGetEmailForNewPost(prefs.getIsEmailSubscribedForNewPost());
+	userDao.save(user);
+	return true;
+    }
 }

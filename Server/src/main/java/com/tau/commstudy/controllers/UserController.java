@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tau.commstudy.beans.UserPrefsBean;
 import com.tau.commstudy.controllers.interfaces.UserControllerInterface;
 import com.tau.commstudy.entities.Course;
 import com.tau.commstudy.entities.User;
@@ -36,17 +37,29 @@ public class UserController implements UserControllerInterface {
 
     @RequestMapping(method = RequestMethod.GET, value = "/getOrCreate")
     public User getOrCreateUser(String idTokenString) throws Exception {
-	// if an exception is thrown that it is caught in runtime by
-	// @ExceptionHandler
-	User user = userService.getOrCreate(idTokenString);
-	return user;
+	return userService.getOrCreate(idTokenString);
+    }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/login")
+    public User get(String idTokenString) throws Exception {
+	return userService.login(idTokenString);
     }
 
     @ExceptionHandler(UnauthorizesException.class)
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public String handleException(UnauthorizesException e) {
 	return e.getMessage();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getByUserCourses")
+    public Set<User> getAllByCourse(Set<Course> courses) {
+	return userService.getAllByCourse(courses);
+    }
+
+    @Override
+    @RequestMapping(method = RequestMethod.POST, value = "/updateEmailPref")
+    public Boolean updateEmailPref(@RequestBody UserPrefsBean prefs, String userTokenId) {
+	return userService.updateUserPrefs(userTokenId, prefs);
     }
 
 }

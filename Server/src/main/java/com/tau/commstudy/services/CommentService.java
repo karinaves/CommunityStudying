@@ -47,8 +47,8 @@ public class CommentService {
      * @throws ValidationException
      *             if not saved
      */
-    public Comment add(NewCommentBean commentBean, String userTokenId) throws ValidationException,
-	    IllegalArgumentException {
+    public Comment add(NewCommentBean commentBean, String userTokenId)
+	    throws ValidationException, IllegalArgumentException {
 	Comment comment = new Comment();
 	User user = userService.get(userTokenId);
 	Post post = postService.getById(commentBean.getPostId());
@@ -58,10 +58,27 @@ public class CommentService {
 	comment.setTimeStamp(Calendar.getInstance());
 	User author = post.getUser();
 	comment.setIsAccepted(false);
-	try {
-	    emailService.emailComment(author.getEmail(), post.getTitle(), post.getId(), post.getUser().getFirstName());
-	} catch (Exception ex) {
-	    System.out.println("Error sending email: " + ex.toString());
+	if (author.isEmailSubscribed() == true) {
+	    try {
+		emailService.emailCommentToPost(author.getEmail(), post.getTitle(), post.getId(),
+			post.getUser().getFirstName());
+	    } catch (Exception ex) {
+		System.out.println("Error sending email: " + ex.toString());
+	    }
+	}
+
+	List<Comment> comments = getAllByPostId(post.getId());
+	for (Comment prevComment : comments) {
+	    User commentUser = prevComment.getUser();
+	    if (commentUser != user && commentUser != author && commentUser.isEmailSubscribed() == true) {
+		try {
+		    emailService.emailCommentToComment(commentUser.getEmail(), post.getTitle(), post.getId(),
+			    commentUser.getFirstName());
+		} catch (Exception ex) {
+		    System.out.println("Error sending email: " + ex.toString());
+		}
+	    }
+
 	}
 
 	Comment commentNew = dao.save(comment);
@@ -101,7 +118,16 @@ public class CommentService {
 	Comment comment = dao.findOne(id);
 	User owner = comment.getUser();
 	User editor = userService.get(userTokenId);
+	System.out.println(owner.getId());
+	System.out.println(editor.getId());
+
 	if (userService.isAuthorizedEditUser(owner, editor) || editor.isAdmin()) {
+	    // edge case - deleting an accepted comment
+	    if (comment.getIsAccepted()) {
+		Post post = comment.getPost();
+		post.setAcceptedComment(false);
+		postDao.save(post);
+	    }
 	    dao.delete(id);
 	    return true;
 	}
@@ -126,7 +152,7 @@ public class CommentService {
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);
 	// unAuthorized
-	if (!userService.isAuthorizedEditUser(owner, editor)) {
+	if (!userService.isAuthorizedEditUser(owner, editor) && !editor.isAdmin()) {
 	    return false;
 	}
 	comment.setIsAccepted(newStat);
@@ -160,8 +186,8 @@ public class CommentService {
 	}
     }
 
-    public Comment updateCommentContent(String content, Long id, String userTokenId) throws UnauthorizesException,
-	    IllegalArgumentException {
+    public Comment updateCommentContent(String content, Long id, String userTokenId)
+	    throws UnauthorizesException, IllegalArgumentException {
 	Comment comment = this.getById(id);
 	User owner = comment.getUser();
 	User editor = userService.get(userTokenId);

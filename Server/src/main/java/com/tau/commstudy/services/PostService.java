@@ -1,7 +1,9 @@
 package com.tau.commstudy.services;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +23,7 @@ import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.TestQuestion;
 import com.tau.commstudy.entities.User;
 import com.tau.commstudy.entities.daos.PostDao;
+import com.tau.commstudy.entities.daos.UserDao;
 import com.tau.commstudy.exceptions.UnauthorizesException;
 import com.tau.commstudy.predicates.PostPredicates;
 
@@ -29,6 +32,9 @@ public class PostService {
 
     @Autowired
     private PostDao dao;
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private FileService fileService;
@@ -45,10 +51,34 @@ public class PostService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EmailService emailService;
+
     public Post createPost(@RequestBody Post newPost) {
 	try {
 	    newPost.setTime(Calendar.getInstance());
-	    return dao.save(newPost);
+
+	    Post post = dao.save(newPost);
+	    User author = post.getUser();
+	    Course course = post.getTestQuestion().getTest().getCourse();
+	    String courseName;
+	    courseName = course.getNameHebrew();
+	    Set<Course> courses = new HashSet<Course>();
+	    courses.add(course);
+	    Set<User> usersInCourse = userService.getAllByCourse(courses);
+	    for (User user : usersInCourse) {
+		System.out.println(user.getFirstName());
+		if (user != author && user.isGetEmailForNewPost() == true && user.isEmailSubscribed() == true) {
+		    try {
+			emailService.emailPostSameCourse(user.getEmail(), post.getTitle(), post.getId(),
+				user.getFirstName(), courseName);
+		    } catch (Exception ex) {
+			System.out.println("Error sending email: " + ex.toString());
+		    }
+		}
+
+	    }
+	    return post;
 	} catch (Exception ex) {
 	    System.out.println("Error creating the post:" + ex.toString());
 	    return null; // "Error creating the post:" + ex.toString();

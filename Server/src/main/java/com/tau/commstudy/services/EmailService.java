@@ -3,7 +3,6 @@ package com.tau.commstudy.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -39,8 +38,8 @@ public class EmailService {
     private String emailUsername = null;
     private String emailPassword = null;
 
-    public Boolean emailCommentToPost(String email, String title, Long postId, String name)
-	    throws AddressException, MessagingException {
+    public Boolean emailCommentToPost(String email, String title, Long postId, String name) throws AddressException,
+	    MessagingException {
 	Properties props = System.getProperties();
 	String[] keys = getCredentials();
 	String mail = keys[0];
@@ -83,8 +82,8 @@ public class EmailService {
 	return true;
     }
 
-    public Boolean emailCommentToComment(String email, String title, Long postId, String name)
-	    throws AddressException, MessagingException {
+    public Boolean emailCommentToComment(String email, String title, Long postId, String name) throws AddressException,
+	    MessagingException {
 	Properties props = System.getProperties();
 	String[] keys = getCredentials();
 	String mail = keys[0];
@@ -205,7 +204,7 @@ public class EmailService {
 	multipart.addBodyPart(messageBodyPart);
 	msg.setContent(multipart);
 
-	msg.setSentDate(new Date(0));
+	msg.setSentDate(new java.util.Date());
 	SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
 	t.connect("smtp.gmail.com", mail, password);
 	t.sendMessage(msg, msg.getAllRecipients());

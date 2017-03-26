@@ -528,4 +528,10 @@ public class PostService {
 	return dao.findByTestQuestion_Test_CourseInOrderByTimeDesc(user.getCourses(), new PageRequest(page, size));
     }
 
+    public Long getByUserCoursesCount(String userTokenId) {
+	User user = userService.get(userTokenId);
+
+	return dao.countByTestQuestion_Test_CourseInOrderByTimeDesc(user.getCourses());
+    }
+
 }

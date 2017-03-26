@@ -32,4 +32,6 @@ public interface PostDao extends CrudRepository<Post, Long>, QueryDslPredicateEx
 	    Integer year, Character semester, Course course);
 
     public List<Post> findByTestQuestion_Test_CourseInOrderByTimeDesc(Set<Course> course, Pageable page);
+
+    public Long countByTestQuestion_Test_CourseInOrderByTimeDesc(Set<Course> course);
 }

@@ -149,4 +149,9 @@ public class PostController implements PostControllerInterface {
 	    @RequestParam(defaultValue = SEARCH_SIZE_DEFAULT_VALUE) int size) {
 	return service.getByUserCourses(userTokenId, page, size);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getByUserCoursesCount")
+    public Long getByUserCoursesCount(String userTokenId) {
+	return service.getByUserCoursesCount(userTokenId);
+    }
 }

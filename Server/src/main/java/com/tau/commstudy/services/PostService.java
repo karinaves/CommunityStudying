@@ -499,8 +499,8 @@ public class PostService {
 	return postNew;
     }
 
-    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId)
-	    throws UnauthorizesException, IllegalArgumentException {
+    public Post updatePost(UpdatePostBean updateBean, Long id, String userTokenId) throws UnauthorizesException,
+	    IllegalArgumentException {
 	Post post = this.getById(id);
 	User owner = post.getUser();
 	User editor = userService.get(userTokenId);
@@ -522,10 +522,10 @@ public class PostService {
      * @param userTokenId
      * @return posts of the user's courses
      */
-    public List<Post> getByUserCourses(String userTokenId) {
+    public List<Post> getByUserCourses(String userTokenId, int page, int size) {
 	User user = userService.get(userTokenId);
 
-	return dao.findByTestQuestion_Test_CourseInOrderByTimeDesc(user.getCourses());
+	return dao.findByTestQuestion_Test_CourseInOrderByTimeDesc(user.getCourses(), new PageRequest(page, size));
     }
 
 }

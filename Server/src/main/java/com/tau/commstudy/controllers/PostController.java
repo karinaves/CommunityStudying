@@ -145,7 +145,8 @@ public class PostController implements PostControllerInterface {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getByUserCourses")
-    public List<Post> getByUserCourses(String userTokenId) {
-	return service.getByUserCourses(userTokenId);
+    public List<Post> getByUserCourses(String userTokenId, @RequestParam(defaultValue = "0") int page,
+	    @RequestParam(defaultValue = SEARCH_SIZE_DEFAULT_VALUE) int size) {
+	return service.getByUserCourses(userTokenId, page, size);
     }
 }

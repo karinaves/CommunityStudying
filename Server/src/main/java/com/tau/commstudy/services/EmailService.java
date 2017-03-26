@@ -67,7 +67,7 @@ public class EmailService {
 
 	// second part (the image)
 	messageBodyPart = new MimeBodyPart();
-	DataSource fds = new FileDataSource("http://studybuddytau.ml/img/logo.png");
+	DataSource fds = new FileDataSource("/var/clientHtml/public_html/img/logo.png");
 	messageBodyPart.setDataHandler(new DataHandler(fds));
 	messageBodyPart.setHeader("Content-ID", "<image>");
 	multipart.addBodyPart(messageBodyPart);
@@ -112,7 +112,7 @@ public class EmailService {
 
 	// second part (the image)
 	messageBodyPart = new MimeBodyPart();
-	DataSource fds = new FileDataSource("http://studybuddytau.ml/img/logo.png");
+	DataSource fds = new FileDataSource("/var/clientHtml/public_html/img/logo.png");
 	messageBodyPart.setDataHandler(new DataHandler(fds));
 	messageBodyPart.setHeader("Content-ID", "<image>");
 	multipart.addBodyPart(messageBodyPart);
@@ -156,7 +156,7 @@ public class EmailService {
 
 	// second part (the image)
 	messageBodyPart = new MimeBodyPart();
-	DataSource fds = new FileDataSource("http://studybuddytau.ml/img/logo.png");
+	DataSource fds = new FileDataSource("/var/clientHtml/public_html/img/logo.png");
 	messageBodyPart.setDataHandler(new DataHandler(fds));
 	messageBodyPart.setHeader("Content-ID", "<image>");
 	multipart.addBodyPart(messageBodyPart);
@@ -199,7 +199,7 @@ public class EmailService {
 
 	// second part (the image)
 	messageBodyPart = new MimeBodyPart();
-	DataSource fds = new FileDataSource("http://studybuddytau.ml/img/logo.png");
+	DataSource fds = new FileDataSource("/var/clientHtml/public_html/img/logo.png");
 	messageBodyPart.setDataHandler(new DataHandler(fds));
 	messageBodyPart.setHeader("Content-ID", "<image>");
 	multipart.addBodyPart(messageBodyPart);

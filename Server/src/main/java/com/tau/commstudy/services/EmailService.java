@@ -67,7 +67,7 @@ public class EmailService {
 
 	// second part (the image)
 	messageBodyPart = new MimeBodyPart();
-	DataSource fds = new FileDataSource("C:\\wamp\\www\\CommunityStudying-Client\\public_html\\img\\logo.png");
+	DataSource fds = new FileDataSource("http://studybuddytau.ml/img/logo.png");
 	messageBodyPart.setDataHandler(new DataHandler(fds));
 	messageBodyPart.setHeader("Content-ID", "<image>");
 	multipart.addBodyPart(messageBodyPart);
@@ -112,7 +112,7 @@ public class EmailService {
 
 	// second part (the image)
 	messageBodyPart = new MimeBodyPart();
-	DataSource fds = new FileDataSource("C:\\wamp\\www\\CommunityStudying-Client\\public_html\\img\\logo.png");
+	DataSource fds = new FileDataSource("http://studybuddytau.ml/img/logo.png");
 	messageBodyPart.setDataHandler(new DataHandler(fds));
 	messageBodyPart.setHeader("Content-ID", "<image>");
 	multipart.addBodyPart(messageBodyPart);
@@ -156,7 +156,7 @@ public class EmailService {
 
 	// second part (the image)
 	messageBodyPart = new MimeBodyPart();
-	DataSource fds = new FileDataSource("C:\\wamp\\www\\CommunityStudying-Client\\public_html\\img\\logo.png");
+	DataSource fds = new FileDataSource("http://studybuddytau.ml/img/logo.png");
 	messageBodyPart.setDataHandler(new DataHandler(fds));
 	messageBodyPart.setHeader("Content-ID", "<image>");
 	multipart.addBodyPart(messageBodyPart);
@@ -165,6 +165,7 @@ public class EmailService {
 	msg.setSentDate(new java.util.Date());
 	SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
 	t.connect("smtp.gmail.com", mail, password);
+
 	t.sendMessage(msg, msg.getAllRecipients());
 	System.out.println("Response: " + t.getLastServerResponse());
 	t.close();
@@ -198,7 +199,7 @@ public class EmailService {
 
 	// second part (the image)
 	messageBodyPart = new MimeBodyPart();
-	DataSource fds = new FileDataSource("C:\\wamp\\www\\CommunityStudying-Client\\public_html\\img\\logo.png");
+	DataSource fds = new FileDataSource("http://studybuddytau.ml/img/logo.png");
 	messageBodyPart.setDataHandler(new DataHandler(fds));
 	messageBodyPart.setHeader("Content-ID", "<image>");
 	multipart.addBodyPart(messageBodyPart);

@@ -4,7 +4,6 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,6 @@ import com.tau.commstudy.services.UserService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
 public class UserController implements UserControllerInterface {
 
     // Path should be "user/updateCourses?userTokenId={id}" method = POST

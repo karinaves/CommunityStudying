@@ -13,7 +13,6 @@ import com.tau.commstudy.services.TestQuestionService;
 
 @RestController
 @RequestMapping("/testQuestion")
-@CrossOrigin
 public class TestQuestionController {
 
     @Autowired

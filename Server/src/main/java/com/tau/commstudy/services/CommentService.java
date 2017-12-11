@@ -47,8 +47,8 @@ public class CommentService {
      * @throws ValidationException
      *             if not saved
      */
-    public Comment add(NewCommentBean commentBean, String userTokenId)
-	    throws ValidationException, IllegalArgumentException {
+    public Comment add(NewCommentBean commentBean, String userTokenId) throws ValidationException,
+	    IllegalArgumentException {
 	Comment comment = new Comment();
 	User user = userService.get(userTokenId);
 	Post post = postService.getById(commentBean.getPostId());
@@ -60,8 +60,8 @@ public class CommentService {
 	comment.setIsAccepted(false);
 	if (author.isEmailSubscribed() == true) {
 	    try {
-		emailService.emailCommentToPost(author.getEmail(), post.getTitle(), post.getId(),
-			post.getUser().getFirstName());
+		emailService.emailCommentToPost(author.getEmail(), post.getTitle(), post.getId(), post.getUser()
+			.getFirstName());
 	    } catch (Exception ex) {
 		System.out.println("Error sending email: " + ex.toString());
 	    }
@@ -86,7 +86,7 @@ public class CommentService {
 	    NewFileBean fileBean = new NewFileBean();
 	    fileBean.setCommentId(commentNew.getId());
 	    fileBean.setUrl(fileUrl);
-	    fileService.add(fileBean, userTokenId);
+	    fileService.add(fileBean, userTokenId, true);
 	}
 	return commentNew;
     }
@@ -186,8 +186,8 @@ public class CommentService {
 	}
     }
 
-    public Comment updateCommentContent(String content, Long id, String userTokenId)
-	    throws UnauthorizesException, IllegalArgumentException {
+    public Comment updateCommentContent(String content, Long id, String userTokenId) throws UnauthorizesException,
+	    IllegalArgumentException {
 	Comment comment = this.getById(id);
 	User owner = comment.getUser();
 	User editor = userService.get(userTokenId);

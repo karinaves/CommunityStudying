@@ -130,8 +130,8 @@ public class TestService {
 	return new Sort(Sort.Direction.DESC, "year", "semester", "moed");
     }
 
-    public Test addNewTest(NewTestBean testBean, String userTokenId)
-	    throws ValidationException, IllegalArgumentException {
+    public Test addNewTest(NewTestBean testBean, String userTokenId) throws ValidationException,
+	    IllegalArgumentException {
 	Long courseId = testBean.getCourseId();
 	Integer year = testBean.getYear();
 	Course course = courseService.get(courseId);
@@ -166,7 +166,10 @@ public class TestService {
 		    NewFileBean fileBean = new NewFileBean();
 		    fileBean.setTestId(testNew.getId());
 		    fileBean.setUrl(fileUrl);
-		    fileService.add(fileBean, userTokenId);
+		    fileBean.setGrade(testBean.getGrade());
+		    fileBean.setTeacher(teacher);
+		    fileBean.setFileType(testBean.getFileType());
+		    fileService.add(fileBean, userTokenId, false);
 		}
 	    }
 	    return testNew;
@@ -177,7 +180,10 @@ public class TestService {
 		    NewFileBean fileBean = new NewFileBean();
 		    fileBean.setTestId(currentTest.getId());
 		    fileBean.setUrl(fileUrl);
-		    fileService.add(fileBean, userTokenId);
+		    fileBean.setGrade(testBean.getGrade());
+		    fileBean.setTeacher(teacher);
+		    fileBean.setFileType(testBean.getFileType());
+		    fileService.add(fileBean, userTokenId, false);
 		}
 	    }
 	    return currentTest;

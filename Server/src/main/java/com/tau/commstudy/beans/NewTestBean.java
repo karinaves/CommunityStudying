@@ -12,6 +12,8 @@ public class NewTestBean {
     private char difficulty;
     private List<String> files;
     private Long CourseId;
+    private Integer fileType;
+    private Integer grade;
 
     public NewTestBean() {
     }
@@ -78,6 +80,22 @@ public class NewTestBean {
 
     public void setCourseId(Long courseId) {
 	CourseId = courseId;
+    }
+
+    public Integer getFileType() {
+	return fileType;
+    }
+
+    public void setFileType(Integer fileType) {
+	this.fileType = fileType;
+    }
+
+    public Integer getGrade() {
+	return grade;
+    }
+
+    public void setGrade(Integer grade) {
+	this.grade = grade;
     }
 
 }

@@ -22,7 +22,7 @@ public class FileController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     public File add(@RequestBody NewFileBean fileBean, String userTokenId) throws Exception {
-	return service.add(fileBean, userTokenId);
+	return service.add(fileBean, userTokenId, false);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")

@@ -18,6 +18,7 @@ import com.tau.commstudy.beans.NewPostBean;
 import com.tau.commstudy.beans.PostCriteria;
 import com.tau.commstudy.beans.UpdatePostBean;
 import com.tau.commstudy.entities.Course;
+import com.tau.commstudy.entities.File.FileType;
 import com.tau.commstudy.entities.Post;
 import com.tau.commstudy.entities.Test;
 import com.tau.commstudy.entities.TestQuestion;
@@ -494,7 +495,8 @@ public class PostService {
 	    NewFileBean fileBean = new NewFileBean();
 	    fileBean.setPostId(postNew.getId());
 	    fileBean.setUrl(fileUrl);
-	    fileService.add(fileBean, userTokenId);
+	    fileBean.setFileType(FileType.POST_ATTACH.getId());
+	    fileService.add(fileBean, userTokenId, true);
 	}
 	return postNew;
     }

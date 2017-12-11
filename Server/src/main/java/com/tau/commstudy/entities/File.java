@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,6 +19,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "files")
 @XmlRootElement
 public class File {
+
+    public static enum FileType {
+	TEST(1), SOLUTION(2), TEST_AND_SOL(3), POST_ATTACH(4);
+
+	private Integer id;
+
+	FileType(int id) {
+	    this.id = id;
+	}
+
+	public Integer getId() {
+	    return this.id;
+	}
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,6 +56,18 @@ public class File {
     private String url;
 
     private boolean primaryFile;
+
+    private Integer fileType;
+
+    private String teacher;
+
+    private Integer grade;
+
+    @NotNull
+    @ManyToOne
+    private User user;
+
+    private boolean approved;
 
     public File() {
     }
@@ -99,6 +126,46 @@ public class File {
 
     public void setPrimaryFile(boolean primaryFile) {
 	this.primaryFile = primaryFile;
+    }
+
+    public Integer getFileType() {
+	return fileType;
+    }
+
+    public void setFileType(Integer fileType) {
+	this.fileType = fileType;
+    }
+
+    public String getTeacher() {
+	return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+	this.teacher = teacher;
+    }
+
+    public Integer getGrade() {
+	return grade;
+    }
+
+    public void setGrade(Integer grade) {
+	this.grade = grade;
+    }
+
+    public User getUser() {
+	return user;
+    }
+
+    public void setUser(User user) {
+	this.user = user;
+    }
+
+    public boolean isApproved() {
+	return approved;
+    }
+
+    public void setApproved(boolean approved) {
+	this.approved = approved;
     }
 
 }

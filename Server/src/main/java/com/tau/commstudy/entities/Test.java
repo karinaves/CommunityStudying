@@ -13,6 +13,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Where;
+
 @Entity
 @Table(name = "test", uniqueConstraints = @UniqueConstraint(columnNames = { "course", "year", "semester", "moed" }))
 @XmlRootElement
@@ -40,6 +42,7 @@ public class Test {
     }
 
     @OneToMany(mappedBy = "test")
+    @Where(clause = "approved = 1")
     private Set<File> files;
 
     public Test() {

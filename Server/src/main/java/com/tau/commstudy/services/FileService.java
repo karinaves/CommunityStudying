@@ -32,7 +32,8 @@ public class FileService {
     @Autowired
     private UserService userService;
 
-    public File add(NewFileBean fileBean, String userTokenId) throws UnauthorizesException, IllegalArgumentException {
+    public File add(NewFileBean fileBean, String userTokenId, boolean isApproved) throws UnauthorizesException,
+	    IllegalArgumentException {
 	File file = new File();
 	file.setUploadTimestamp(Calendar.getInstance());
 	file.setUrl(fileBean.getUrl());
@@ -40,6 +41,11 @@ public class FileService {
 	Post post = fileBean.getPostId() != null ? postService.getById(fileBean.getPostId()) : null;
 	Comment comment = fileBean.getCommentId() != null ? commentService.getById(fileBean.getCommentId()) : null;
 	User owner, editor = userService.get(userTokenId);
+	file.setUser(editor);
+	file.setApproved(isApproved);
+	file.setGrade(fileBean.getGrade());
+	file.setFileType(fileBean.getFileType());
+	file.setTeacher(fileBean.getTeacher());
 
 	// update only test post or comment - not combined
 	if (test != null) {
